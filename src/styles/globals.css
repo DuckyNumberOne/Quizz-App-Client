@@ -1,0 +1,21 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.disable-scroll {
+  overflow: hidden;
+}
+
+@keyframes slideInFromBottom {
+  0% {
+    transform: translateY(100%);
+  }
+  100% {
+    transform: translateY(0);
+  }
+}
+
+.popup {
+  transform: translateX(-50%);
+  animation: slideInFromBottom 0.4s ease-in forwards;
+}
