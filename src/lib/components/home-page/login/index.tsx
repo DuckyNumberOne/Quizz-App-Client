@@ -1,13 +1,18 @@
 import React, { useEffect, useState } from "react";
 import Image from "next/image";
-import ButtonDefault from "@/lib/common/button/ButtonDefault";
-import PopupDefault from "@/lib/common/popup/PopupWelcome";
-import Form from "@/lib/common/form";
-import Input from "../../input";
 import { verifyLogin } from "@/api/auth";
 import { getListQuizz } from "@/api/quizz";
 import { useForm } from "react-hook-form";
 import { User } from "@/lib/modal/user";
+import PopupDefault from "../../common/Popup/PopupWelcome";
+import Form from "../../common/Form";
+import Input from "../../common/Input";
+import ButtonDefault from "../../common/Button/ButtonDefault";
+import { useRouter } from "next/router";
+import { useDispatch } from "react-redux";
+import { AppDispatch } from "@/lib/state/store";
+import { setTurnOffPopup } from "@/lib/state/popup/popupSlice";
+import useLocalStorage from "@/lib/hook/useLocalStorage";
 // import WelcomeImage from "/images/welcome-popup/welcome-1.png";
 
 interface PropSubmit {
@@ -15,13 +20,11 @@ interface PropSubmit {
   password: string;
 }
 
-interface PropData {
-  accessToken: string;
-  userFilter: User;
-}
-
 const Login = () => {
-  const [data, setData] = useState<PropData>();
+  const { push } = useRouter();
+  const dispatch = useDispatch<AppDispatch>();
+  const [token, setToken] = useLocalStorage("token", "");
+  const [inforUser, setInforUser] = useLocalStorage("user", "");
 
   const handleSubmitForm = async (
     data: PropSubmit,
@@ -30,7 +33,12 @@ const Login = () => {
   ) => {
     try {
       const result = await verifyLogin(data);
-      setData(result);
+      setToken(result.accessToken);
+      setInforUser(result.userFilter);
+      setTimeout(() => {
+        dispatch(setTurnOffPopup());
+        push("/admin");
+      }, 1500);
     } catch (error: any) {
       if (error?.response?.data) {
         setError("errorSubmit", {
@@ -126,14 +134,14 @@ const Login = () => {
             </div>
             <ButtonDefault
               className={`w-full p-5 rounded-full text-white border-b-[5px] border-r-[4px] font-medium text-base hover:font-medium ease-in-out duration-300 ${
-                data?.accessToken != undefined
+                token != ""
                   ? "bg-[#3ed684] p-5"
                   : props?.error?.errorSubmit?.message
-                  ? `bg-red-600 p-5 border-red-800`
+                  ? `bg-rose-600 p-5 border-rose-800`
                   : `bg-[#000000] p-5 border-[#6d5ff6]`
               }`}
               content={
-                data?.accessToken != undefined
+                token != ""
                   ? "Successfully !"
                   : props?.error?.errorSubmit?.message
                   ? `${props?.error?.errorSubmit?.message}`

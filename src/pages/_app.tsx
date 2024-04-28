@@ -1,6 +1,6 @@
-import Login from "@/lib/hook/Context/login";
-import Layout from "@/lib/components/layout";
+import Layout from "@/lib/components/layout/DefaultLayout";
 import "@/styles/globals.css";
+import "@/styles/loading.css";
 import type { AppProps } from "next/app";
 import { Provider } from "react-redux";
 import { store } from "../../src/lib/state/store";
@@ -10,9 +10,7 @@ export default function App({ Component, pageProps }: AppProps) {
     <Layout>
       <Provider store={store}>
         <div className="bg-white">
-          <div className="py-10">
-            <Component {...pageProps} />;
-          </div>
+          <Component {...pageProps} />;
         </div>
       </Provider>
     </Layout>

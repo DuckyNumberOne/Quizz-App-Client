@@ -1,6 +1,6 @@
+import HomePage from "@/lib/components/home-page";
 import { Inter } from "next/font/google";
 import React from "react";
-import HomePage from "@/pages/home-page/index";
 
 const inter = Inter({ subsets: ["latin"] });
 
