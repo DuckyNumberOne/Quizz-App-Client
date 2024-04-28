@@ -1,6 +1,10 @@
+import { Collection } from './collection';
 import { Question } from "./question";
+import { User } from "./user";
 
 export interface Quizz {
+  user: User;
+  collection:Collection;
   _id: string;
   idUser: string;
   title: string;

@@ -1,9 +1,9 @@
-import ButtonDefault from "@/lib/common/button/ButtonDefault";
 import { setTurnOnPopup } from "@/lib/state/popup/popupSlice";
 import { AppDispatch, RootState } from "@/lib/state/store";
 import Image from "next/image";
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
+import ButtonDefault from "../../common/Button/ButtonDefault";
 
 const Banner = () => {
   const dispatch = useDispatch<AppDispatch>();
