@@ -16,18 +16,16 @@ const Play = () => {
   const params = path && splitPath[splitPath.length - 1];
   const dispatch = useDispatch<AppDispatch>();
   const [quizz, setQuizz] = useState<Quizz>();
-  const [popup, setPopup] = useState(true);
 
   const handleFollow = () => {};
 
   useEffect(() => {
     if (params) {
       const fetch = async () => {
-        const res = await getItemQuizz(params);
+        const res: Quizz = await getItemQuizz(params);
         if (res) {
-          dispatch(setTurnOffPopup("popup_loading_page_admin"));
           setQuizz(res);
-          setPopup(false);
+          dispatch(setTurnOffPopup("popup_loading_page_admin"));
         }
       };
       fetch();
