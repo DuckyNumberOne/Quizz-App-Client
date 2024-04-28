@@ -1,4 +1,4 @@
-import React, { ReactNode } from "react";
+import React, { ReactNode, useEffect } from "react";
 import Header from "./header/DefaultHeader";
 import Footer from "./footer/DefaultFooter";
 import { usePathname, useRouter } from "next/navigation";
@@ -10,10 +10,18 @@ interface Props {
 
 const Layout = ({ children }: Props) => {
   const patch = usePathname();
+  const { push } = useRouter();
   const checkPageAdmin =
     patch && patch.split("/")[1] === "admin" ? true : false;
   const [storedValue, setStoredValue] = useLocalStorage("token", "");
   const admin = checkPageAdmin && storedValue != "" && storedValue != " ";
+
+  // useEffect(() => {
+  //   if (!admin) {
+  //     push("/");
+  //   }
+  // }, []);
+
   return (
     <>
       {admin ? (

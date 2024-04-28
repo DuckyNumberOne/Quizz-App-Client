@@ -11,20 +11,6 @@ const DefaultPopupAdmin: React.FC<PropsPopupAdmin> = ({
   popupDefault,
   animation,
 }) => {
-  useEffect(() => {
-    if (popupDefault) {
-      const mainContent = document.getElementById("main-content");
-      if (mainContent) {
-        mainContent.classList.add("disable-scroll");
-      }
-    } else {
-      const mainContent = document.getElementById("main-content");
-      if (mainContent) {
-        mainContent.classList.remove("disable-scroll");
-      }
-    }
-  }, [popupDefault]);
-
   return (
     <>
       {popupDefault && (

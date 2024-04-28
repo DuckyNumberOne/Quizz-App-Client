@@ -8,50 +8,31 @@ import { Quizz } from "@/lib/modal/quizz";
 import { useRouter } from "next/router";
 import DefaultLoading from "@/lib/components/common/Loading/DefaultLoading";
 import DefaultPopupAdmin from "@/lib/components/admin/PopupAdmin/DefaultPopupAdmin";
+import { useDispatch } from "react-redux";
+import { AppDispatch } from "@/lib/state/store";
+import { setTurnOnPopup } from "@/lib/state/popup/popupSlice";
+import DefaultLoadingPage from "@/lib/components/admin/LoadingPage/DefaultLoadingPage";
 
 const Admin = () => {
   const { push } = useRouter();
   const [data, setData] = useState<Quizz[]>([]);
-  const [popup, setPopup] = useState(false);
+  const dispatch = useDispatch<AppDispatch>();
 
-  const items = [
-    {
-      id: 1,
-    },
-    {
-      id: 2,
-    },
-    {
-      id: 3,
-    },
-    {
-      id: 4,
-    },
-    {
-      id: 5,
-    },
-    {
-      id: 6,
-    },
-    {
-      id: 6,
-    },
-  ];
-
-  const handleFindFriend = () => {};
-
-  const handleCheck = () => {
-    const welcome = document.getElementById("welcome");
-    if (welcome) {
+  const handleScrollToTop = () => {
+    const content = document.getElementById("main-content");
+    if (content) {
       window.scrollTo({
-        top: welcome.offsetTop - 90,
-        behavior: "smooth",
+        top: content?.offsetTop - 90,
+        behavior: "instant",
       });
     }
   };
 
+  const handleFindFriend = () => {};
+
   const handlePlayGame = (id: string) => {
-    setPopup(!popup);
+    handleScrollToTop();
+    dispatch(setTurnOnPopup("popup_loading_page_admin"));
     setTimeout(() => {
       push(`admin/play/${id}`);
     }, 2000);
@@ -66,8 +47,7 @@ const Admin = () => {
   }, []);
 
   return (
-    <>
-      <DefaultPopupAdmin animation="popup-up" popupDefault={popup} />
+    <DefaultLoadingPage animation="popup-up">
       <section className="z-1 relative border-lilac-20% bg-purple-faded-2 pt-[90px] pb-8 bg-bts-hero-search-bg">
         <div className="mx-6">
           <div className="mt-2 w-full col-span-12 flex flex-col items-center z-20">
@@ -91,7 +71,6 @@ const Admin = () => {
           </div>
         </div>
       </section>
-
       {/* Header Slider  */}
       <section className="bg-[#f2f2f2] h-fit px-6" id="welcome">
         {/* Demo Category 1*/}
@@ -159,7 +138,6 @@ const Admin = () => {
             ))}
           </DefaulltSlider>
         </div>
-        <button onClick={handleCheck}>CHECK</button>
         {/* Demo Category 1*/}
         <div className="mb-4 pt-10">
           <div className="flex items-center mb-4">
@@ -192,19 +170,26 @@ const Admin = () => {
         {/* Box Slider Category 1*/}
         <div className="flex max-w-full relative">
           <DefaulltSlider>
-            {items.map((items) => (
-              <Link
-                href="/"
+            {data.map((items) => (
+              <div
+                key={items._id}
+                onClick={() => handlePlayGame(items._id)}
                 className="bg-white quiz-card shadow-md rounded-lg bg-light-3 text-left cursor-pointer hover:shadow-lg max-w-56 md:max-w-72"
               >
                 <div className="overflow-hidden rounded-t-lg h-full">
-                  <div className="w-56 md:w-72 h-30 md:h-40 flex items-center justify-around"></div>
+                  <div className="w-56 md:w-72 h-30 md:h-40 flex items-center justify-around">
+                    <img
+                      src={items.urlThumbnail}
+                      alt="Thumbnail"
+                      className="w-full h-full bg-cover bg-center"
+                    />
+                  </div>
                   <div className="px-2.5 pt-2.5 pb-3.5 h-30">
                     <div className="px-2 py-1 bg-[#e2e2e2] w-fit text-xs rounded-md">
-                      <span>BÀI HỌC</span>
+                      <span>{items.idCollection}</span>
                     </div>
                     <p className="mt-2 mb-4 text-sm md:text-base text-dark-2 font-semibold">
-                      Volume of Cones and Spheres
+                      {items.title}
                     </p>
                     <div className="flex items-center justify-between text-tn md:text-xs text-dark-4 font-semibold mt-auto">
                       <div className="mr-1.5">15 Slide • </div>
@@ -214,7 +199,7 @@ const Admin = () => {
                     </div>
                   </div>
                 </div>
-              </Link>
+              </div>
             ))}
           </DefaulltSlider>
         </div>
@@ -250,19 +235,26 @@ const Admin = () => {
         {/* Box Slider Category 1*/}
         <div className="flex max-w-full relative">
           <DefaulltSlider>
-            {items.map((items) => (
-              <Link
-                href="/"
+            {data.map((items) => (
+              <div
+                key={items._id}
+                onClick={() => handlePlayGame(items._id)}
                 className="bg-white quiz-card shadow-md rounded-lg bg-light-3 text-left cursor-pointer hover:shadow-lg max-w-56 md:max-w-72"
               >
                 <div className="overflow-hidden rounded-t-lg h-full">
-                  <div className="w-56 md:w-72 h-30 md:h-40 flex items-center justify-around"></div>
+                  <div className="w-56 md:w-72 h-30 md:h-40 flex items-center justify-around">
+                    <img
+                      src={items.urlThumbnail}
+                      alt="Thumbnail"
+                      className="w-full h-full bg-cover bg-center"
+                    />
+                  </div>
                   <div className="px-2.5 pt-2.5 pb-3.5 h-30">
                     <div className="px-2 py-1 bg-[#e2e2e2] w-fit text-xs rounded-md">
-                      <span>BÀI HỌC</span>
+                      <span>{items.idCollection}</span>
                     </div>
                     <p className="mt-2 mb-4 text-sm md:text-base text-dark-2 font-semibold">
-                      Volume of Cones and Spheres
+                      {items.title}
                     </p>
                     <div className="flex items-center justify-between text-tn md:text-xs text-dark-4 font-semibold mt-auto">
                       <div className="mr-1.5">15 Slide • </div>
@@ -272,12 +264,12 @@ const Admin = () => {
                     </div>
                   </div>
                 </div>
-              </Link>
+              </div>
             ))}
           </DefaulltSlider>
         </div>
       </section>
-    </>
+    </DefaultLoadingPage>
   );
 };
 export default Admin;
