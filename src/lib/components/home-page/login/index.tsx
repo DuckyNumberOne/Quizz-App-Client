@@ -25,6 +25,15 @@ const Login = () => {
   const dispatch = useDispatch<AppDispatch>();
   const [token, setToken] = useLocalStorage("token", "");
   const [inforUser, setInforUser] = useLocalStorage("user", "");
+  const isBrowser = () => typeof window !== "undefined";
+
+  useEffect(() => {
+    function scrollToTop() {
+      if (!isBrowser()) return;
+      window.scrollTo({ top: 0, behavior: "instant" });
+    }
+    scrollToTop();
+  }, []);
 
   const handleSubmitForm = async (
     data: PropSubmit,
@@ -36,7 +45,7 @@ const Login = () => {
       setToken(result.accessToken);
       setInforUser(result.userFilter);
       setTimeout(() => {
-        dispatch(setTurnOffPopup());
+        dispatch(setTurnOffPopup("popup_login"));
         push("/admin");
       }, 1500);
     } catch (error: any) {

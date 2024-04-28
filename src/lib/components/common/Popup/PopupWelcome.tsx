@@ -13,7 +13,7 @@ interface PropsPopupWelcome {
 const PopupDefault: React.FC<PropsPopupWelcome> = ({ children }) => {
   const dispatch = useDispatch<AppDispatch>();
   const handleClose = () => {
-    dispatch(setTurnOffPopup());
+    dispatch(setTurnOffPopup("popup_login"));
   };
 
   return (

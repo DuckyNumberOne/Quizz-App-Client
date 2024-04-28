@@ -4,11 +4,20 @@ import Image from "next/image";
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import ButtonDefault from "../../common/Button/ButtonDefault";
+import useLocalStorage from "@/lib/hook/useLocalStorage";
+import { useRouter } from "next/router";
 
 const Banner = () => {
   const dispatch = useDispatch<AppDispatch>();
+  const { push } = useRouter();
+  const [token, setToken] = useLocalStorage("token", "");
+
   const handleOpenPopupWel = () => {
-    dispatch(setTurnOnPopup());
+    if (token != "") {
+      push("/admin");
+    } else {
+      dispatch(setTurnOnPopup("popup_login"));
+    }
   };
 
   return (

@@ -1,27 +1,29 @@
 import { PayloadAction, createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 
-interface CounterState {
-  statusPopup: boolean;
+interface PopupState {
+  [key: string]: boolean;
 }
 
-const initialState: CounterState = {
-  statusPopup: false,
+const initialState: PopupState = {
+  "popup_login": false, 
+  "popup_loading_page_admin": false,
+  //Add more key
 };
 
-const counterSlice = createSlice({
+const popupSlice = createSlice({
   name: "popup",
   initialState,
   reducers: {
-    setTurnOnPopup: (state) => {
+    setTurnOnPopup: (state, action: PayloadAction<string>) => {
       document.body.classList.add("disable-scroll");
-      state.statusPopup = true;
+      state[action.payload] = true; 
     },
-    setTurnOffPopup: (state) => {
+    setTurnOffPopup: (state, action: PayloadAction<string>) => {
       document.body.classList.remove("disable-scroll");
-      state.statusPopup = false;
+      state[action.payload] = false;
     },
   },
 });
 
-export const { setTurnOnPopup, setTurnOffPopup } = counterSlice.actions;
-export default counterSlice.reducer;
+export const { setTurnOnPopup, setTurnOffPopup } = popupSlice.actions;
+export default popupSlice.reducer;
