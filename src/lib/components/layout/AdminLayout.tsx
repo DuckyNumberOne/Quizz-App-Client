@@ -1,14 +1,34 @@
 "use client";
-import React, { useState, ReactNode } from "react";
+import React, { useState, ReactNode, useRef, useEffect } from "react";
 import Sidebar from "../admin/Sidebar";
 import Header from "../admin/Header";
+import { usePathname } from "next/navigation";
+import { useDispatch } from "react-redux";
+import { AppDispatch } from "@/lib/state/store";
+import { setTurnOffPopup } from "@/lib/state/popup/popupSlice";
 
 export default function AdminLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
+  const dispatch = useDispatch<AppDispatch>();
+  const currentPage = usePathname();
   const [sidebarOpen, setSidebarOpen] = useState(false);
+  const savedPathNameRef = useRef(currentPage);
+
+  const handleClearState = () => {
+    dispatch(setTurnOffPopup("popup_choose_category_question"));
+    dispatch(setTurnOffPopup("popup_create_question"));
+  };
+
+  useEffect(() => {
+    if (savedPathNameRef.current !== currentPage) {
+      handleClearState();
+      savedPathNameRef.current = currentPage;
+    }
+  }, [currentPage]);
+
   return (
     <>
       {/* <!-- ===== Page Wrapper Start ===== --> */}

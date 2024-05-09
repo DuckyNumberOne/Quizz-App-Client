@@ -156,7 +156,6 @@ const Login = () => {
                   ? `${props?.error?.errorSubmit?.message}`
                   : "Sign in"
               }
-              // onClick={}
             />
           </>
         )}

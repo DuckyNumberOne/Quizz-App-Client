@@ -2,7 +2,7 @@ import { setTurnOnPopup } from "@/lib/state/popup/popupSlice";
 import { AppDispatch, RootState } from "@/lib/state/store";
 import Image from "next/image";
 import React from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import ButtonDefault from "../../common/Button/ButtonDefault";
 import useLocalStorage from "@/lib/hook/useLocalStorage";
 import { useRouter } from "next/router";
