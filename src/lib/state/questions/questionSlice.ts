@@ -25,8 +25,11 @@ const questionSlice = createSlice({
         state.splice(indexToDelete, 1);
       }
     },
+    resetQuestions: (state) => {
+      return [];
+    }
   },
 });
 
-export const { addQuestion, updateQuestion,deleteQuestionByIndex } = questionSlice.actions;
+export const { addQuestion, updateQuestion,deleteQuestionByIndex ,resetQuestions} = questionSlice.actions;
 export default questionSlice.reducer;

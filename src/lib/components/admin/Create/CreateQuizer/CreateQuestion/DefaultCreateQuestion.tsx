@@ -10,6 +10,7 @@ import { useDispatch, useSelector } from "react-redux";
 import {
   addQuestion,
   deleteQuestionByIndex,
+  resetQuestions,
   updateQuestion,
 } from "@/lib/state/questions/questionSlice";
 import { RootState } from "@/lib/state/store";
@@ -19,6 +20,7 @@ import {
   addMultipleAnswers,
   clearAnswer,
 } from "@/lib/state/answer/answerSlice";
+import { useRouter } from "next/router";
 
 interface PropsData {
   title: string;
@@ -32,6 +34,7 @@ interface PropsData {
 const DefaultCreateQuestion = () => {
   const dispatch = useDispatch();
   const dataQuestion = useSelector((state: RootState) => state.question);
+  const dataQuizz = useSelector((state: RootState) => state.quizz);
   const { popup_error_question } = useSelector(
     (state: RootState) => state.popup
   );
@@ -231,6 +234,13 @@ const DefaultCreateQuestion = () => {
     }
   };
 
+  const handCreateQuizz = () => {
+    // dataQuestion
+    // dataQuizz
+    console.log("🚀 ~ handCreateQuizz ~ dataQuestion:", dataQuestion);
+    console.log("🚀 ~ handCreateQuizz ~ dataQuizz:", dataQuizz);
+  };
+
   useEffect(() => {
     if (indexs != -1) {
       const anwsers = dataQuestion[indexs].anwsers;
@@ -269,13 +279,6 @@ const DefaultCreateQuestion = () => {
           {indexs != -1 ? `Question ${indexs + 1}` : "Create question"}
         </p>
         <div className="flex items-center gap-6">
-          <Image
-            src="/images/preview-2.webp"
-            width={40}
-            height={40}
-            alt="Preview"
-            className="cursor-pointer"
-          />
           <Image
             src="/images/about.webp"
             width={30}
@@ -487,7 +490,7 @@ const DefaultCreateQuestion = () => {
                 </div>
                 <div className="h-full flex justify-center items-center  w-1/4 relative">
                   {indexs !== -1 ? (
-                    <div className="w-full space-y-2 ease-in-out duration-300">
+                    <div className="w-full space-y-2 ease-in-out duration-300 ml-4">
                       <button className="bg-yellow-300 w-full rounded-md flex justify-center items-center p-2">
                         <Image
                           src={"/images/edit.png"}
@@ -523,6 +526,19 @@ const DefaultCreateQuestion = () => {
             </>
           )}
         </Form>
+        <div className="border-t-2 border-[#b5b2c1] w-full mt-5" />
+        {dataQuestion.length >= 5 && (
+          <div className="pb-10">
+            <button className="shadow-2 shadow-purple-600 flex items-center justify-center gap-4 mt-8 font-bold  hover:bg-slate-50 rounded-full py-3 px-8 text-lg  text-black bg-white hover:shadow-sm hover:shadow-black ease-in-out duration-300 w-full">
+              <p className="">Preview quizz</p>
+            </button>
+            <ButtonDefault
+              content="Create"
+              className="mt-8 font-bold text-white bg-black rounded-full py-3 px-8 text-lg  hover:text-black hover:bg-white hover:shadow-sm hover:shadow-black ease-in-out duration-300 w-full"
+              onClick={handCreateQuizz}
+            />
+          </div>
+        )}
       </div>
     </div>
   );

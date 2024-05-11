@@ -6,6 +6,7 @@ import { usePathname } from "next/navigation";
 import { useDispatch } from "react-redux";
 import { AppDispatch } from "@/lib/state/store";
 import { setTurnOffPopup } from "@/lib/state/popup/popupSlice";
+import { resetQuestions } from "@/lib/state/questions/questionSlice";
 
 export default function AdminLayout({
   children,
@@ -23,6 +24,7 @@ export default function AdminLayout({
   };
 
   useEffect(() => {
+    dispatch(resetQuestions());
     if (savedPathNameRef.current !== currentPage) {
       handleClearState();
       savedPathNameRef.current = currentPage;

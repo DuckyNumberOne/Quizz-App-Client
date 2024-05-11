@@ -7,7 +7,7 @@ import { Collection } from "@/lib/modal/collection";
 import { QuizzPost } from "@/lib/modal/quizz";
 import { setTurnOnPopup } from "@/lib/state/popup/popupSlice";
 import { addQuestion } from "@/lib/state/questions/questionSlice";
-import { addQuizz, updateQuizz } from "@/lib/state/quizz/questionSlice";
+import { addQuizz, updateQuizz } from "@/lib/state/quizz/quizzSlice";
 import { RootState } from "@/lib/state/store";
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";

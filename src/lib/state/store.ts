@@ -2,7 +2,7 @@ import { configureStore } from "@reduxjs/toolkit";
 import popupReducer from "./popup/popupSlice";
 import questionReducer from "./questions/questionSlice";
 import answerReducer from "./answer/answerSlice";
-import quizzReducer from "./quizz/questionSlice";
+import quizzReducer from "./quizz/quizzSlice";
 
 
 
