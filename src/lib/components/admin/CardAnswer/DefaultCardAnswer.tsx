@@ -44,17 +44,17 @@ const DefaultCardAnswer: React.FC<DefaultCardAnswerProps> = ({
   };
 
   const handleInputChange = (value: string) => {
-    if (indexs == -1) {
-      const answer = { ...answerShare, text: value };
-      dispatch(addAnswer({ answer }));
-    }
+    // if (indexs == -1) {
+    const answer = { ...answerShare, text: value };
+    dispatch(addAnswer({ answer }));
+    // }
   };
 
   const handleCheckbox = (value: boolean) => {
-    if (indexs == -1) {
-      const answer = { ...answerShare, isCorrect: value };
-      dispatch(addAnswer({ answer }));
-    }
+    // if (indexs == -1) {
+    const answer = { ...answerShare, isCorrect: value };
+    dispatch(addAnswer({ answer }));
+    // }
   };
 
   return (

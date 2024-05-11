@@ -138,8 +138,6 @@ const DefaultCreateQuestion = () => {
   };
 
   const handleStayQuestionIndex = () => {
-    console.log("check");
-
     dispatch(setTurnOffPopup("popup_error_question"));
   };
 
@@ -171,6 +169,17 @@ const DefaultCreateQuestion = () => {
     const titleChanged = existingQuestion
       ? existingQuestion.title !== validatedData.title
       : true;
+
+    // Kiểm tra xem có các text giống nhau không
+    const uniqueTexts = new Set(
+      validatedData.anwsers.map((answer) => answer.text)
+    );
+    const isTextsUnique = uniqueTexts.size === validatedData.anwsers.length;
+
+    if (!isTextsUnique) {
+      setError("Answers should have unique text!");
+      return;
+    }
 
     if (isCorrectTrue === 0 && validatedData.anwsers.length > 0) {
       dispatch(updateQuestion(validatedData));
@@ -213,7 +222,10 @@ const DefaultCreateQuestion = () => {
   };
 
   useEffect(() => {
-    dispatch(clearAnswer());
+    if (indexs != -1) {
+      const anwsers = dataQuestion[indexs].anwsers;
+      dispatch(addMultipleAnswers({ anwsers }));
+    }
     setError("");
   }, [indexs]);
 
@@ -227,26 +239,25 @@ const DefaultCreateQuestion = () => {
         <div className="absolute top-0 right-0 w-full h-screen bg-black-shadow z-10 rounded-lg flex items-center justify-center">
           <div className="bg-white shadow-2 shadow-purple-500 w-[300px] h-[220px] rounded-2xl p-4">
             <p className="text-base font-normal">
-              Are you sure you want to move on to another question? If you don't
-              add a correct answer, this question will be{" "}
-              <span className="text-[#cc0000] font-semibold">deleted</span>.
+              Cannot move another question because the question is experiencing
+              an
+              <span className="text-[#cc0000] font-semibold"> error </span>!
             </p>
-            <div className=" mt-4 space-y-2">
+            <div className=" mt-6 space-y-2">
               <button
                 className="block w-full bg-white text-black font-medium shadow-2 shadow-graydark rounded-md hover:bg-whiten"
                 onClick={handleStayQuestionIndex}
               >
                 Stay
               </button>
-              <button className="block w-full hover:bg-red text-white font-medium shadow-2 shadow-graydark rounded-md bg-[#ff0000]">
-                Move to Another Question
-              </button>
             </div>
           </div>
         </div>
       )}
       <div className="flex justify-between items-center relative">
-        <p className="text-xl font-bold">Create question</p>
+        <p className="text-xl font-bold">
+          {indexs != -1 ? `Question ${indexs + 1}` : "Create question"}
+        </p>
         <div className="flex items-center gap-6">
           <Image
             src="/images/preview-2.webp"
@@ -463,12 +474,20 @@ const DefaultCreateQuestion = () => {
                   </div>
                 </div>
                 <div className="h-full flex justify-center items-center  w-1/4">
-                  <button className="bg-[#036be5] p-5 rounded-full cursor-pointer hover:bg-[#509bf0]">
+                  <button
+                    className={`${
+                      indexs === -1
+                        ? "bg-[#036be5] hover:bg-[#509bf0]"
+                        : "bg-white shadow-4 shadow-[#8854c0] hover:bg-[#bb98e0]"
+                    } p-5 rounded-full cursor-pointer ease-in-out duration-300`}
+                  >
                     <Image
-                      src="/images/plus.png"
+                      src={
+                        indexs != -1 ? "/images/edit.png" : "/images/plus.png"
+                      }
                       width={40}
                       height={40}
-                      alt="Plus"
+                      alt={indexs ? "Edit" : "Plus"}
                     />
                   </button>
                 </div>

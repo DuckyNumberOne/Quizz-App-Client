@@ -7,13 +7,15 @@ import { Collection } from "@/lib/modal/collection";
 import { QuizzPost } from "@/lib/modal/quizz";
 import { setTurnOnPopup } from "@/lib/state/popup/popupSlice";
 import { addQuestion } from "@/lib/state/questions/questionSlice";
-import { addQuizz } from "@/lib/state/quizz/questionSlice";
+import { addQuizz, updateQuizz } from "@/lib/state/quizz/questionSlice";
+import { RootState } from "@/lib/state/store";
 import React, { useEffect, useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
 const DefaulCreateQuizer = () => {
   const dispatch = useDispatch();
   const [collection, setCollection] = useState<Collection[]>([]);
+  const dataQuizer = useSelector((state: RootState) => state.quizz);
   const visibility = [
     { id: 1111, title: "Public", value: "public" },
     { id: 2222, title: "Private", value: "private" },
@@ -35,9 +37,13 @@ const DefaulCreateQuizer = () => {
   }, []);
 
   const handleSubmitForm = async (data: QuizzPost) => {
-    if (data) {
+    if (dataQuizer.title !== " ") {
+      console.log("dataQuizer.title !== ");
       dispatch(addQuizz(data));
       dispatch(setTurnOnPopup("popup_choose_category_question"));
+    } else {
+      console.log("dataQuizer.title == ");
+      dispatch(updateQuizz(data));
     }
   };
 
@@ -170,12 +176,12 @@ const DefaulCreateQuizer = () => {
                   },
                 }}
                 classLabel="hidden"
-                classInput="text-[#036be5] font-bold bg-[#f6f5fa] w-full px-5 py-5 rounded-[13px]"
+                classInput="text-blue-500 font-bold bg-[#f6f5fa] w-full px-5 py-5 rounded-[13px]"
               />
             </div>
             <div className="flex items-center justify-center w-full mt-6">
               <ButtonDefault
-                content="Creat quzier"
+                content={dataQuizer.title !== "" ? "Edit quizz" : "Creat quizz"}
                 className="font-bold text-white bg-black rounded-full py-3 px-8 text-lg  hover:text-black hover:bg-white hover:shadow-sm hover:shadow-black ease-in-out duration-300 w-full"
               />
             </div>

@@ -17,8 +17,14 @@ const quizzSlice = createSlice({
     addQuizz: (state, action: PayloadAction<QuizzPost>) => {
       return action.payload;
     },
+    updateQuizz: (state, action: PayloadAction<Partial<QuizzPost>>) => {
+      return {
+        ...state,
+        ...action.payload,
+      };
+    },
   },
 });
 
-export const { addQuizz } = quizzSlice.actions;
+export const { addQuizz,updateQuizz } = quizzSlice.actions;
 export default quizzSlice.reducer;
