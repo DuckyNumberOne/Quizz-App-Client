@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 
 interface OptionProps {
   value: string | number;
@@ -31,7 +31,14 @@ const Select: React.FC<SelectProps> = ({
   classSelect,
   defaultValue,
 }) => {
+  const [selectedOption, setSelectedOption] = useState("");
   const keys = errorsOption ? Object.keys(errorsOption) : [];
+
+  // useEffect(() => {
+  //   if (!options.map((opt) => opt.value).includes(selectedOption)) {
+  //     setSelectedOption("");
+  //   }
+  // }, [options]);
 
   return (
     <>
@@ -39,23 +46,26 @@ const Select: React.FC<SelectProps> = ({
         {label}
       </label>
       <select
+        value={selectedOption}
         id={name}
         {...register(name, errorsOption)}
         className={classSelect}
         defaultValue={defaultValue}
+        onChange={(e) => setSelectedOption(e.target.value)}
       >
         <option value="" disabled>
           {textSelect}
         </option>
-        {options.map((item) => (
-          <option
-            key={item.value}
-            value={item.value}
-            selected={item.value === defaultValue ? true : false}
-          >
-            {item.title}
-          </option>
-        ))}
+        {options &&
+          options.map((item) => (
+            <option
+              key={item.value}
+              value={item.value}
+              // selected={item.value === defaultValue ? true : false}
+            >
+              {item.title}
+            </option>
+          ))}
       </select>
 
       {errors?.[name] &&

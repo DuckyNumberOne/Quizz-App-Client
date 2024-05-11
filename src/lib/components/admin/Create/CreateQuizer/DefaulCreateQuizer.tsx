@@ -126,7 +126,7 @@ const DefaulCreateQuizer = () => {
                 }}
                 classLabel="hidden"
                 classSelect="bg-[#f6f5fa] w-full px-5 py-5 rounded-[13px]"
-                options={optionsCollection && optionsCollection}
+                options={optionsCollection}
               />
               <Select
                 label="Visibility"

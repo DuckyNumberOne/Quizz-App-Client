@@ -19,6 +19,7 @@ interface DefaultCardAnswerProps {
   register: any;
   errors: any;
   control?: any;
+  indexs: number;
 }
 
 const DefaultCardAnswer: React.FC<DefaultCardAnswerProps> = ({
@@ -33,6 +34,7 @@ const DefaultCardAnswer: React.FC<DefaultCardAnswerProps> = ({
   number = 0,
   register,
   errors,
+  indexs,
 }) => {
   const dispatch = useDispatch();
   const answerShare: Anwsers = {
@@ -42,13 +44,17 @@ const DefaultCardAnswer: React.FC<DefaultCardAnswerProps> = ({
   };
 
   const handleInputChange = (value: string) => {
-    const answer = { ...answerShare, text: value };
-    dispatch(addAnswer({ answer }));
+    if (indexs == -1) {
+      const answer = { ...answerShare, text: value };
+      dispatch(addAnswer({ answer }));
+    }
   };
 
   const handleCheckbox = (value: boolean) => {
-    const answer = { ...answerShare, isCorrect: value };
-    dispatch(addAnswer({ answer }));
+    if (indexs == -1) {
+      const answer = { ...answerShare, isCorrect: value };
+      dispatch(addAnswer({ answer }));
+    }
   };
 
   return (
@@ -60,6 +66,7 @@ const DefaultCardAnswer: React.FC<DefaultCardAnswerProps> = ({
       }}
     >
       <DefaultCheckBoxAnswer
+        indexs={indexs}
         name={`isCorrect${String(number + 1)}`}
         register={register}
         onClick={handleCheckbox}

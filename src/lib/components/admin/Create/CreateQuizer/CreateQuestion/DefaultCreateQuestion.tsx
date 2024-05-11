@@ -7,7 +7,10 @@ import ButtonDefault from "@/lib/components/common/Button/ButtonDefault";
 import DefaultCardAnsswer from "../../../CardAnswer/DefaultCardAnswer";
 import { Anwsers, Question } from "@/lib/modal/question";
 import { useDispatch, useSelector } from "react-redux";
-import { addQuestion } from "@/lib/state/questions/questionSlice";
+import {
+  addQuestion,
+  updateQuestion,
+} from "@/lib/state/questions/questionSlice";
 import { RootState } from "@/lib/state/store";
 import { setTurnOffPopup, setTurnOnPopup } from "@/lib/state/popup/popupSlice";
 import {
@@ -28,9 +31,12 @@ interface PropsData {
 const DefaultCreateQuestion = () => {
   const dispatch = useDispatch();
   const dataQuestion = useSelector((state: RootState) => state.question);
-  console.log("🚀 ~ DefaultCreateQuestion ~ dataQuestion:", dataQuestion);
+  const { popup_error_question } = useSelector(
+    (state: RootState) => state.popup
+  );
   const [popupRule, setPopupRule] = useState(true);
   const [indexs, setIndex] = useState(-1);
+  const [error, setError] = useState("");
 
   const defaultAnswer = {
     number: 0,
@@ -82,6 +88,7 @@ const DefaultCreateQuestion = () => {
       }
     }
     return {
+      _id: String(inputData._id),
       imgQuestion: String(inputData.imgQuestion),
       point: Number(inputData.point),
       time: Number(inputData.time),
@@ -90,28 +97,154 @@ const DefaultCreateQuestion = () => {
     };
   };
 
-  const handleOpenQuestion = (index: number) => {
-    setIndex(index);
-  };
+  function convertQuestionFormat(question: Question) {
+    let newQuestion = {
+      _id: String(question._id),
+      imgQuestion: String(question.imgQuestion),
+      point: Number(question.point),
+      time: Number(question.time),
+      title: String(question.title),
+    };
+    for (let i = 0; i < question.anwsers.length; i++) {
+      newQuestion["isCorrect" + (i + 1)] = question.anwsers[i].isCorrect;
+      newQuestion["text" + (i + 1)] = question.anwsers[i].text;
+    }
 
-  const handleSubmitForm = async (data: PropsData) => {
-    if (data) {
-      const validatedData = transformData(data);
-      dispatch(clearAnswer());
-      dispatch(addQuestion(validatedData));
-      dispatch(setTurnOffPopup("popup_create_question"));
-      dispatch(setTurnOnPopup("popup_choose_category_question"));
+    return newQuestion;
+  }
+
+  const handleScrollToTop = () => {
+    const content = document.getElementById("main-content");
+    if (content) {
+      window.scrollTo({
+        top: content?.offsetTop - 90,
+        behavior: "instant",
+      });
     }
   };
 
-  // useEffect(() => {
-  //   if (indexs != -1) {
-  //     dispatch(addMultipleAnswers(dataQuestion[indexs]));
-  //   }
-  // }, [indexs]);
+  const defaultValue =
+    indexs != -1
+      ? convertQuestionFormat(dataQuestion[indexs])
+      : dataQuestion[indexs];
+
+  const handleOpenQuestion = (index: number) => {
+    if (error != "" && indexs != -1) {
+      handleScrollToTop();
+      dispatch(setTurnOnPopup("popup_error_question"));
+    } else {
+      setIndex(index);
+    }
+  };
+
+  const handleStayQuestionIndex = () => {
+    console.log("check");
+
+    dispatch(setTurnOffPopup("popup_error_question"));
+  };
+
+  function generateUniqueId() {
+    // Tạo một chuỗi ngẫu nhiên có độ dài 8 ký tự từ các ký tự a-z và số từ 0-9
+    const randomString = Math.random().toString(36).substring(2, 10);
+    // Tạo một timestamp từ thời gian hiện tại
+    const timestamp = Date.now();
+    // Kết hợp chuỗi ngẫu nhiên và timestamp để tạo ID
+    const uniqueId = randomString + timestamp;
+    return uniqueId;
+  }
+
+  const valueId = indexs != -1 ? dataQuestion[indexs]._id : generateUniqueId();
+
+  const handleSubmitForm = async (data: PropsData) => {
+    if (!data) return;
+
+    const validatedData = transformData(data);
+    const isCorrectTrue = validatedData.anwsers.filter(
+      (item) => item.isCorrect
+    ).length;
+    const existsId = dataQuestion.some(
+      (question) => question._id === validatedData._id
+    );
+    const existingQuestion = dataQuestion.find(
+      (question) => question._id === validatedData._id
+    );
+    const titleChanged = existingQuestion
+      ? existingQuestion.title !== validatedData.title
+      : true;
+
+    if (isCorrectTrue === 0 && validatedData.anwsers.length > 0) {
+      dispatch(updateQuestion(validatedData));
+      setError("Please choose 1 correct answer !");
+    } else {
+      if (existsId) {
+        dispatch(clearAnswer());
+        if (!titleChanged) {
+          // Title is not changed, continue without checking existence
+          dispatch(updateQuestion(validatedData));
+          dispatch(setTurnOffPopup("popup_create_question"));
+          dispatch(setTurnOnPopup("popup_choose_category_question"));
+        } else {
+          // Title is changed, check existence
+          const existsTitle = dataQuestion.some(
+            (question) => question.title === validatedData.title
+          );
+          if (existsTitle) {
+            setError("This title question already exists !");
+          } else {
+            dispatch(updateQuestion(validatedData));
+            dispatch(setTurnOffPopup("popup_create_question"));
+            dispatch(setTurnOnPopup("popup_choose_category_question"));
+          }
+        }
+      } else {
+        const existsTitle = dataQuestion.some(
+          (question) => question.title === validatedData.title
+        );
+        if (existsTitle) {
+          setError("This title question already exists !");
+        } else {
+          dispatch(clearAnswer());
+          dispatch(addQuestion(validatedData));
+          dispatch(setTurnOffPopup("popup_create_question"));
+          dispatch(setTurnOnPopup("popup_choose_category_question"));
+        }
+      }
+    }
+  };
+
+  useEffect(() => {
+    dispatch(clearAnswer());
+    setError("");
+  }, [indexs]);
 
   return (
-    <div className="px-3 py-4 border md:p-4 bg-white border-[#e5e5e5] my-4 rounded-lg fade-in-1s overflow-y-auto h-[935px]">
+    <div
+      className={`px-3 py-4 border md:p-4 bg-white border-[#e5e5e5] my-4 rounded-lg fade-in-1s h-[935px] relative ${
+        !popup_error_question && "overflow-y-auto"
+      }`}
+    >
+      {popup_error_question && (
+        <div className="absolute top-0 right-0 w-full h-screen bg-black-shadow z-10 rounded-lg flex items-center justify-center">
+          <div className="bg-white shadow-2 shadow-purple-500 w-[300px] h-[220px] rounded-2xl p-4">
+            <p className="text-base font-normal">
+              Are you sure you want to move on to another question? If you don't
+              add a correct answer, this question will be{" "}
+              <span className="text-[#cc0000] font-semibold">deleted</span>.
+            </p>
+            <div className=" mt-4 space-y-2">
+              <button
+                className="block w-full bg-white text-black font-medium shadow-2 shadow-graydark rounded-md hover:bg-whiten"
+                onClick={handleStayQuestionIndex}
+              >
+                Stay
+              </button>
+              <button className="block w-full hover:bg-red text-white font-medium shadow-2 shadow-graydark rounded-md bg-[#ff0000]">
+                Move to Another Question
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
       <div className="flex justify-between items-center relative">
         <p className="text-xl font-bold">Create question</p>
         <div className="flex items-center gap-6">
@@ -158,10 +291,30 @@ const DefaultCreateQuestion = () => {
         )}
       </div>
       <div>
-        <Form classForm="mt-3" onSubmitForm={handleSubmitForm}>
+        <Form
+          classForm="mt-3"
+          onSubmitForm={handleSubmitForm}
+          defaultValue={defaultValue}
+        >
           {(props: any) => (
             <>
               <div className="space-y-4">
+                <Input
+                  label="_id"
+                  name="_id"
+                  type="text"
+                  register={props.registers}
+                  errors={props.error}
+                  errorsOption={{
+                    required: {
+                      value: true,
+                      message: "_id is empty",
+                    },
+                  }}
+                  defaultValue={valueId}
+                  classLabel="hidden"
+                  classInput="hidden"
+                />
                 <Input
                   label="Url Thumbnail"
                   name="imgQuestion"
@@ -189,11 +342,6 @@ const DefaultCreateQuestion = () => {
                       register={props.registers}
                       errors={props.error}
                       textSelect="Choose point"
-                      defaultValue={
-                        indexs != -1
-                          ? dataQuestion[indexs].point
-                          : pointQuestion[0].value
-                      }
                       errorsOption={{
                         required: {
                           value: true,
@@ -212,11 +360,6 @@ const DefaultCreateQuestion = () => {
                       register={props.registers}
                       errors={props.error}
                       textSelect="Choose time"
-                      defaultValue={
-                        indexs != -1
-                          ? dataQuestion[indexs].time
-                          : timeQuestion[0].value
-                      }
                       errorsOption={{
                         required: {
                           value: true,
@@ -236,7 +379,6 @@ const DefaultCreateQuestion = () => {
                   register={props.registers}
                   errors={props.error}
                   placeholder="Title question"
-                  defaultValue={indexs != -1 ? dataQuestion[indexs].title : ""}
                   errorsOption={{
                     required: {
                       value: true,
@@ -262,17 +404,11 @@ const DefaultCreateQuestion = () => {
                     {colorCardAnser.map((items, index) => (
                       <div key={items.id}>
                         <DefaultCardAnsswer
+                          indexs={indexs}
                           number={index}
                           register={props.registers}
                           errors={props.error}
                           placeholder="Text question"
-                          errorsOptionInput={{
-                            required: { value: true, message: "Text is empty" },
-                            maxLength: {
-                              value: 20,
-                              message: "Title cannot exceed 20 characters",
-                            },
-                          }}
                           defaultValue={
                             dataQuestion &&
                             dataQuestion[indexs] &&
@@ -282,6 +418,13 @@ const DefaultCreateQuestion = () => {
                               ? dataQuestion[indexs].anwsers[index]
                               : defaultAnswer
                           }
+                          errorsOptionInput={{
+                            required: { value: true, message: "Text is empty" },
+                            maxLength: {
+                              value: 20,
+                              message: "Title cannot exceed 20 characters",
+                            },
+                          }}
                           classInput="text-white font-semibold text-[18px] text-center mt-12 relative"
                           backgroundColor={items.colorBackground}
                           borderShadowColor={items.colorBoder}
@@ -290,6 +433,13 @@ const DefaultCreateQuestion = () => {
                     ))}
                   </div>
                 </div>
+              </div>
+              <div className="h-6">
+                {error != "" && (
+                  <p className="text-rose-600 text-center font-medium">
+                    {error}
+                  </p>
+                )}
               </div>
               <div className="border-t-2 border-[#b5b2c1] w-full mt-10" />
               <div className="flex gap-1 h-[150px]">

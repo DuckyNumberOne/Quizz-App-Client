@@ -9,6 +9,7 @@ interface CheckBoxAnswerProps {
   errorsOption?: any;
   onClick?: any;
   defaultValue?: boolean;
+  indexs: number;
 }
 
 const DefaultCheckBoxAnswer: React.FC<CheckBoxAnswerProps> = ({
@@ -17,6 +18,7 @@ const DefaultCheckBoxAnswer: React.FC<CheckBoxAnswerProps> = ({
   errorsOption,
   onClick,
   defaultValue,
+  indexs,
 }) => {
   // const dispatch = useDispatch();
   const answers = useSelector((state: RootState) => state.answers);
@@ -37,7 +39,7 @@ const DefaultCheckBoxAnswer: React.FC<CheckBoxAnswerProps> = ({
 
   useEffect(() => {
     setIsCorrect(defaultValue || false);
-  }, [defaultValue]);
+  }, [defaultValue, indexs]);
 
   return (
     <div className="cursor-pointer">

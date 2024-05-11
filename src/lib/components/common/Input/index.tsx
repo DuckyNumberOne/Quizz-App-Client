@@ -108,7 +108,7 @@ const Input: React.FC<InputProps> = ({
             className={classInput}
             id={name}
             type={type}
-            value={inputValue}
+            // value={inputValue}
             placeholder={placeholder}
             defaultValue={defaultValue ? defaultValue : ""}
             {...register(name, {
