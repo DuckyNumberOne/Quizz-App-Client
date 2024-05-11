@@ -16,9 +16,12 @@ const config: Config = {
         },
         extend: {
           colors: {
+           "transparent-2":"rgba(255, 255, 255, 0)",
             "lilac-faded":'rgba(237, 230, 246, var(--tw-bg-opacity))',
             "white-shadow":"rgba(255,255,255, 0.3)",
+            "white-shadow-2":"rgba(255,255,255, 0.1)",
             'black-shadow': 'rgba(0, 0, 0, 0.9);',
+            'black-shadow-2': 'rgba(0, 0, 0, 0.4);',
             current: "currentColor",
             transparent: "transparent",
             white: "#FFFFFF",

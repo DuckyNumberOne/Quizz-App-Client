@@ -8,13 +8,18 @@ interface PropsDefaultValue {
   classForm: string;
   children: (props: any) => React.JSX.Element;
   id?: string;
+  defaultValue?: any;
 }
 
 const Form: React.FC<PropsDefaultValue> = ({
   children,
   classForm,
   onSubmitForm,
+  defaultValue,
 }) => {
+  const [currentDefaultValue, setCurrentDefaultValue] =
+    useState<any>(defaultValue);
+
   const {
     register,
     handleSubmit,
@@ -22,7 +27,9 @@ const Form: React.FC<PropsDefaultValue> = ({
     setError,
     formState: { errors },
     reset,
-  } = useForm();
+  } = useForm({
+    defaultValues: currentDefaultValue,
+  });
   // const router = useRouter();
   // const dispath = useDispatch();
   // const patch = usePathname();
@@ -30,6 +37,18 @@ const Form: React.FC<PropsDefaultValue> = ({
   const onSubmit = useCallback(async (data: any) => {
     onSubmitForm(data, setError, reset);
   }, []);
+
+  useEffect(() => {
+    if (defaultValue !== undefined) {
+      setCurrentDefaultValue(defaultValue);
+    }
+  }, [defaultValue]);
+
+  useEffect(() => {
+    if (currentDefaultValue !== undefined) {
+      reset(currentDefaultValue);
+    }
+  }, [currentDefaultValue, reset]);
 
   return (
     <form className={classForm} action="#" onSubmit={handleSubmit(onSubmit)}>

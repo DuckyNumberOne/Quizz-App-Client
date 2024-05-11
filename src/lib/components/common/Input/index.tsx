@@ -1,7 +1,8 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { memo, useCallback, useEffect, useRef, useState } from "react";
 import { Controller } from "react-hook-form";
 import { usePathname } from "next/navigation";
 import Image from "next/image";
+import { debounce } from "@/utils/debounce";
 
 interface InputProps {
   label: string;
@@ -15,6 +16,8 @@ interface InputProps {
   type: string;
   defaultValue?: string | number;
   control?: any;
+  onInputChange?: any;
+  onInputBlur?: any;
 }
 
 const Input: React.FC<InputProps> = ({
@@ -28,11 +31,22 @@ const Input: React.FC<InputProps> = ({
   classInput,
   defaultValue,
   type,
+  onInputChange,
+  onInputBlur,
   control,
 }) => {
   const keys = errorsOption ? Object.keys(errorsOption) : [];
   const url = label.toLowerCase().indexOf("url") === 0;
   const [inputValue, setInputValue] = useState(defaultValue || "");
+
+  const debouncedCallback = debounce({
+    delay: 200,
+    callback: (value: string) => {
+      if (onInputChange) {
+        onInputChange(value);
+      }
+    },
+  });
 
   useEffect(() => {
     if (defaultValue) {
@@ -40,11 +54,21 @@ const Input: React.FC<InputProps> = ({
     }
   }, [defaultValue]);
 
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setInputValue(e.target.value);
+  const handleInputChange = useCallback(
+    (e: React.ChangeEvent<HTMLInputElement>) => {
+      const { value } = e.target;
+      setInputValue(value);
+      debouncedCallback(value);
+    },
+    []
+  );
+
+  const handleBlur = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { value } = e.target;
+    if (onInputBlur) {
+      onInputBlur(value);
+    }
   };
-  const path = usePathname();
-  const checkPagePosts = path.split("/").indexOf("posts") > 0;
 
   switch (type) {
     case "text":
@@ -84,18 +108,20 @@ const Input: React.FC<InputProps> = ({
             className={classInput}
             id={name}
             type={type}
-            value={inputValue}
+            // value={inputValue}
             placeholder={placeholder}
+            defaultValue={defaultValue ? defaultValue : ""}
             {...register(name, {
               ...errorsOption,
             })}
+            // onBlur={handleBlur}
             onChange={handleInputChange}
           />
           {errors?.[name] &&
             keys.map((items) => (
               <div key={items}>
                 {errors?.[name]?.type === items && (
-                  <p className="text-red-600 mt-3 text-sm">
+                  <p className="text-red mt-3 font-medium text-sm">
                     {errors?.[name]?.message}
                   </p>
                 )}
@@ -115,6 +141,7 @@ const Input: React.FC<InputProps> = ({
             type={type}
             value={inputValue}
             placeholder={placeholder}
+            defaultValue={defaultValue ? defaultValue : 0}
             {...register(name, {
               ...errorsOption,
               valueAsNumber: type === "number",
@@ -125,7 +152,7 @@ const Input: React.FC<InputProps> = ({
             keys.map((items) => (
               <div key={items}>
                 {errors?.[name]?.type === items && (
-                  <p className="text-red-600 mt-3 text-sm">
+                  <p className="text-red mt-3 font-medium text-sm">
                     {errors?.[name]?.message}
                   </p>
                 )}
@@ -154,7 +181,7 @@ const Input: React.FC<InputProps> = ({
             keys.map((items) => (
               <div key={items}>
                 {errors?.[name]?.type === items && (
-                  <p className="text-red-600 mt-3 text-sm">
+                  <p className="text-red mt-3 font-medium text-sm">
                     {errors?.[name]?.message}
                   </p>
                 )}
@@ -205,7 +232,10 @@ const Input: React.FC<InputProps> = ({
                 {keys.map((items) => (
                   <>
                     {errors?.[name]?.type === items && (
-                      <div key={items} className="text-red-600 mt-3 text-sm">
+                      <div
+                        key={items}
+                        className="text-red mt-3 font-medium text-sm"
+                      >
                         {errors?.[name]?.message}
                       </div>
                     )}
@@ -218,4 +248,4 @@ const Input: React.FC<InputProps> = ({
       );
   }
 };
-export default Input;
+export default memo(Input);

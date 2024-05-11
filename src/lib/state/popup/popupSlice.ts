@@ -7,19 +7,29 @@ interface PopupState {
 const initialState: PopupState = {
   "popup_login": false, 
   "popup_loading_page_admin": false,
+  "popup_create_quizer": true,
+  "popup_choose_category_question": false,
+  "popup_create_question": false,
+  "popup_error_question":false
   //Add more key
 };
+
+const scrollDisabledPopups = ["popup_login", "popup_loading_page_admin","popup_error_question"];
 
 const popupSlice = createSlice({
   name: "popup",
   initialState,
   reducers: {
     setTurnOnPopup: (state, action: PayloadAction<string>) => {
-      document.body.classList.add("disable-scroll");
+      if (scrollDisabledPopups.includes(action.payload)) {
+        document.body.classList.add("disable-scroll");
+      }
       state[action.payload] = true; 
     },
     setTurnOffPopup: (state, action: PayloadAction<string>) => {
-      document.body.classList.remove("disable-scroll");
+      if (scrollDisabledPopups.includes(action.payload)) {
+        document.body.classList.remove("disable-scroll");
+      }
       state[action.payload] = false;
     },
   },

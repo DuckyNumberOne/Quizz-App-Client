@@ -7,12 +7,12 @@ import { store } from "../../src/lib/state/store";
 
 export default function App({ Component, pageProps }: AppProps) {
   return (
-    <Layout>
-      <Provider store={store}>
+    <Provider store={store}>
+      <Layout>
         <div className="bg-white">
           <Component {...pageProps} />;
         </div>
-      </Provider>
-    </Layout>
+      </Layout>
+    </Provider>
   );
 }

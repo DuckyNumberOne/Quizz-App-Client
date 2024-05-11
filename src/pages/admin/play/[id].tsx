@@ -36,7 +36,7 @@ const Play = () => {
     <DefaultLoadingPage animation="popup-dow">
       <div className="grid grid-cols-12">
         <div className="mx-6 pt-4 col-span-4 h-full">
-          <div className="px-3 py-4 border md:p-4 bg-white border-[#e5e5e5]  my-4 rounded-lg">
+          <div className="px-3 py-4 border md:p-4 bg-white border-[#e5e5e5]  my-4 rounded-lg h-full">
             <div className="text-xl font-bold py-4">
               <div className="w-full h-[300px]">
                 <img
@@ -128,12 +128,12 @@ const Play = () => {
           </div>
         </div>
         <div className="mx-6 pt-4 col-span-8 h-full ">
-          <div className="px-3 py-4 border md:p-4 bg-white border-[#e5e5e5] my-4 rounded-lg">
+          <div className="px-3 py-4 border md:p-4 bg-white border-[#e5e5e5] my-4 rounded-lg h-full">
             <div className="text-xl font-bold py-4">
               <p className="text-2xl mb-4">
                 {quizz?.question.length} question 🙋
               </p>
-              <div className="space-y-4 h-[800px] overflow-y-auto p-4">
+              <div className="space-y-4 h-[900px] overflow-y-auto p-4">
                 {quizz ? (
                   quizz.question.map((items) => (
                     <div className="flex gap-5 p-4 rounded-xl shadow-4 shadow-[#5c4f7ea6] hover:bg-[#e5e5e571] ease-in-out duration-300">
