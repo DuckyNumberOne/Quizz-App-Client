@@ -108,6 +108,12 @@
   opacity: 0;
 }
 
+.fade-in-05s {
+  animation: fadeIn 1s ease forwards;
+  animation-delay: 0.5s;
+  opacity: 0;
+}
+
 
 @keyframes rotateAnimation {
   0% {

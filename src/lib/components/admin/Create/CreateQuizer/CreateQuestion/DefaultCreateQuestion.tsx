@@ -9,6 +9,7 @@ import { Anwsers, Question } from "@/lib/modal/question";
 import { useDispatch, useSelector } from "react-redux";
 import {
   addQuestion,
+  deleteQuestionByIndex,
   updateQuestion,
 } from "@/lib/state/questions/questionSlice";
 import { RootState } from "@/lib/state/store";
@@ -139,6 +140,15 @@ const DefaultCreateQuestion = () => {
 
   const handleStayQuestionIndex = () => {
     dispatch(setTurnOffPopup("popup_error_question"));
+  };
+
+  const handleDeleteQuestion = () => {
+    if (indexs !== -1) {
+      dispatch(deleteQuestionByIndex(indexs));
+      setIndex(-1); // Đặt lại giá trị của indexs sau khi xóa thành -1
+      dispatch(setTurnOffPopup("popup_create_question"));
+      dispatch(setTurnOnPopup("popup_choose_category_question"));
+    }
   };
 
   function generateUniqueId() {
@@ -454,7 +464,9 @@ const DefaultCreateQuestion = () => {
               </div>
               <div className="border-t-2 border-[#b5b2c1] w-full mt-10" />
               <div className="flex gap-1 h-[150px]">
-                <div className="h-full flex items-center gap-3 justify-between overflow-auto w-3/4">
+                <div
+                  className={`h-full flex items-center gap-3 justify-between overflow-auto w-3/4`}
+                >
                   <div className="h-full flex items-center gap-1">
                     {dataQuestion.map((items, index) => (
                       <div
@@ -473,23 +485,39 @@ const DefaultCreateQuestion = () => {
                     ))}
                   </div>
                 </div>
-                <div className="h-full flex justify-center items-center  w-1/4">
-                  <button
-                    className={`${
-                      indexs === -1
-                        ? "bg-[#036be5] hover:bg-[#509bf0]"
-                        : "bg-white shadow-4 shadow-[#8854c0] hover:bg-[#bb98e0]"
-                    } p-5 rounded-full cursor-pointer ease-in-out duration-300`}
-                  >
-                    <Image
-                      src={
-                        indexs != -1 ? "/images/edit.png" : "/images/plus.png"
-                      }
-                      width={40}
-                      height={40}
-                      alt={indexs ? "Edit" : "Plus"}
-                    />
-                  </button>
+                <div className="h-full flex justify-center items-center  w-1/4 relative">
+                  {indexs !== -1 ? (
+                    <div className="w-full space-y-2 ease-in-out duration-300">
+                      <button className="bg-yellow-300 w-full rounded-md flex justify-center items-center p-2">
+                        <Image
+                          src={"/images/edit.png"}
+                          width={40}
+                          height={40}
+                          alt={"Edit"}
+                        />
+                      </button>
+                      <div
+                        className="bg-red w-full rounded-md cursor-pointer flex justify-center items-center p-2"
+                        onClick={handleDeleteQuestion}
+                      >
+                        <Image
+                          src={"/images/delete.png"}
+                          width={40}
+                          height={40}
+                          alt={"Trash"}
+                        />
+                      </div>
+                    </div>
+                  ) : (
+                    <button className="bg-[#036be5] hover:bg-[#509bf0] p-5 rounded-full cursor-pointer">
+                      <Image
+                        src={"/images/plus.png"}
+                        width={40}
+                        height={40}
+                        alt={"Plus"}
+                      />
+                    </button>
+                  )}
                 </div>
               </div>
             </>

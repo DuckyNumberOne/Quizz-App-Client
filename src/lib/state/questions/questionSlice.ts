@@ -19,16 +19,14 @@ const questionSlice = createSlice({
         state[existingQuestionIndex] = updatedQuestion;
       }
     },
-    // checkExisQuestion: (state, action: PayloadAction<Question>) => {
-    //   const updatedQuestion = action.payload;
-    //   const existingQuestionIndex = state.findIndex(
-    //     (question) => question.title === updatedQuestion.title
-    //   );
-    //   // Trả về true nếu câu hỏi tồn tại, ngược lại trả về false
-    //   return existingQuestionIndex !== -1;
-    // },
+    deleteQuestionByIndex: (state, action: PayloadAction<number>) => {
+      const indexToDelete = action.payload;
+      if (indexToDelete >= 0 && indexToDelete < state.length) {
+        state.splice(indexToDelete, 1);
+      }
+    },
   },
 });
 
-export const { addQuestion, updateQuestion } = questionSlice.actions;
+export const { addQuestion, updateQuestion,deleteQuestionByIndex } = questionSlice.actions;
 export default questionSlice.reducer;
