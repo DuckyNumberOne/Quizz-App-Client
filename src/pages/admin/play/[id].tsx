@@ -4,32 +4,41 @@ import React, { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import Image from "next/image";
 import DefaultCardAnsswer from "@components/admin/CardAnswer/DefaultCardAnswer";
-import { getItemQuizz, getQuestionById } from "@/api/quizz";
+import { getAnwsersIsTrue, getItemQuizz, getQuestionById } from "@/api/quizz";
 import { Question } from "@/lib/modal/question";
 import { questionInit } from "@/lib/config/initQuestion";
 import CountdownTimer from "@/lib/components/common/CountdownTimer/DefaultCountdownTimer";
 
 const Play = () => {
-  const pathname = usePathname();
   const dispatch = useDispatch();
+  const pathname = usePathname();
+  const { query } = useRouter();
   const [start, setStart] = useState(false);
+  const [notification, setNotification] = useState("");
   const [countdown, setCountdown] = useState(3);
   const [question, setQuestion] = useState<Question[]>(questionInit);
   const [indexs, setIndexs] = useState(0);
+  const [idsArray, setIdsArray] = useState<string[]>([]);
   const timeQuestionIndex = question[indexs].time;
-  console.log("🚀 ~ Play ~ timeQuestionIndex:", timeQuestionIndex);
   const timeQuestion = timeQuestionIndex * 1000;
+
   const handleStart = () => {
     setStart(true);
   };
 
-  const handleChoice = () => {};
-
-  const handleTick = (updatedSeconds: number) => {
-    console.log("🚀 ~ handleTick ~ updatedSeconds:", updatedSeconds);
+  const handleChoiceAnswer = async (id: string | undefined) => {
+    if (id) {
+      if (idsArray.includes(id)) {
+        setIdsArray((prevIdsArray) =>
+          prevIdsArray.filter((item) => item !== id)
+        );
+      } else if (idsArray.length + 1 < 4) {
+        setIdsArray((prevIdsArray) => [...prevIdsArray, id]);
+      }
+    }
   };
 
-  const colorCardAnser = [
+  const colorCardAnswer = [
     { id: 1, colorBackground: "#e35454", colorBoder: "#bf2d49" },
     { id: 2, colorBackground: "#30b0c7", colorBoder: "#0093ad" },
     { id: 3, colorBackground: "#ff9500", colorBoder: "#c27810" },
@@ -39,6 +48,32 @@ const Play = () => {
   const indexQuestionPercent = Number(
     (indexs + 1) * (1 / question?.length) * 100
   );
+
+  const handleSubmit = async () => {
+    const id = query.id;
+    const data = {
+      idsArrayAnswer: idsArray,
+      idQuestion: question[indexs]._id,
+    };
+    const { isAllCorrect } = await getAnwsersIsTrue(data, id);
+    if (isAllCorrect) {
+      setNotification("TRUE");
+      setTimeout(() => {
+        if (indexs !== -1 && indexs < question.length - 1) {
+          setIndexs((prevIndex) => prevIndex + 1);
+          setIdsArray([]);
+        }
+      }, 1500); // Chờ 1.5 giây trước khi chuyển câu hỏi tiếp theo
+    } else {
+      setNotification("FALSE");
+      setTimeout(() => {
+        if (indexs !== -1 && indexs < question.length - 1) {
+          setIndexs((prevIndex) => prevIndex + 1);
+          setIdsArray([]);
+        }
+      }, 1500); // Chờ 1.5 giây trước khi chuyển câu hỏi tiếp theo
+    }
+  };
 
   useEffect(() => {
     if (pathname && start) {
@@ -65,9 +100,10 @@ const Play = () => {
   }, [countdown]);
 
   useEffect(() => {
+    setNotification("");
     const timer = setTimeout(() => {
       if (indexs !== -1 && indexs < question.length - 1) {
-        setIndexs((prevIndex) => prevIndex + 1);
+        handleSubmit();
       }
     }, timeQuestion);
     return () => clearTimeout(timer);
@@ -81,7 +117,39 @@ const Play = () => {
             {/* Box 1 */}
             <div></div>
             {/* Box 2  */}
-            <div className="slide-up mt-2 max-w-2xl mx-auto rounded-lg border h-full px-5 pt-5 bg-white shadow-2 shadow-purple-500">
+            <div className="slide-up mt-2 max-w-2xl mx-auto rounded-lg border h-full px-5 pt-5 bg-white shadow-2 shadow-purple-500 relative">
+              {/* Notification True  */}
+              {notification === "TRUE" && (
+                <div className="slide-up absolute top-0 left-0 w-full h-[200px] bg-[#3ed684] z-10 rounded-b-3xl shadow-2 shadow-black flex justify-center items-center">
+                  <div>
+                    <p className="text-white text-[36px] font-medium text-center">
+                      Correct !
+                    </p>
+                    <div className="w-[200px] px-4 py-2 bg-white rounded-full mt-5 shadow-2">
+                      <p className="text-center w-full text-black font-semibold font-pacifico">
+                        + {question[indexs].point} point
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              )}
+              {/* Notification False  */}
+              {notification === "FALSE" && (
+                <div
+                  className={`slide-up absolute top-0 left-0 w-full h-[200px] bg-[#e35454] z-10 rounded-b-3xl shadow-2 shadow-black flex justify-center items-center`}
+                >
+                  <div>
+                    <p className="text-white text-[36px] font-medium text-center">
+                      Incorrect !
+                    </p>
+                    <div className="w-[200px] px-4 py-2 bg-white rounded-full mt-5 shadow-2">
+                      <p className="text-center w-full text-black font-semibold font-pacifico">
+                        No points +
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              )}
               <div>
                 {/* Navbar  */}
                 <div className="flex justify-between items-center">
@@ -114,7 +182,7 @@ const Play = () => {
                         : "/images/image-loading.webp"
                     }
                     alt="Logo"
-                    className="mt-10 rounded-xl border w-full mx-auto h-[340px]"
+                    className={`mt-10 rounded-xl border w-[500px] mx-auto h-[340px] fade-in-05s`}
                   />
                 </div>
                 <p className="font-medium mt-5 text-xl h-[70px]">
@@ -127,14 +195,27 @@ const Play = () => {
                         className={`hover:shadow-2 hover:shadow-green-400 hover:scale-105 ease-in-out duration-300 cursor-pointer border-r-4 border-b-4 py-3 px-6 rounded-2xl w-full h-[170px] flex justify-center items-center relative`}
                         style={{
                           backgroundColor:
-                            colorCardAnser[index].colorBackground,
-                          borderColor: colorCardAnser[index].colorBoder,
+                            colorCardAnswer[index].colorBackground,
+                          borderColor: colorCardAnswer[index].colorBoder,
                         }}
-                        onClick={handleChoice}
+                        onClick={() => handleChoiceAnswer(items._id)}
                       >
                         <p className="text-white font-medium text-lg">
                           {items.text}
                         </p>
+                        <div className="cursor-pointer">
+                          <div className="absolute right-3 top-5 rounded-full border-4 border-white p-1 ease-in-out duration-300 w-[40px] h-[40px]">
+                            {idsArray.includes(items._id) && (
+                              <Image
+                                src="/images/doneLight.png"
+                                width={30}
+                                height={30}
+                                alt="CheckBox"
+                                className="absolute inset-0 z-0"
+                              />
+                            )}
+                          </div>
+                        </div>
                       </div>
                     </div>
                   ))}
@@ -143,6 +224,7 @@ const Play = () => {
             </div>
             {/* Box 3 */}
             <div>
+              {/* Point and Time  */}
               <div className="slide-up mt-2 max-w-2xl mx-auto rounded-lg border bg-white shadow-2 shadow-purple-500 w-full grid grid-cols-2">
                 <div className="flex w-full h-full border-r p-2">
                   <Image
@@ -185,6 +267,7 @@ const Play = () => {
                   </p>
                 </div>
               </div>
+              {/* Analytic  */}
               <div className="slide-up mt-2 max-w-2xl mx-auto rounded-lg border h-1/4 bg-white shadow-2 shadow-purple-500 w-full">
                 <div className="grid grid-cols-3 border-b">
                   <div className="border-r p-2">
@@ -198,6 +281,14 @@ const Play = () => {
                   </div>
                 </div>
               </div>
+              <button
+                className="slide-up mt-2 max-w-2xl mx-auto rounded-lg border  bg-white shadow-2 shadow-purple-500 w-full hover:bg-black hover:text-white ease-linear duration-300"
+                onClick={handleSubmit}
+              >
+                <p className="text-center text-xl font-semibold p-4">
+                  Next question
+                </p>
+              </button>
             </div>
           </div>
         </div>

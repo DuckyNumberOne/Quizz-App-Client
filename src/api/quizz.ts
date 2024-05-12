@@ -22,6 +22,16 @@ export const getItemQuizz = async (id: string | string[]) => {
   }
 };
 
+export const getAnwsersIsTrue = async (data:any,id: string | string[] | undefined) => {
+  try {
+    const response = await axios.post(`/quizz/getAnwsersIsTrue/${id}`, data);
+    const quizz = response.data;
+    return quizz;
+  } catch (error) {
+    console.error(error);
+  }
+};
+
 export const getQuestionById = async (id: string | string[]) => {
   try {
     const response = await axios.get(`/quizz/getQuestionById/${id}`);

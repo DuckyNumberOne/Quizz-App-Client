@@ -147,7 +147,10 @@ const Play = () => {
               <div className="space-y-4 h-[900px] overflow-y-auto p-4">
                 {quizz ? (
                   quizz.question.map((items) => (
-                    <div className="flex gap-5 p-4 rounded-xl shadow-4 shadow-[#5c4f7ea6] hover:bg-[#e5e5e571] ease-in-out duration-300">
+                    <div
+                      className="flex gap-5 p-4 rounded-xl shadow-4 shadow-[#5c4f7ea6] hover:bg-[#e5e5e571] ease-in-out duration-300"
+                      key={items._id}
+                    >
                       <div className="w-1/3 h-[200px] relative rounded-lg ">
                         <img
                           src={
