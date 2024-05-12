@@ -22,6 +22,16 @@ export const getItemQuizz = async (id: string | string[]) => {
   }
 };
 
+export const getQuestionById = async (id: string | string[]) => {
+  try {
+    const response = await axios.get(`/quizz/getQuestionById/${id}`);
+    const quizz = response.data;
+    return quizz;
+  } catch (error) {
+    console.error(error);
+  }
+};
+
 export const getItemQuizzByUser = async (id: string | string[]) => {
   try {
     const response = await axios.get(`/quizz/getItemQuizzByUser/${id}`);

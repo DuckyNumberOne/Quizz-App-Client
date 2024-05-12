@@ -19,7 +19,7 @@ interface DefaultCardAnswerProps {
   register: any;
   errors: any;
   control?: any;
-  indexs: number;
+  indexs?: number;
 }
 
 const DefaultCardAnswer: React.FC<DefaultCardAnswerProps> = ({

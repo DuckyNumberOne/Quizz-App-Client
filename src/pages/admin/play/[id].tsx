@@ -1,236 +1,246 @@
-import { getItemQuizz } from "@/api/quizz";
-import DefaultLoadingPage from "@/lib/components/admin/LoadingPage/DefaultLoadingPage";
-import DefaultPopupAdmin from "@/lib/components/admin/PopupAdmin/DefaultPopupAdmin";
-import ButtonDefault from "@/lib/components/common/Button/ButtonDefault";
-import { Quizz } from "@/lib/modal/quizz";
-import { setTurnOffPopup } from "@/lib/state/popup/popupSlice";
-import { AppDispatch } from "@/lib/state/store";
-import Image from "next/image";
-import { usePathname } from "next/navigation";
+import { useParams, usePathname } from "next/navigation";
+import { useRouter } from "next/router";
 import React, { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
+import Image from "next/image";
+import DefaultCardAnsswer from "@components/admin/CardAnswer/DefaultCardAnswer";
+import { getItemQuizz, getQuestionById } from "@/api/quizz";
+import { Question } from "@/lib/modal/question";
+import { questionInit } from "@/lib/config/initQuestion";
+import CountdownTimer from "@/lib/components/common/CountdownTimer/DefaultCountdownTimer";
 
 const Play = () => {
-  const path = usePathname();
-  const splitPath = path && path.split("/");
-  const params = path && splitPath[splitPath.length - 1];
-  const dispatch = useDispatch<AppDispatch>();
-  const [quizz, setQuizz] = useState<Quizz>();
+  const pathname = usePathname();
+  const dispatch = useDispatch();
+  const [start, setStart] = useState(false);
+  const [countdown, setCountdown] = useState(3);
+  const [question, setQuestion] = useState<Question[]>(questionInit);
+  const [indexs, setIndexs] = useState(0);
+  const timeQuestionIndex = question[indexs].time;
+  console.log("🚀 ~ Play ~ timeQuestionIndex:", timeQuestionIndex);
+  const timeQuestion = timeQuestionIndex * 1000;
+  const handleStart = () => {
+    setStart(true);
+  };
 
-  const handleFollow = () => {};
+  const handleChoice = () => {};
+
+  const handleTick = (updatedSeconds: number) => {
+    console.log("🚀 ~ handleTick ~ updatedSeconds:", updatedSeconds);
+  };
+
+  const colorCardAnser = [
+    { id: 1, colorBackground: "#e35454", colorBoder: "#bf2d49" },
+    { id: 2, colorBackground: "#30b0c7", colorBoder: "#0093ad" },
+    { id: 3, colorBackground: "#ff9500", colorBoder: "#c27810" },
+    { id: 4, colorBackground: "#3ed684", colorBoder: "#81ab8b" },
+  ];
+
+  const indexQuestionPercent = Number(
+    (indexs + 1) * (1 / question?.length) * 100
+  );
 
   useEffect(() => {
-    if (params) {
+    if (pathname && start) {
+      const checkPathPlay = pathname.split("/");
+      const params = checkPathPlay[checkPathPlay.length - 1];
       const fetch = async () => {
-        const res: Quizz = await getItemQuizz(params);
+        const res = await getQuestionById(params);
         if (res) {
-          setQuizz(res);
-          dispatch(setTurnOffPopup("popup_loading_page_admin"));
+          setIndexs(0);
+          setQuestion(res);
         }
       };
       fetch();
     }
-  }, []);
+  }, [start]);
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      if (countdown > 0) {
+        setCountdown(countdown - 1);
+      }
+    }, 1000);
+    return () => clearTimeout(timer);
+  }, [countdown]);
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      if (indexs !== -1 && indexs < question.length - 1) {
+        setIndexs((prevIndex) => prevIndex + 1);
+      }
+    }, timeQuestion);
+    return () => clearTimeout(timer);
+  }, [start, indexs, question]);
 
   return (
-    <DefaultLoadingPage animation="popup-dow">
-      <div className="grid grid-cols-12">
-        <div className="mx-6 pt-4 col-span-4 h-full">
-          <div className="px-3 py-4 border md:p-4 bg-white border-[#e5e5e5]  my-4 rounded-lg h-full">
-            <div className="text-xl font-bold py-4">
-              <div className="w-full h-[300px]">
-                <img
-                  src={quizz?.urlThumbnail || "/images/image-loading.webp"}
-                  width={200}
-                  height={300}
-                  alt="Thumbnail"
-                  className="rounded-xl bg-cover bg-center w-full h-full shadow-2 shadow-black"
-                />
-              </div>
-              <div className="mt-4">
-                <h1 className="font-bold text-2xl h-1/6">
-                  {quizz?.title ? quizz?.title : "Loading..."}
-                </h1>
-                {/* Analyst Quizer  */}
-                <div className="grid grid-cols-4 mt-10 border-4 border-[#c5c3ce] p-4 rounded-xl shadow-4">
-                  <div className=" text-center">
-                    <h3 className="font-medium text-lg text-[#c5c3ce]">
-                      Played
-                    </h3>
-                    <p>{quizz?.play}</p>
+    <div className="">
+      {start ? (
+        <div className="bg-bts-hero-search-bg bg-no-repeat bg-right bg-cover">
+          <div className="pb-10 grid grid-cols-3 gap-4 container mx-auto">
+            {/* Box 1 */}
+            <div></div>
+            {/* Box 2  */}
+            <div className="slide-up mt-2 max-w-2xl mx-auto rounded-lg border h-full px-5 pt-5 bg-white shadow-2 shadow-purple-500">
+              <div>
+                {/* Navbar  */}
+                <div className="flex justify-between items-center">
+                  <p className="text-xl font-normal">
+                    <span>{indexs + 1}</span>/
+                    <span className="font-bold">{question.length}</span>
+                  </p>
+                  <div className="bg-white border-2 w-2/4 h-4 rounded-xl">
+                    <div
+                      style={{ width: `${indexQuestionPercent}% ` }}
+                      className={`bg-yellow-300 h-full rounded-xl slide-left`}
+                    ></div>
                   </div>
-                  <div className=" text-center">
-                    <h3 className="font-medium text-lg text-[#c5c3ce]">
-                      Share
-                    </h3>
-                    <p>{quizz?.share}</p>
-                  </div>
-                  <div className=" text-center">
-                    <h3 className="font-medium text-lg text-[#c5c3ce]">
-                      Followw
-                    </h3>
-                    <p>12</p>
-                  </div>
-                  <div className=" text-center">
-                    <h3 className="font-medium text-lg text-[#c5c3ce]">
-                      Question
-                    </h3>
-                    <p>{quizz?.question.length}</p>
-                  </div>
-                </div>
-                {/* Details Author */}
-                <div className="mt-10 flex items-center justify-between">
-                  <div className="flex gap-5 items-center">
-                    <img
-                      src={quizz?.user.urlAvatar}
-                      width={100}
-                      height={100}
-                      alt={quizz?.user.fullName}
-                      className="rounded-full border-[4px] border-[#8854c0] border-solid shadow-4"
+                  <button className="shadow-2 border-2 border-black rounded-full p-1">
+                    <Image
+                      src="/images/menu.png"
+                      width={26}
+                      height={26}
+                      alt="Logo"
+                      className="border-2"
                     />
-                    <div className="">
-                      <p className="text-xl font-semibold cursor-pointer text-black transition ease-in-out delay-150 hover:-translate-y-1 hover:scale-110 duration-300">
-                        {quizz?.user.fullName}
-                      </p>
-                      <p className="text-base text-[#c4c2ce] font-medium">
-                        @{quizz?.user.username}
-                      </p>
+                  </button>
+                </div>
+                {/* Body */}
+                <div className="object-contain">
+                  <img
+                    src={
+                      question
+                        ? question[indexs].imgQuestion
+                        : "/images/image-loading.webp"
+                    }
+                    alt="Logo"
+                    className="mt-10 rounded-xl border w-full mx-auto h-[340px]"
+                  />
+                </div>
+                <p className="font-medium mt-5 text-xl h-[70px]">
+                  {question[indexs].title}
+                </p>
+                <div className="w-full border-r-[5px] border-white mb-3 grid grid-cols-2 grid-rows-2 gap-4">
+                  {question[indexs].anwsers.map((items, index) => (
+                    <div key={items._id}>
+                      <div
+                        className={`hover:shadow-2 hover:shadow-green-400 hover:scale-105 ease-in-out duration-300 cursor-pointer border-r-4 border-b-4 py-3 px-6 rounded-2xl w-full h-[170px] flex justify-center items-center relative`}
+                        style={{
+                          backgroundColor:
+                            colorCardAnser[index].colorBackground,
+                          borderColor: colorCardAnser[index].colorBoder,
+                        }}
+                        onClick={handleChoice}
+                      >
+                        <p className="text-white font-medium text-lg">
+                          {items.text}
+                        </p>
+                      </div>
                     </div>
-                  </div>
-                  <ButtonDefault
-                    content="Follow"
-                    className="text-white bg-black rounded-full py-4 px-8 text-lg  hover:text-black hover:bg-white hover:shadow-sm hover:shadow-black ease-in-out duration-300"
-                    onClick={handleFollow}
-                  />
+                  ))}
                 </div>
-                {/* Descripsiom  */}
-                <div className="mt-12">
-                  <p className="text-xl font-bold">Description</p>
-                  <div className="h-[140px] overflow-y-auto mt-4">
-                    <p className="text-base font-medium">
-                      {quizz?.description}
-                    </p>
-                  </div>
+              </div>
+            </div>
+            {/* Box 3 */}
+            <div>
+              <div className="slide-up mt-2 max-w-2xl mx-auto rounded-lg border bg-white shadow-2 shadow-purple-500 w-full grid grid-cols-2">
+                <div className="flex w-full h-full border-r p-2">
+                  <Image
+                    src="/images/point.webp"
+                    width={40}
+                    height={40}
+                    alt="Logo"
+                    className="bg-contain bg-center object-cover"
+                  />
+                  <p className="p-2 font-medium text-lg">
+                    Point:{" "}
+                    <span className="text-green-500">
+                      {question[indexs].point}
+                    </span>
+                  </p>
                 </div>
-                {/* Play  */}
-                <div className="flex gap-5 justify-between items-center mt-10">
-                  <ButtonDefault
-                    className="text-white bg-black shadow-4 shadow-[#6d5ff6] p-4 rounded-full text-sm w-[30%] transition ease-in-out hover:scale-105"
-                    content="Play with friends"
+                <div className="flex w-full h-full p-2">
+                  <Image
+                    src="/images/time-clock.webp"
+                    width={40}
+                    height={40}
+                    alt="Logo"
+                    className="bg-contain bg-center object-cover"
                   />
-                  <ButtonDefault
-                    className="text-black bg-white shadow-4 shadow-[#6d5ff6] p-4 rounded-full text-sm w-[30%] transition ease-in-out hover:scale-105"
-                    content="Play solo"
-                  />
+                  <p className="p-2 font-medium text-lg">
+                    Time:{" "}
+                    <span className="text-rose-600">
+                      {timeQuestionIndex > 0 ? (
+                        <>
+                          <CountdownTimer
+                            maxTime={timeQuestionIndex}
+                            index={indexs}
+                          />{" "}
+                          s
+                        </>
+                      ) : (
+                        "0 s"
+                      )}
+                    </span>
+                  </p>
+                </div>
+              </div>
+              <div className="slide-up mt-2 max-w-2xl mx-auto rounded-lg border h-1/4 bg-white shadow-2 shadow-purple-500 w-full">
+                <div className="grid grid-cols-3 border-b">
+                  <div className="border-r p-2">
+                    <p className="text-center font-medium">Question</p>
+                  </div>
+                  <div className="border-r p-2">
+                    <p className="text-center font-medium">Point</p>
+                  </div>
+                  <div className=" p-2">
+                    <p className="text-center font-medium">Time</p>
+                  </div>
                 </div>
               </div>
             </div>
           </div>
         </div>
-        <div className="mx-6 pt-4 col-span-8 h-full ">
-          <div className="px-3 py-4 border md:p-4 bg-white border-[#e5e5e5] my-4 rounded-lg h-full">
-            <div className="text-xl font-bold py-4">
-              <p className="text-2xl mb-4">
-                {quizz?.question.length} question 🙋
-              </p>
-              <div className="space-y-4 h-[900px] overflow-y-auto p-4">
-                {quizz ? (
-                  quizz.question.map((items) => (
-                    <div className="flex gap-5 p-4 rounded-xl shadow-4 shadow-[#5c4f7ea6] hover:bg-[#e5e5e571] ease-in-out duration-300">
-                      <div className="w-1/3 h-[200px] relative rounded-lg ">
-                        <img
-                          src={
-                            items.imgQuestion || "/images/image-loading.webp"
-                          }
-                          className="w-full h-full rounded-lg"
-                          alt={items.title}
-                        />
-                        <div className="absolute top-0 left-0 w-full h-full flex items-center justify-center bg-black-shadow rounded-lg">
-                          <div className="p-5 rounded-full bg-[#8854c0]">
-                            <Image
-                              src="/images/quizzes-question.png"
-                              alt="quizzes question"
-                              width={50}
-                              height={50}
-                            />
-                          </div>
-                        </div>
-                      </div>
-                      <div>
-                        <p className="h-1/3">{items.title}</p>
-                        <div className="flex gap-4">
-                          <div className="space-y-3">
-                            <div className="px-4 py-1.5 text-lg font-semibold text-black w-[220px] shadow-4 rounded-lg ">
-                              <div className="flex gap-3">
-                                <Image
-                                  src="/images/time-clock.webp"
-                                  width={25}
-                                  height={25}
-                                  alt="Time clock"
-                                  className="bg-cover bg-center"
-                                />
-                                <p>
-                                  Time:{" "}
-                                  <span className="text-red">
-                                    {items.time} s
-                                  </span>
-                                </p>
-                              </div>
-                            </div>
-                            <div className="px-4 py-1.5 text-lg  font-semibold text-black w-[220px] shadow-4 rounded-lg ">
-                              <div className="flex gap-3">
-                                <Image
-                                  src="/images/points.webp"
-                                  width={25}
-                                  height={25}
-                                  alt="Points"
-                                  className="bg-cover bg-center"
-                                />
-                                <p>
-                                  Points:{" "}
-                                  <span className="text-red">
-                                    {items.point} P
-                                  </span>
-                                </p>
-                              </div>
-                            </div>
-                          </div>
-                          <div className="space-y-3">
-                            <div className="px-4 py-1.5 text-lg  font-semibold text-black w-[220px] shadow-4 rounded-lg ">
-                              <div className="flex gap-3">
-                                <Image
-                                  src="/images/right-answer.webp"
-                                  width={25}
-                                  height={25}
-                                  alt="Right answer"
-                                  className="bg-cover bg-center"
-                                />
-                                <p>
-                                  Right answer:{" "}
-                                  <span className="text-red">
-                                    {
-                                      items.anwsers.filter(
-                                        (anwsers) => anwsers.isCorrect === true
-                                      ).length
-                                    }
-                                  </span>
-                                </p>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  ))
-                ) : (
-                  <div>Loading ...</div>
-                )}
+      ) : (
+        <div
+          className={`flex justify-center items-center h-screen ${
+            start ? "slide-down" : ""
+          }`}
+        >
+          {countdown > 0 ? (
+            <div className={`${!start ? "slide-down " : ""}`}>
+              <Image
+                src="/images/logo.png"
+                width={250}
+                height={250}
+                alt="Logo"
+                className="mx-auto"
+              />
+              <div className="mx-auto h-[180px] bg-white shadow-4 shadow-[#6c4298] w-[180px] border-4 rounded-full font-bold font-poetsen flex items-center justify-center">
+                <p className="text-[160px] text-black">{countdown}</p>
               </div>
             </div>
-          </div>
+          ) : (
+            <div className={` ${!start ? "fade-in-05s" : ""}`}>
+              <Image
+                src="/images/logo.png"
+                width={250}
+                height={250}
+                alt="Logo"
+                className="mx-auto"
+              />
+              <div
+                onClick={handleStart}
+                className="hover:bg-rose-600 hover:shadow-rose-800 cursor-pointer text-[60px] font-bold font-poetsen shadow-4 shadow-rose-700 w-[400px] flex justify-center items-center bg-rose-500 rounded-full"
+              >
+                <p className="text-white">Start</p>
+              </div>
+            </div>
+          )}
         </div>
-      </div>
-    </DefaultLoadingPage>
+      )}
+    </div>
   );
 };
+
 export default Play;

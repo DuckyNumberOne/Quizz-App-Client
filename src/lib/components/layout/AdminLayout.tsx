@@ -7,6 +7,10 @@ import { useDispatch } from "react-redux";
 import { AppDispatch } from "@/lib/state/store";
 import { setTurnOffPopup } from "@/lib/state/popup/popupSlice";
 import { resetQuestions } from "@/lib/state/questions/questionSlice";
+import useLocalStorage from "@/lib/hook/useLocalStorage";
+import { addUser } from "@/lib/state/user/userSlice";
+import { User } from "@/lib/modal/user";
+import { userInit } from "@/lib/config/initUser";
 
 export default function AdminLayout({
   children,
@@ -17,6 +21,7 @@ export default function AdminLayout({
   const currentPage = usePathname();
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const savedPathNameRef = useRef(currentPage);
+  const [inforUser, setInforUser] = useLocalStorage<User>("user", userInit);
 
   const handleClearState = () => {
     dispatch(setTurnOffPopup("popup_choose_category_question"));
@@ -30,6 +35,12 @@ export default function AdminLayout({
       savedPathNameRef.current = currentPage;
     }
   }, [currentPage]);
+
+  useEffect(() => {
+    if (inforUser) {
+      dispatch(addUser(inforUser));
+    }
+  }, [inforUser]);
 
   return (
     <>
