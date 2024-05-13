@@ -10,11 +10,12 @@ import { questionInit } from "@/lib/config/initQuestion";
 import CountdownTimer from "@/lib/components/common/CountdownTimer/DefaultCountdownTimer";
 import { addResult, resetResult } from "@/lib/state/result/resultSlice";
 import { RootState } from "@/lib/state/store";
+import Link from "next/link";
 
 const Play = () => {
   const dispatch = useDispatch();
   const pathname = usePathname();
-  const { query } = useRouter();
+  const { query, push } = useRouter();
   const [start, setStart] = useState(false);
   const [notification, setNotification] = useState("");
   const [countdown, setCountdown] = useState(3);
@@ -86,30 +87,34 @@ const Play = () => {
   };
 
   const handleSubmit = async () => {
-    clearTimer();
-    setStopTime(true);
-    const id = query.id;
-    const data = {
-      idsArrayAnswer: idsArray,
-      idQuestion: question[indexs]._id,
-    };
-    const { isAllCorrect } = await getAnwsersIsTrue(data, id);
-    if (isAllCorrect) {
-      setNotification("TRUE");
+    if (dataResult.length === question.length) {
+      push("/admin/result");
     } else {
-      setNotification("FALSE");
-    }
-    const resultExists = dataResult.some((result) => result.index === indexs);
-    if (!resultExists) {
-      const resutlt = {
-        index: indexs,
-        point: isAllCorrect ? question[indexs].point : 0,
-        time: timeLeft,
-        rightAnswer: isAllCorrect,
+      clearTimer();
+      setStopTime(true);
+      const id = query.id;
+      const data = {
+        idsArrayAnswer: idsArray,
+        idQuestion: question[indexs]._id,
       };
-      dispatch(addResult(resutlt));
+      const { isAllCorrect } = await getAnwsersIsTrue(data, id);
+      if (isAllCorrect) {
+        setNotification("TRUE");
+      } else {
+        setNotification("FALSE");
+      }
+      const resultExists = dataResult.some((result) => result.index === indexs);
+      if (!resultExists) {
+        const resutlt = {
+          index: indexs,
+          point: isAllCorrect ? question[indexs].point : 0,
+          time: timeLeft,
+          rightAnswer: isAllCorrect,
+        };
+        dispatch(addResult(resutlt));
+      }
+      startTimerB();
     }
-    startTimerB();
   };
 
   useEffect(() => {
@@ -146,6 +151,41 @@ const Play = () => {
     clearTimer();
     dispatch(resetResult());
   }, [pathname]);
+
+  useEffect(() => {
+    const audio = new Audio("/music/music-play-game.mp3");
+    const count = new Audio("/music/count-down.mp3");
+
+    if (start) {
+      count.pause();
+      audio.play();
+    } else {
+      audio.pause();
+      count.volume = 0.5;
+      count.play();
+    }
+    return () => {
+      audio.pause();
+      count.pause();
+    };
+  }, [start]);
+
+  useEffect(() => {
+    const audioTrueAnswer = new Audio("/music/rightanswer.mp3");
+    const audioFalseAnswer = new Audio("/music/wronganswer.mp3");
+
+    if (notification === "TRUE") {
+      audioTrueAnswer.play();
+      return () => {
+        audioTrueAnswer.pause();
+      };
+    } else if (notification === "FALSE") {
+      audioFalseAnswer.play();
+      return () => {
+        audioFalseAnswer.pause();
+      };
+    }
+  }, [notification]);
 
   return (
     <div className="">
@@ -349,7 +389,9 @@ const Play = () => {
                 onClick={handleSubmit}
               >
                 <p className="text-center text-xl font-semibold p-4">
-                  Next question
+                  {dataResult.length === question.length
+                    ? "Go to results !!!"
+                    : "Next question"}
                 </p>
               </button>
             </div>
