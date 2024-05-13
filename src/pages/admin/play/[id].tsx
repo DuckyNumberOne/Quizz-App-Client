@@ -18,7 +18,9 @@ const Play = () => {
   const [countdown, setCountdown] = useState(3);
   const [question, setQuestion] = useState<Question[]>(questionInit);
   const [indexs, setIndexs] = useState(0);
+  const [stopTime, setStopTime] = useState(false);
   const [idsArray, setIdsArray] = useState<string[]>([]);
+  const [timerA, setTimerA] = useState<any>(null);
   const timeQuestionIndex = question[indexs].time;
   const timeQuestion = timeQuestionIndex * 1000;
 
@@ -38,6 +40,33 @@ const Play = () => {
     }
   };
 
+  const startTimerA = () => {
+    clearTimeout(timerA);
+    setTimerA(
+      setTimeout(() => {
+        if (indexs !== -1 && indexs < question.length - 1) {
+          handleSubmit();
+        }
+      }, timeQuestion)
+    );
+  };
+
+  const startTimerB = () => {
+    clearTimeout(timerA);
+    setTimerA(
+      setTimeout(() => {
+        if (indexs !== -1 && indexs < question.length - 1) {
+          setIndexs((prevIndex) => prevIndex + 1);
+          setIdsArray([]);
+        }
+      }, 1500)
+    );
+  };
+
+  const clearTimer = () => {
+    clearTimeout(timerA);
+  };
+
   const colorCardAnswer = [
     { id: 1, colorBackground: "#e35454", colorBoder: "#bf2d49" },
     { id: 2, colorBackground: "#30b0c7", colorBoder: "#0093ad" },
@@ -50,6 +79,8 @@ const Play = () => {
   );
 
   const handleSubmit = async () => {
+    clearTimer();
+    setStopTime(true);
     const id = query.id;
     const data = {
       idsArrayAnswer: idsArray,
@@ -58,21 +89,10 @@ const Play = () => {
     const { isAllCorrect } = await getAnwsersIsTrue(data, id);
     if (isAllCorrect) {
       setNotification("TRUE");
-      setTimeout(() => {
-        if (indexs !== -1 && indexs < question.length - 1) {
-          setIndexs((prevIndex) => prevIndex + 1);
-          setIdsArray([]);
-        }
-      }, 1500); // Chờ 1.5 giây trước khi chuyển câu hỏi tiếp theo
     } else {
       setNotification("FALSE");
-      setTimeout(() => {
-        if (indexs !== -1 && indexs < question.length - 1) {
-          setIndexs((prevIndex) => prevIndex + 1);
-          setIdsArray([]);
-        }
-      }, 1500); // Chờ 1.5 giây trước khi chuyển câu hỏi tiếp theo
     }
+    startTimerB();
   };
 
   useEffect(() => {
@@ -100,13 +120,9 @@ const Play = () => {
   }, [countdown]);
 
   useEffect(() => {
+    setStopTime(false);
     setNotification("");
-    const timer = setTimeout(() => {
-      if (indexs !== -1 && indexs < question.length - 1) {
-        handleSubmit();
-      }
-    }, timeQuestion);
-    return () => clearTimeout(timer);
+    startTimerA();
   }, [start, indexs, question]);
 
   return (
@@ -257,6 +273,7 @@ const Play = () => {
                           <CountdownTimer
                             maxTime={timeQuestionIndex}
                             index={indexs}
+                            stop={stopTime}
                           />{" "}
                           s
                         </>

@@ -3,9 +3,10 @@ import React, { useEffect, useState } from "react";
 interface PropsTimer {
   maxTime: number;
   index?: number;
+  stop: boolean;
 }
 
-const CountdownTimer: React.FC<PropsTimer> = ({ maxTime, index }) => {
+const CountdownTimer: React.FC<PropsTimer> = ({ maxTime, index, stop }) => {
   const [timeLeft, setTimeLeft] = useState(maxTime);
 
   useEffect(() => {
@@ -15,6 +16,10 @@ const CountdownTimer: React.FC<PropsTimer> = ({ maxTime, index }) => {
   useEffect(() => {
     const timer = setInterval(() => {
       setTimeLeft((prevTimeLeft: number) => {
+        if (stop) {
+          clearInterval(timer);
+          return 0;
+        }
         if (prevTimeLeft > 0) {
           return prevTimeLeft - 1;
         } else {
@@ -25,7 +30,7 @@ const CountdownTimer: React.FC<PropsTimer> = ({ maxTime, index }) => {
     }, 1000);
 
     return () => clearInterval(timer);
-  }, [maxTime]);
+  }, [maxTime, stop]);
 
   const formatTime = (time: number) => {
     const minutes = Math.floor(time / 60);
