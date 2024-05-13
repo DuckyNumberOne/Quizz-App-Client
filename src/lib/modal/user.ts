@@ -9,7 +9,7 @@ export interface User {
   urlAvatar: string;
   email: string;
   admin: boolean;
-  password: string;
+  // password: string;
   updatedAt?: string;
   createdAt: string;
 }

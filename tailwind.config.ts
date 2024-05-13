@@ -6,6 +6,8 @@ const config: Config = {
     theme: {
         fontFamily: {
           satoshi: ["Satoshi", "sans-serif"],
+          pacifico: ["Pacifico", "sans-serif"],
+          poetsen: ["Poetsen One", "sans-serif"],
         },
         screens: {
           "2xsm": "375px",

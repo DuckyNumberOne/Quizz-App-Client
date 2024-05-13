@@ -9,7 +9,7 @@ interface CheckBoxAnswerProps {
   errorsOption?: any;
   onClick?: any;
   defaultValue?: boolean;
-  indexs: number;
+  indexs?: number;
 }
 
 const DefaultCheckBoxAnswer: React.FC<CheckBoxAnswerProps> = ({

@@ -10,11 +10,12 @@ const initialState: PopupState = {
   "popup_create_quizer": true,
   "popup_choose_category_question": false,
   "popup_create_question": false,
-  "popup_error_question":false
+  "popup_error_question":false,
+  "popup_start_game":false,
   //Add more key
 };
 
-const scrollDisabledPopups = ["popup_login", "popup_loading_page_admin","popup_error_question"];
+const scrollDisabledPopups = ["popup_login", "popup_loading_page_admin","popup_error_question","popup_start_game"];
 
 const popupSlice = createSlice({
   name: "popup",

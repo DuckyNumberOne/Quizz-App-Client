@@ -2,11 +2,13 @@ import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import useLocalStorage from "@/lib/hook/useLocalStorage";
+import { User } from "@/lib/modal/user";
+import { useSelector } from "react-redux";
+import { RootState } from "@/lib/state/store";
 
 const DropdownUser = () => {
   const [dropdownOpen, setDropdownOpen] = useState(false);
-  const [inforUser, setInforUser] = useLocalStorage("user", "");
-
+  const dataUser = useSelector((state: RootState) => state.user);
   const trigger = useRef<any>(null);
   const dropdown = useRef<any>(null);
 
@@ -46,20 +48,27 @@ const DropdownUser = () => {
       >
         <span className="hidden text-right lg:block">
           <span className="block text-sm font-medium text-black dark:text-white">
-            Thomas Anree
+            {dataUser.fullName}
           </span>
-          <span className="block text-xs">UX Designer</span>
+          <span className="block text-xs">
+            {dataUser.admin ? (
+              <p className="text-rose-700 font-medium">Admin</p>
+            ) : (
+              <p className="text-purple-500 font-medium">Member</p>
+            )}
+          </span>
         </span>
 
         <span className="h-12 w-12 rounded-full">
-          <Image
+          <img
             width={112}
             height={112}
-            src={"/images/user/user-01.png"}
+            src={dataUser.urlAvatar}
             style={{
               width: "auto",
               height: "auto",
             }}
+            className="rounded-full shadow-4 shadow-[#8854c0]"
             alt="User"
           />
         </span>

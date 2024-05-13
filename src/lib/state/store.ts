@@ -3,6 +3,8 @@ import popupReducer from "./popup/popupSlice";
 import questionReducer from "./questions/questionSlice";
 import answerReducer from "./answer/answerSlice";
 import quizzReducer from "./quizz/quizzSlice";
+import userReducer from "./user/userSlice";
+
 
 
 
@@ -12,7 +14,8 @@ export const store = configureStore({
     popup: popupReducer,
     question:questionReducer,
     answers:answerReducer,
-    quizz:quizzReducer
+    quizz:quizzReducer,
+    user:userReducer
   },
 });
 

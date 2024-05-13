@@ -12,29 +12,20 @@ import { useDispatch } from "react-redux";
 import { AppDispatch } from "@/lib/state/store";
 import { setTurnOnPopup } from "@/lib/state/popup/popupSlice";
 import DefaultLoadingPage from "@/lib/components/admin/LoadingPage/DefaultLoadingPage";
+import { scrollToTop } from "@/utils/scrollToTop";
 
 const Admin = () => {
   const { push } = useRouter();
   const [data, setData] = useState<Quizz[]>([]);
   const dispatch = useDispatch<AppDispatch>();
 
-  const handleScrollToTop = () => {
-    const content = document.getElementById("main-content");
-    if (content) {
-      window.scrollTo({
-        top: content?.offsetTop - 90,
-        behavior: "instant",
-      });
-    }
-  };
-
   const handleFindFriend = () => {};
 
-  const handlePlayGame = (id: string) => {
-    handleScrollToTop();
+  const handleOpenQuizz = (id: string) => {
+    scrollToTop("main-content");
     dispatch(setTurnOnPopup("popup_loading_page_admin"));
     setTimeout(() => {
-      push(`admin/play/${id}`);
+      push(`admin/quizz/${id}`);
     }, 2000);
   };
 
@@ -108,7 +99,7 @@ const Admin = () => {
             {data.map((items) => (
               <div
                 key={items._id}
-                onClick={() => handlePlayGame(items._id)}
+                onClick={() => handleOpenQuizz(items._id)}
                 className="bg-white quiz-card shadow-md rounded-lg bg-light-3 text-left cursor-pointer hover:shadow-lg max-w-56 md:max-w-72"
               >
                 <div className="overflow-hidden rounded-t-lg h-full">
@@ -173,7 +164,7 @@ const Admin = () => {
             {data.map((items) => (
               <div
                 key={items._id}
-                onClick={() => handlePlayGame(items._id)}
+                onClick={() => handleOpenQuizz(items._id)}
                 className="bg-white quiz-card shadow-md rounded-lg bg-light-3 text-left cursor-pointer hover:shadow-lg max-w-56 md:max-w-72"
               >
                 <div className="overflow-hidden rounded-t-lg h-full">
@@ -238,7 +229,7 @@ const Admin = () => {
             {data.map((items) => (
               <div
                 key={items._id}
-                onClick={() => handlePlayGame(items._id)}
+                onClick={() => handleOpenQuizz(items._id)}
                 className="bg-white quiz-card shadow-md rounded-lg bg-light-3 text-left cursor-pointer hover:shadow-lg max-w-56 md:max-w-72"
               >
                 <div className="overflow-hidden rounded-t-lg h-full">
