@@ -1,18 +1,21 @@
 import { useParams, usePathname } from "next/navigation";
 import { useRouter } from "next/router";
 import React, { useEffect, useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import Image from "next/image";
 import DefaultCardAnsswer from "@components/admin/CardAnswer/DefaultCardAnswer";
 import { getAnwsersIsTrue, getItemQuizz, getQuestionById } from "@/api/quizz";
 import { Question } from "@/lib/modal/question";
 import { questionInit } from "@/lib/config/initQuestion";
 import CountdownTimer from "@/lib/components/common/CountdownTimer/DefaultCountdownTimer";
+import { addResult, resetResult } from "@/lib/state/result/resultSlice";
+import { RootState } from "@/lib/state/store";
+import Link from "next/link";
 
 const Play = () => {
   const dispatch = useDispatch();
   const pathname = usePathname();
-  const { query } = useRouter();
+  const { query, push } = useRouter();
   const [start, setStart] = useState(false);
   const [notification, setNotification] = useState("");
   const [countdown, setCountdown] = useState(3);
@@ -23,6 +26,8 @@ const Play = () => {
   const [timerA, setTimerA] = useState<any>(null);
   const timeQuestionIndex = question[indexs].time;
   const timeQuestion = timeQuestionIndex * 1000;
+  const dataResult = useSelector((state: RootState) => state.result);
+  const [timeLeft, setTimeLeft] = useState(timeQuestionIndex);
 
   const handleStart = () => {
     setStart(true);
@@ -77,22 +82,39 @@ const Play = () => {
   const indexQuestionPercent = Number(
     (indexs + 1) * (1 / question?.length) * 100
   );
+  const handleTick = (timeLeft: number) => {
+    setTimeLeft(timeLeft);
+  };
 
   const handleSubmit = async () => {
-    clearTimer();
-    setStopTime(true);
-    const id = query.id;
-    const data = {
-      idsArrayAnswer: idsArray,
-      idQuestion: question[indexs]._id,
-    };
-    const { isAllCorrect } = await getAnwsersIsTrue(data, id);
-    if (isAllCorrect) {
-      setNotification("TRUE");
+    if (dataResult.length === question.length) {
+      push("/admin/result");
     } else {
-      setNotification("FALSE");
+      clearTimer();
+      setStopTime(true);
+      const id = query.id;
+      const data = {
+        idsArrayAnswer: idsArray,
+        idQuestion: question[indexs]._id,
+      };
+      const { isAllCorrect } = await getAnwsersIsTrue(data, id);
+      if (isAllCorrect) {
+        setNotification("TRUE");
+      } else {
+        setNotification("FALSE");
+      }
+      const resultExists = dataResult.some((result) => result.index === indexs);
+      if (!resultExists) {
+        const resutlt = {
+          index: indexs,
+          point: isAllCorrect ? question[indexs].point : 0,
+          time: timeLeft,
+          rightAnswer: isAllCorrect,
+        };
+        dispatch(addResult(resutlt));
+      }
+      startTimerB();
     }
-    startTimerB();
   };
 
   useEffect(() => {
@@ -124,6 +146,46 @@ const Play = () => {
     setNotification("");
     startTimerA();
   }, [start, indexs, question]);
+
+  useEffect(() => {
+    clearTimer();
+    dispatch(resetResult());
+  }, [pathname]);
+
+  useEffect(() => {
+    const audio = new Audio("/music/music-play-game.mp3");
+    const count = new Audio("/music/count-down.mp3");
+
+    if (start) {
+      count.pause();
+      audio.play();
+    } else {
+      audio.pause();
+      count.volume = 0.5;
+      count.play();
+    }
+    return () => {
+      audio.pause();
+      count.pause();
+    };
+  }, [start]);
+
+  useEffect(() => {
+    const audioTrueAnswer = new Audio("/music/rightanswer.mp3");
+    const audioFalseAnswer = new Audio("/music/wronganswer.mp3");
+
+    if (notification === "TRUE") {
+      audioTrueAnswer.play();
+      return () => {
+        audioTrueAnswer.pause();
+      };
+    } else if (notification === "FALSE") {
+      audioFalseAnswer.play();
+      return () => {
+        audioFalseAnswer.pause();
+      };
+    }
+  }, [notification]);
 
   return (
     <div className="">
@@ -274,6 +336,7 @@ const Play = () => {
                             maxTime={timeQuestionIndex}
                             index={indexs}
                             stop={stopTime}
+                            onTick={(timeLeft: number) => handleTick(timeLeft)}
                           />{" "}
                           s
                         </>
@@ -286,7 +349,7 @@ const Play = () => {
               </div>
               {/* Analytic  */}
               <div className="slide-up mt-2 max-w-2xl mx-auto rounded-lg border h-1/4 bg-white shadow-2 shadow-purple-500 w-full">
-                <div className="grid grid-cols-3 border-b">
+                <div className="grid grid-cols-3 border-b pr-[5px]">
                   <div className="border-r p-2">
                     <p className="text-center font-medium">Question</p>
                   </div>
@@ -294,8 +357,31 @@ const Play = () => {
                     <p className="text-center font-medium">Point</p>
                   </div>
                   <div className=" p-2">
-                    <p className="text-center font-medium">Time</p>
+                    <p className="text-center font-medium">Time(s)</p>
                   </div>
+                </div>
+                <div className="h-[180px] overflow-y-scroll">
+                  {dataResult.map((items) => (
+                    <div className="grid grid-cols-3 border-b">
+                      <div
+                        className={`border-r p-2 text-white ${
+                          items.rightAnswer ? "bg-green-400" : "bg-rose-600"
+                        }`}
+                      >
+                        <p className="text-center font-medium">
+                          {items.index + 1}
+                        </p>
+                      </div>
+                      <div className="border-r p-2">
+                        <p className="text-center font-medium">{items.point}</p>
+                      </div>
+                      <div className=" p-2">
+                        <p className="text-center font-medium">
+                          {items.time} s
+                        </p>
+                      </div>
+                    </div>
+                  ))}
                 </div>
               </div>
               <button
@@ -303,7 +389,9 @@ const Play = () => {
                 onClick={handleSubmit}
               >
                 <p className="text-center text-xl font-semibold p-4">
-                  Next question
+                  {dataResult.length === question.length
+                    ? "Go to results !!!"
+                    : "Next question"}
                 </p>
               </button>
             </div>

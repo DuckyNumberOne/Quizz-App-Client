@@ -4,9 +4,15 @@ interface PropsTimer {
   maxTime: number;
   index?: number;
   stop: boolean;
+  onTick: (timeLeft: number) => void; // Thêm prop onTick
 }
 
-const CountdownTimer: React.FC<PropsTimer> = ({ maxTime, index, stop }) => {
+const CountdownTimer: React.FC<PropsTimer> = ({
+  maxTime,
+  index,
+  stop,
+  onTick,
+}) => {
   const [timeLeft, setTimeLeft] = useState(maxTime);
 
   useEffect(() => {
@@ -31,6 +37,10 @@ const CountdownTimer: React.FC<PropsTimer> = ({ maxTime, index, stop }) => {
 
     return () => clearInterval(timer);
   }, [maxTime, stop]);
+
+  useEffect(() => {
+    onTick(timeLeft); // Gọi hàm onTick mỗi khi timeLeft thay đổi
+  }, [timeLeft, onTick]);
 
   const formatTime = (time: number) => {
     const minutes = Math.floor(time / 60);
