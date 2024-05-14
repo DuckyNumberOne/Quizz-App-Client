@@ -49,8 +49,10 @@ const Play = () => {
     clearTimeout(timerA);
     setTimerA(
       setTimeout(() => {
-        if (indexs !== -1 && indexs < question.length - 1) {
-          handleSubmit();
+        if (start) {
+          if (indexs !== -1 && indexs < question.length) {
+            handleSubmit();
+          }
         }
       }, timeQuestion)
     );
@@ -87,12 +89,12 @@ const Play = () => {
   };
 
   const handleSubmit = async () => {
+    const id = query.id;
     if (dataResult.length === question.length) {
-      push("/admin/result");
+      push(`/admin/result/${id}`);
     } else {
       clearTimer();
       setStopTime(true);
-      const id = query.id;
       const data = {
         idsArrayAnswer: idsArray,
         idQuestion: question[indexs]._id,
@@ -108,7 +110,7 @@ const Play = () => {
         const resutlt = {
           index: indexs,
           point: isAllCorrect ? question[indexs].point : 0,
-          time: timeLeft,
+          time: question[indexs].time - timeLeft,
           rightAnswer: isAllCorrect,
         };
         dispatch(addResult(resutlt));
@@ -144,7 +146,9 @@ const Play = () => {
   useEffect(() => {
     setStopTime(false);
     setNotification("");
-    startTimerA();
+    if (question.length !== 1) {
+      startTimerA();
+    }
   }, [start, indexs, question]);
 
   useEffect(() => {
@@ -155,7 +159,6 @@ const Play = () => {
   useEffect(() => {
     const audio = new Audio("/music/music-play-game.mp3");
     const count = new Audio("/music/count-down.mp3");
-
     if (start) {
       count.pause();
       audio.play();
@@ -190,7 +193,7 @@ const Play = () => {
   return (
     <div className="">
       {start ? (
-        <div className="bg-bts-hero-search-bg bg-no-repeat bg-right bg-cover">
+        <div className="bg-bts-hero-search-bg bg-no-repeat bg-right bg-cover h-screen">
           <div className="pb-10 grid grid-cols-3 gap-4 container mx-auto">
             {/* Box 1 */}
             <div></div>
@@ -283,7 +286,7 @@ const Play = () => {
                         </p>
                         <div className="cursor-pointer">
                           <div className="absolute right-3 top-5 rounded-full border-4 border-white p-1 ease-in-out duration-300 w-[40px] h-[40px]">
-                            {idsArray.includes(items._id) && (
+                            {idsArray.includes(String(items._id)) && (
                               <Image
                                 src="/images/doneLight.png"
                                 width={30}
@@ -361,8 +364,8 @@ const Play = () => {
                   </div>
                 </div>
                 <div className="h-[180px] overflow-y-scroll">
-                  {dataResult.map((items) => (
-                    <div className="grid grid-cols-3 border-b">
+                  {dataResult.map((items, index) => (
+                    <div className="grid grid-cols-3 border-b" key={index}>
                       <div
                         className={`border-r p-2 text-white ${
                           items.rightAnswer ? "bg-green-400" : "bg-rose-600"

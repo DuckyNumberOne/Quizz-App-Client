@@ -4,7 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import DefaulltSlider from "@/lib/components/common/Slider/DefaulltSlider";
 import { getListQuizz } from "@/api/quizz";
-import { Quizz } from "@/lib/modal/quizz";
+import { QuizzOption2 } from "@/lib/modal/quizz";
 import { useRouter } from "next/router";
 import DefaultLoading from "@/lib/components/common/Loading/DefaultLoading";
 import DefaultPopupAdmin from "@/lib/components/admin/PopupAdmin/DefaultPopupAdmin";
@@ -13,10 +13,27 @@ import { AppDispatch } from "@/lib/state/store";
 import { setTurnOnPopup } from "@/lib/state/popup/popupSlice";
 import DefaultLoadingPage from "@/lib/components/admin/LoadingPage/DefaultLoadingPage";
 import { scrollToTop } from "@/utils/scrollToTop";
+import { getListCollection } from "@/api/collection";
+import { initQuizzOption2 } from "@/lib/config/initQuizz";
 
 const Admin = () => {
-  const { push } = useRouter();
-  const [data, setData] = useState<Quizz[]>([]);
+  const fetchDataQuiz = async () => {
+    const res = await getListQuizz();
+    setDataQuizz(res);
+  };
+
+  const fetchCollectionQuiz = async () => {
+    const res = await getListCollection();
+    setDataCollection(res);
+  };
+
+  const { push, pathname } = useRouter();
+  const [dataQuizz, setDataQuizz] = useState<QuizzOption2[]>([
+    initQuizzOption2,
+  ]);
+  const [dataCollection, setDataCollection] = useState<QuizzOption2[]>([
+    initQuizzOption2,
+  ]);
   const dispatch = useDispatch<AppDispatch>();
 
   const handleFindFriend = () => {};
@@ -30,12 +47,11 @@ const Admin = () => {
   };
 
   useEffect(() => {
-    const fetch = async () => {
-      const res = await getListQuizz();
-      setData(res);
-    };
-    fetch();
-  }, []);
+    if (pathname) {
+      fetchCollectionQuiz();
+      fetchDataQuiz();
+    }
+  }, [pathname]);
 
   return (
     <DefaultLoadingPage animation="popup-up">
@@ -65,200 +81,78 @@ const Admin = () => {
       {/* Header Slider  */}
       <section className="bg-[#f2f2f2] h-fit px-6" id="welcome">
         {/* Demo Category 1*/}
-        <div className="mb-4 pt-10">
-          <div className="flex items-center mb-4">
-            <div className="flex items-center">
-              <Image
-                src="/images/admin/star.webp"
-                width={30}
-                height={30}
-                alt="star"
-              />
-              <h2 className="text-sm md:text-2xl text-dark-2 ml-2 font-semibold">
-                Category
-              </h2>
-            </div>
-            <div className="flex gap-3 items-center justify-center px-3 py-1 text-xs font-semibold h-6 base text-lilac hover:text-lilac-light active:text-lilac-dark rounded-full secondary relative min-w-max ml-auto bg-lilac-faded  transition-colors duration-200 ease-in-out">
-              <ButtonDefault
-                className="text-black text-base"
-                content="More"
-                onClick={handleFindFriend}
-              />
-              <Image
-                src="/incons/arrow-right.webp"
-                width={15}
-                height={15}
-                alt="Arrow right"
-              />
-            </div>
-          </div>
-        </div>
-        {/* Box Slider Category 1*/}
-        <div className="flex max-w-full relative">
-          <DefaulltSlider>
-            {data.map((items) => (
-              <div
-                key={items._id}
-                onClick={() => handleOpenQuizz(items._id)}
-                className="bg-white quiz-card shadow-md rounded-lg bg-light-3 text-left cursor-pointer hover:shadow-lg max-w-56 md:max-w-72"
-              >
-                <div className="overflow-hidden rounded-t-lg h-full">
-                  <div className="w-56 md:w-72 h-30 md:h-40 flex items-center justify-around">
-                    <img
-                      src={items.urlThumbnail}
-                      alt="Thumbnail"
-                      className="w-full h-full bg-cover bg-center"
-                    />
-                  </div>
-                  <div className="px-2.5 pt-2.5 pb-3.5 h-30">
-                    <div className="px-2 py-1 bg-[#e2e2e2] w-fit text-xs rounded-md">
-                      <span>{items.idCollection}</span>
-                    </div>
-                    <p className="mt-2 mb-4 text-sm md:text-base text-dark-2 font-semibold">
-                      {items.title}
-                    </p>
-                    <div className="flex items-center justify-between text-tn md:text-xs text-dark-4 font-semibold mt-auto">
-                      <div className="mr-1.5">15 Slide • </div>
-                      <div className="mr-1.5 ml-1.5">
-                        <p>104 lần chơi</p>
-                      </div>
-                    </div>
-                  </div>
+        {dataCollection.map((col) => (
+          <div key={col._id}>
+            <div className="mb-4 pt-10">
+              <div className="flex items-center mb-4">
+                <div className="flex items-center">
+                  <Image
+                    src="/images/admin/star.webp"
+                    width={30}
+                    height={30}
+                    alt="star"
+                  />
+                  <h2 className="text-sm md:text-2xl text-dark-2 ml-2 font-semibold">
+                    {col.title}
+                  </h2>
+                </div>
+                <div className="flex gap-3 items-center justify-center px-3 py-1 text-xs font-semibold h-6 base text-lilac hover:text-lilac-light active:text-lilac-dark rounded-full secondary relative min-w-max ml-auto bg-lilac-faded  transition-colors duration-200 ease-in-out">
+                  <ButtonDefault
+                    className="text-black text-base"
+                    content="More"
+                    onClick={handleFindFriend}
+                  />
+                  <Image
+                    src="/incons/arrow-right.webp"
+                    width={15}
+                    height={15}
+                    alt="Arrow right"
+                  />
                 </div>
               </div>
-            ))}
-          </DefaulltSlider>
-        </div>
-        {/* Demo Category 1*/}
-        <div className="mb-4 pt-10">
-          <div className="flex items-center mb-4">
-            <div className="flex items-center">
-              <Image
-                src="/images/admin/star.webp"
-                width={30}
-                height={30}
-                alt="star"
-              />
-              <h2 className="text-sm md:text-2xl text-dark-2 ml-2 font-semibold">
-                Category
-              </h2>
             </div>
-            <div className="flex gap-3 items-center justify-center px-3 py-1 text-xs font-semibold h-6 base text-lilac hover:text-lilac-light active:text-lilac-dark rounded-full secondary relative min-w-max ml-auto bg-lilac-faded  transition-colors duration-200 ease-in-out">
-              <ButtonDefault
-                className="text-black text-base"
-                content="More"
-                onClick={handleFindFriend}
-              />
-              <Image
-                src="/incons/arrow-right.webp"
-                width={15}
-                height={15}
-                alt="Arrow right"
-              />
-            </div>
-          </div>
-        </div>
-        {/* Box Slider Category 1*/}
-        <div className="flex max-w-full relative">
-          <DefaulltSlider>
-            {data.map((items) => (
-              <div
-                key={items._id}
-                onClick={() => handleOpenQuizz(items._id)}
-                className="bg-white quiz-card shadow-md rounded-lg bg-light-3 text-left cursor-pointer hover:shadow-lg max-w-56 md:max-w-72"
-              >
-                <div className="overflow-hidden rounded-t-lg h-full">
-                  <div className="w-56 md:w-72 h-30 md:h-40 flex items-center justify-around">
-                    <img
-                      src={items.urlThumbnail}
-                      alt="Thumbnail"
-                      className="w-full h-full bg-cover bg-center"
-                    />
-                  </div>
-                  <div className="px-2.5 pt-2.5 pb-3.5 h-30">
-                    <div className="px-2 py-1 bg-[#e2e2e2] w-fit text-xs rounded-md">
-                      <span>{items.idCollection}</span>
-                    </div>
-                    <p className="mt-2 mb-4 text-sm md:text-base text-dark-2 font-semibold">
-                      {items.title}
-                    </p>
-                    <div className="flex items-center justify-between text-tn md:text-xs text-dark-4 font-semibold mt-auto">
-                      <div className="mr-1.5">15 Slide • </div>
-                      <div className="mr-1.5 ml-1.5">
-                        <p>104 lần chơi</p>
+            {/* Box Slider Category 1*/}
+            <div className="flex max-w-full relative">
+              <DefaulltSlider>
+                {dataQuizz
+                  .filter((item) => item.idCollection._id === col._id)
+                  .map((item) => (
+                    <div
+                      key={item._id}
+                      onClick={() => handleOpenQuizz(item._id)}
+                      className="bg-white quiz-card shadow-md rounded-lg bg-light-3 text-left cursor-pointer hover:shadow-lg max-w-56 md:max-w-72"
+                    >
+                      <div className="overflow-hidden rounded-t-lg h-full">
+                        <div className="w-56 md:w-72 h-30 md:h-40 flex items-center justify-around">
+                          <img
+                            src={item.urlThumbnail}
+                            alt="Thumbnail"
+                            className="w-full h-full bg-cover bg-center"
+                          />
+                        </div>
+                        <div className="px-2.5 pt-2.5 pb-3.5 h-30">
+                          <div className="px-2 py-1 bg-[#e2e2e2] w-fit text-xs rounded-md">
+                            <span>{item.idCollection.title}</span>
+                          </div>
+                          <p className="mt-2 mb-4 text-sm md:text-base text-dark-2 font-semibold">
+                            {item.title}
+                          </p>
+                          <div className="flex items-center justify-between text-tn md:text-xs text-dark-4 font-semibold mt-auto">
+                            <div className="mr-1.5">
+                              {item.question.length} Question •{" "}
+                            </div>
+                            <div className="mr-1.5 ml-1.5">
+                              <p>{item.play} played</p>
+                            </div>
+                          </div>
+                        </div>
                       </div>
                     </div>
-                  </div>
-                </div>
-              </div>
-            ))}
-          </DefaulltSlider>
-        </div>
-        {/* Demo Category 1*/}
-        <div className="mb-4 pt-10">
-          <div className="flex items-center mb-4">
-            <div className="flex items-center">
-              <Image
-                src="/images/admin/star.webp"
-                width={30}
-                height={30}
-                alt="star"
-              />
-              <h2 className="text-sm md:text-2xl text-dark-2 ml-2 font-semibold">
-                Category
-              </h2>
-            </div>
-            <div className="flex gap-3 items-center justify-center px-3 py-1 text-xs font-semibold h-6 base text-lilac hover:text-lilac-light active:text-lilac-dark rounded-full secondary relative min-w-max ml-auto bg-lilac-faded  transition-colors duration-200 ease-in-out">
-              <ButtonDefault
-                className="text-black text-base"
-                content="More"
-                onClick={handleFindFriend}
-              />
-              <Image
-                src="/incons/arrow-right.webp"
-                width={15}
-                height={15}
-                alt="Arrow right"
-              />
+                  ))}
+              </DefaulltSlider>
             </div>
           </div>
-        </div>
-        {/* Box Slider Category 1*/}
-        <div className="flex max-w-full relative">
-          <DefaulltSlider>
-            {data.map((items) => (
-              <div
-                key={items._id}
-                onClick={() => handleOpenQuizz(items._id)}
-                className="bg-white quiz-card shadow-md rounded-lg bg-light-3 text-left cursor-pointer hover:shadow-lg max-w-56 md:max-w-72"
-              >
-                <div className="overflow-hidden rounded-t-lg h-full">
-                  <div className="w-56 md:w-72 h-30 md:h-40 flex items-center justify-around">
-                    <img
-                      src={items.urlThumbnail}
-                      alt="Thumbnail"
-                      className="w-full h-full bg-cover bg-center"
-                    />
-                  </div>
-                  <div className="px-2.5 pt-2.5 pb-3.5 h-30">
-                    <div className="px-2 py-1 bg-[#e2e2e2] w-fit text-xs rounded-md">
-                      <span>{items.idCollection}</span>
-                    </div>
-                    <p className="mt-2 mb-4 text-sm md:text-base text-dark-2 font-semibold">
-                      {items.title}
-                    </p>
-                    <div className="flex items-center justify-between text-tn md:text-xs text-dark-4 font-semibold mt-auto">
-                      <div className="mr-1.5">15 Slide • </div>
-                      <div className="mr-1.5 ml-1.5">
-                        <p>104 lần chơi</p>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            ))}
-          </DefaulltSlider>
-        </div>
+        ))}
       </section>
     </DefaultLoadingPage>
   );

@@ -78,7 +78,7 @@
 
 @keyframes slideUp {
   0% {
-    transform: translateY(-100%);
+    transform: translateY(100%);
     opacity: 0;
   }
   100% {
@@ -149,6 +149,13 @@
   animation-delay: 0.5s;
   opacity: 0;
 }
+
+.fade-in-01s {
+  animation: fadeIn 1s ease forwards;
+  animation-delay: 0.1s;
+  opacity: 0;
+}
+
 
 .button-start {
   opacity: 0;

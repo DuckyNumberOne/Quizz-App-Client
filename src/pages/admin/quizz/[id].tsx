@@ -1,13 +1,17 @@
 import { getItemQuizz } from "@/api/quizz";
+import { getItemQuizzResultByQuizz } from "@/api/quizzResult";
 import DefaultLoadingPage from "@/lib/components/admin/LoadingPage/DefaultLoadingPage";
 import DefaultPopupAdmin from "@/lib/components/admin/PopupAdmin/DefaultPopupAdmin";
 import ButtonDefault from "@/lib/components/common/Button/ButtonDefault";
 import DefaultLoading from "@/lib/components/common/Loading/DefaultLoading";
+import { initResult } from "@/lib/config/initResult";
 import { Quizz } from "@/lib/modal/quizz";
+import { QuizzResult, QuizzResultOption } from "@/lib/modal/quizzResult";
 import { setTurnOffPopup, setTurnOnPopup } from "@/lib/state/popup/popupSlice";
 import { AppDispatch, RootState } from "@/lib/state/store";
 import { scrollToTop } from "@/utils/scrollToTop";
 import Image from "next/image";
+import Link from "next/link";
 import { useParams, usePathname } from "next/navigation";
 import { useRouter } from "next/router";
 import React, { useEffect, useState } from "react";
@@ -15,27 +19,50 @@ import { useDispatch, useSelector } from "react-redux";
 
 const Play = () => {
   const path = usePathname();
-  const { push } = useRouter();
+  const { push, query } = useRouter();
   const splitPath = path && path.split("/");
   const params = path && splitPath[splitPath.length - 1];
   const dispatch = useDispatch<AppDispatch>();
   const [quizz, setQuizz] = useState<Quizz>();
-  const { popup_start_game } = useSelector((state: RootState) => state.popup);
+  const [dataResult, setDataResult] = useState<QuizzResultOption[]>([
+    initResult,
+    initResult,
+    initResult,
+  ]);
+
+  const [hidden, setHidden] = useState(true);
+  // const { popup_start_game } = useSelector((state: RootState) => state.popup);
+  const user = useSelector((state: RootState) => state.user);
+  const checkUser = user._id === quizz?.idUser;
+  const top1 = dataResult.length > 0 ? dataResult[0] : initResult;
+  const top2 = dataResult.length > 1 ? dataResult[1] : initResult;
+  const top3 = dataResult.length > 2 ? dataResult[2] : initResult;
+
+  const fetchQuizz = async () => {
+    const res: Quizz = await getItemQuizz(params);
+    if (res) {
+      setQuizz(res);
+      dispatch(setTurnOffPopup("popup_loading_page_admin"));
+    }
+  };
+
+  const fetchResult = async () => {
+    const res = await getItemQuizzResultByQuizz(params);
+    setDataResult(res);
+  };
 
   const handleFollow = () => {};
 
+  const handleHidden = () => {
+    setHidden(!hidden);
+  };
+
   useEffect(() => {
     if (params) {
-      const fetch = async () => {
-        const res: Quizz = await getItemQuizz(params);
-        if (res) {
-          setQuizz(res);
-          dispatch(setTurnOffPopup("popup_loading_page_admin"));
-        }
-      };
-      fetch();
+      fetchResult();
+      fetchQuizz();
     }
-  }, []);
+  }, [params]);
 
   const handlPlaySolo = () => {
     scrollToTop("main-content");
@@ -45,7 +72,7 @@ const Play = () => {
   return (
     <DefaultLoadingPage animation="popup-dow">
       <div className="grid grid-cols-12">
-        <div className="mx-6 pt-4 col-span-4 h-full">
+        <section className="mx-6 pt-4 col-span-4 h-full">
           <div className="px-3 py-4 border md:p-4 bg-white border-[#e5e5e5]  my-4 rounded-lg h-full">
             <div className="text-xl font-bold py-4">
               <div className="w-full h-[300px]">
@@ -58,7 +85,7 @@ const Play = () => {
                 />
               </div>
               <div className="mt-4">
-                <h1 className="font-bold text-2xl h-1/6">
+                <h1 className="font-bold text-xl h-[120px]">
                   {quizz?.title ? quizz?.title : "Loading..."}
                 </h1>
                 {/* Analyst Quizer  */}
@@ -137,14 +164,126 @@ const Play = () => {
               </div>
             </div>
           </div>
-        </div>
-        <div className="mx-6 pt-4 col-span-8 h-full ">
+        </section>
+        <section className="mx-6 pt-4 col-span-8 h-full ">
           <div className="px-3 py-4 border md:p-4 bg-white border-[#e5e5e5] my-4 rounded-lg h-full">
-            <div className="text-xl font-bold py-4">
-              <p className="text-2xl mb-4">
-                {quizz?.question.length} question 🙋
-              </p>
-              <div className="space-y-4 h-[900px] overflow-y-auto p-4">
+            {dataResult.length > 0 && (
+              <div>
+                {/* More Rank  */}
+                <Link href={`/admin/rank/${params}`} className="w-full">
+                  <p className="text-base text-blue-700 font-medium text-end mb-2 hover:text-blue-500 cursor-pointer">
+                    See more ratings
+                  </p>
+                </Link>
+                {/* Rank  */}
+                <div className=" w-full h-[10%]">
+                  <div className="w-full grid grid-cols-3">
+                    {/* Top 1  */}
+                    <div className="flex justify-between items-center m-5 px-2 py-1 shadow-4 shadow-[#f0d321] rounded-full">
+                      <div className="flex gap-5 items-center">
+                        <img
+                          src={top1.idUser.urlAvatar}
+                          width={60}
+                          height={60}
+                          alt="Avatar"
+                          className="rounded-full"
+                        />
+                        <div>
+                          <p className="text-black font-medium text-base">
+                            {top1.idUser.fullName}
+                          </p>
+                          <div className="text-xs font-medium flex gap-7">
+                            <p>{top1.totalPoints} P</p>
+                            <p>{top1.completionTime} s</p>
+                          </div>
+                        </div>
+                      </div>
+                      <Image
+                        src="/incons/top1.webp"
+                        width={70}
+                        height={70}
+                        alt="Top1"
+                      />
+                    </div>
+                    {/* Top 2 */}
+                    <div className="flex justify-between items-center m-5 px-2 py-1 shadow-4 shadow-[#a4a8ae] rounded-full">
+                      <div className="flex gap-5 items-center">
+                        <img
+                          src={top2.idUser.urlAvatar}
+                          width={60}
+                          height={60}
+                          alt="Avatar"
+                          className="rounded-full"
+                        />
+                        <div>
+                          <p className="text-black font-medium text-base">
+                            {top2.idUser.fullName}
+                          </p>
+                          <div className="text-xs font-medium flex gap-7">
+                            <p>{top2.totalPoints} P</p>
+                            <p>{top2.completionTime} s</p>
+                          </div>
+                        </div>
+                      </div>
+                      <Image
+                        src="/incons/top2.webp"
+                        width={70}
+                        height={70}
+                        alt="Top2"
+                      />
+                    </div>
+                    {/* Top 3  */}
+                    <div className="flex justify-between items-center m-5 px-2 py-1 shadow-4 shadow-[#c98639] rounded-full">
+                      <div className="flex gap-5 items-center">
+                        <img
+                          src={top3.idUser.urlAvatar}
+                          width={60}
+                          height={60}
+                          alt="Avatar"
+                          className="rounded-full"
+                        />
+                        <div>
+                          <p className="text-black font-medium text-base">
+                            {top3.idUser.fullName}
+                          </p>
+                          <div className="text-xs font-medium flex gap-7">
+                            <p>{top3.totalPoints} P</p>
+                            <p>{top3.completionTime} s</p>
+                          </div>
+                        </div>
+                      </div>
+                      <Image
+                        src="/incons/top3.webp"
+                        width={70}
+                        height={70}
+                        alt="Top3"
+                      />
+                    </div>
+                  </div>
+                </div>
+              </div>
+            )}
+            {/* Question  */}
+            <div className=" py-4">
+              <div className="text-xl font-bold flex items-center justify-between mb-5">
+                <p className="text-2xl mb-4">
+                  {quizz?.question.length} question 🙋
+                </p>
+                <button
+                  onClick={handleHidden}
+                  className="w-10 h-10 rounded-full bg-white shadow-2 flex items-center justify-center border-2 shadow-purple-500"
+                >
+                  <Image
+                    src={
+                      hidden ? "/images/preview-2.webp" : "/images/hidden.webp"
+                    }
+                    width={30}
+                    height={30}
+                    alt="hidden"
+                  />
+                </button>
+              </div>
+              <div className="space-y-4 h-[900px] overflow-y-auto p-4 text-xl font-bold">
                 {quizz ? (
                   quizz.question.map((items) => (
                     <div
@@ -159,16 +298,23 @@ const Play = () => {
                           className="w-full h-full rounded-lg"
                           alt={items.title}
                         />
-                        <div className="absolute top-0 left-0 w-full h-full flex items-center justify-center bg-black-shadow rounded-lg">
-                          <div className="p-5 rounded-full bg-[#8854c0]">
-                            <Image
-                              src="/images/quizzes-question.png"
-                              alt="quizzes question"
-                              width={50}
-                              height={50}
-                            />
+                        {/* shadow  */}
+                        {hidden && checkUser && (
+                          <div
+                            className={`${
+                              hidden ? "fade-in-01s" : ""
+                            } absolute top-0 left-0 w-full h-full flex items-center justify-center bg-black-shadow rounded-lg`}
+                          >
+                            <div className="p-5 rounded-full bg-[#8854c0]">
+                              <Image
+                                src="/images/quizzes-question.png"
+                                alt="quizzes question"
+                                width={50}
+                                height={50}
+                              />
+                            </div>
                           </div>
-                        </div>
+                        )}
                       </div>
                       <div>
                         <p className="h-1/3">{items.title}</p>
@@ -242,7 +388,7 @@ const Play = () => {
               </div>
             </div>
           </div>
-        </div>
+        </section>
       </div>
     </DefaultLoadingPage>
   );

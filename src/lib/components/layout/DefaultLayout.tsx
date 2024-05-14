@@ -14,11 +14,9 @@ const Layout = ({ children }: Props) => {
   const path = usePathname();
   const { push } = useRouter();
   const isAdminPage = path && path.split("/")[1] === "admin";
-  const [token, setToken] = useLocalStorage("token", "");
-  const isAuthenticated = token && token !== "";
-
   useEffect(() => {
-    if (!isAuthenticated && isAdminPage) {
+    const token = localStorage.getItem("token");
+    if (isAdminPage && !token) {
       push("/");
     }
   }, [path]);
