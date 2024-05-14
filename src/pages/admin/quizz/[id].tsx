@@ -167,100 +167,102 @@ const Play = () => {
         </section>
         <section className="mx-6 pt-4 col-span-8 h-full ">
           <div className="px-3 py-4 border md:p-4 bg-white border-[#e5e5e5] my-4 rounded-lg h-full">
-            <div>
-              {/* More Rank  */}
-              <Link href={`/admin/rank/${params}`} className="w-full">
-                <p className="text-base text-blue-700 font-medium text-end mb-2 hover:text-blue-500 cursor-pointer">
-                  See more ratings
-                </p>
-              </Link>
-              {/* Rank  */}
-              <div className=" w-full h-[10%]">
-                <div className="w-full grid grid-cols-3">
-                  {/* Top 1  */}
-                  <div className="flex justify-between items-center m-5 px-2 py-1 shadow-4 shadow-[#f0d321] rounded-full">
-                    <div className="flex gap-5 items-center">
-                      <img
-                        src={top1.idUser.urlAvatar}
-                        width={60}
-                        height={60}
-                        alt="Avatar"
-                        className="rounded-full"
-                      />
-                      <div>
-                        <p className="text-black font-medium text-base">
-                          {top1.idUser.fullName}
-                        </p>
-                        <div className="text-xs font-medium flex gap-7">
-                          <p>{top1.totalPoints} P</p>
-                          <p>{top1.completionTime} s</p>
+            {dataResult.length > 0 && (
+              <div>
+                {/* More Rank  */}
+                <Link href={`/admin/rank/${params}`} className="w-full">
+                  <p className="text-base text-blue-700 font-medium text-end mb-2 hover:text-blue-500 cursor-pointer">
+                    See more ratings
+                  </p>
+                </Link>
+                {/* Rank  */}
+                <div className=" w-full h-[10%]">
+                  <div className="w-full grid grid-cols-3">
+                    {/* Top 1  */}
+                    <div className="flex justify-between items-center m-5 px-2 py-1 shadow-4 shadow-[#f0d321] rounded-full">
+                      <div className="flex gap-5 items-center">
+                        <img
+                          src={top1.idUser.urlAvatar}
+                          width={60}
+                          height={60}
+                          alt="Avatar"
+                          className="rounded-full"
+                        />
+                        <div>
+                          <p className="text-black font-medium text-base">
+                            {top1.idUser.fullName}
+                          </p>
+                          <div className="text-xs font-medium flex gap-7">
+                            <p>{top1.totalPoints} P</p>
+                            <p>{top1.completionTime} s</p>
+                          </div>
                         </div>
                       </div>
-                    </div>
-                    <Image
-                      src="/incons/top1.webp"
-                      width={70}
-                      height={70}
-                      alt="Top1"
-                    />
-                  </div>
-                  {/* Top 2 */}
-                  <div className="flex justify-between items-center m-5 px-2 py-1 shadow-4 shadow-[#a4a8ae] rounded-full">
-                    <div className="flex gap-5 items-center">
-                      <img
-                        src={top2.idUser.urlAvatar}
-                        width={60}
-                        height={60}
-                        alt="Avatar"
-                        className="rounded-full"
+                      <Image
+                        src="/incons/top1.webp"
+                        width={70}
+                        height={70}
+                        alt="Top1"
                       />
-                      <div>
-                        <p className="text-black font-medium text-base">
-                          {top2.idUser.fullName}
-                        </p>
-                        <div className="text-xs font-medium flex gap-7">
-                          <p>{top2.totalPoints} P</p>
-                          <p>{top2.completionTime} s</p>
+                    </div>
+                    {/* Top 2 */}
+                    <div className="flex justify-between items-center m-5 px-2 py-1 shadow-4 shadow-[#a4a8ae] rounded-full">
+                      <div className="flex gap-5 items-center">
+                        <img
+                          src={top2.idUser.urlAvatar}
+                          width={60}
+                          height={60}
+                          alt="Avatar"
+                          className="rounded-full"
+                        />
+                        <div>
+                          <p className="text-black font-medium text-base">
+                            {top2.idUser.fullName}
+                          </p>
+                          <div className="text-xs font-medium flex gap-7">
+                            <p>{top2.totalPoints} P</p>
+                            <p>{top2.completionTime} s</p>
+                          </div>
                         </div>
                       </div>
-                    </div>
-                    <Image
-                      src="/incons/top2.webp"
-                      width={70}
-                      height={70}
-                      alt="Top2"
-                    />
-                  </div>
-                  {/* Top 3  */}
-                  <div className="flex justify-between items-center m-5 px-2 py-1 shadow-4 shadow-[#c98639] rounded-full">
-                    <div className="flex gap-5 items-center">
-                      <img
-                        src={top3.idUser.urlAvatar}
-                        width={60}
-                        height={60}
-                        alt="Avatar"
-                        className="rounded-full"
+                      <Image
+                        src="/incons/top2.webp"
+                        width={70}
+                        height={70}
+                        alt="Top2"
                       />
-                      <div>
-                        <p className="text-black font-medium text-base">
-                          {top3.idUser.fullName}
-                        </p>
-                        <div className="text-xs font-medium flex gap-7">
-                          <p>{top3.totalPoints} P</p>
-                          <p>{top3.completionTime} s</p>
+                    </div>
+                    {/* Top 3  */}
+                    <div className="flex justify-between items-center m-5 px-2 py-1 shadow-4 shadow-[#c98639] rounded-full">
+                      <div className="flex gap-5 items-center">
+                        <img
+                          src={top3.idUser.urlAvatar}
+                          width={60}
+                          height={60}
+                          alt="Avatar"
+                          className="rounded-full"
+                        />
+                        <div>
+                          <p className="text-black font-medium text-base">
+                            {top3.idUser.fullName}
+                          </p>
+                          <div className="text-xs font-medium flex gap-7">
+                            <p>{top3.totalPoints} P</p>
+                            <p>{top3.completionTime} s</p>
+                          </div>
                         </div>
                       </div>
+                      <Image
+                        src="/incons/top3.webp"
+                        width={70}
+                        height={70}
+                        alt="Top3"
+                      />
                     </div>
-                    <Image
-                      src="/incons/top3.webp"
-                      width={70}
-                      height={70}
-                      alt="Top3"
-                    />
                   </div>
                 </div>
               </div>
-            </div>
+            )}
             {/* Question  */}
             <div className=" py-4">
               <div className="text-xl font-bold flex items-center justify-between mb-5">

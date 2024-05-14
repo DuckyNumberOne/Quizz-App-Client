@@ -244,13 +244,12 @@ const DefaultCreateQuestion = () => {
       });
       const dataQuizzConvert = {
         ...dataQuizz,
-        idUser: dataUser._id,
+        idUser: String(dataUser._id),
         question: questionsWithoutId,
       };
-      console.log("🚀 ~ handCreateQuizz ~ dataQuizzConvert:", dataQuizzConvert);
       const res = await postQuizz(dataQuizzConvert);
       if (res) {
-        push(`admin/quizz/${res._id}`);
+        push(`/admin/quizz/${res._id}`);
       }
     } catch (error: any) {
       setError(error.response.data);
@@ -461,8 +460,8 @@ const DefaultCreateQuestion = () => {
                           errorsOptionInput={{
                             required: { value: true, message: "Text is empty" },
                             maxLength: {
-                              value: 20,
-                              message: "Title cannot exceed 20 characters",
+                              value: 70,
+                              message: "Title cannot exceed 70 characters",
                             },
                           }}
                           classInput="text-white font-semibold text-[18px] text-center mt-12 relative"

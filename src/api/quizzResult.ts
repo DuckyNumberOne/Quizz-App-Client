@@ -36,13 +36,10 @@ export const getItemQuizzResultByQuizz = async (id: string | string[]) => {
 };
 
 export const postQuizzResult = async (data: QuizzResult) => {
-  try {
     const response = await axios.post("/quizzResult/createQuizzResult", data);
     const quizz = response.data;
     return quizz;
-  } catch (error) {
-    console.error(error);
-  }
+
 };
 
 export const updateItemQuizzResult = async (data: QuizzResult, id: string) => {

@@ -3,7 +3,7 @@ import { initResult } from "@/lib/config/initResult";
 import { QuizzResult, QuizzResultOption } from "@/lib/modal/quizzResult";
 import { useRouter } from "next/router";
 import React, { useEffect, useState } from "react";
-const Result = () => {
+const Rank = () => {
   const { query, push } = useRouter();
   const param = query.id;
 
@@ -14,8 +14,8 @@ const Result = () => {
   ]);
 
   const top1 = dataResult.length > 0 ? dataResult[0] : initResult;
-  const top2 = dataResult.length > 0 ? dataResult[1] : initResult;
-  const top3 = dataResult.length > 0 ? dataResult[2] : initResult;
+  const top2 = dataResult.length > 1 ? dataResult[1] : initResult;
+  const top3 = dataResult.length > 2 ? dataResult[2] : initResult;
 
   useEffect(() => {
     if (param) {
@@ -35,25 +35,27 @@ const Result = () => {
           <div className="grid-cols-3 grid h-1/2 absolute bottom-0 max-w-xl w-full">
             {/* Top 2  */}
             <div className="col-span-1 w-full bg-#6d5ff6 relative">
-              <div className="absolute bottom-70 w-full bg-#6d5ff6 s">
-                <div className="bg-white w-1/2 mx-auto rounded-2xl shadow-4 shadow-purple-500 px-2 py-1">
-                  <p className="text-center font-medium">
-                    {top2.totalPoints} P
+              {top2 && (
+                <div className="absolute bottom-70 w-full bg-#6d5ff6 s">
+                  <div className="bg-white w-1/2 mx-auto rounded-2xl shadow-4 shadow-purple-500 px-2 py-1">
+                    <p className="text-center font-medium">
+                      {top2.totalPoints} P
+                    </p>
+                  </div>
+                  <img
+                    src={
+                      top2.idUser.urlAvatar !== "Loading..."
+                        ? top2.idUser.urlAvatar
+                        : "/images/avatar-loading.png"
+                    }
+                    alt="avatar"
+                    className="w-25 h-25 rounded-full shadow-4 shadow-whiten mx-auto object-cover"
+                  />
+                  <p className="text-lg font-medium text-center mt-5 text-white">
+                    {top2 ? top2.idUser.fullName : ""}
                   </p>
                 </div>
-                <img
-                  src={
-                    top2.idUser.urlAvatar !== "Loading..."
-                      ? top2.idUser.urlAvatar
-                      : "/images/avatar-loading.png"
-                  }
-                  alt="avatar"
-                  className="w-25 h-25 rounded-full shadow-4 shadow-whiten mx-auto object-cover"
-                />
-                <p className="text-lg font-medium text-center mt-5 text-white">
-                  {dataResult.length > 1 ? top2.idUser.fullName : ""}
-                </p>
-              </div>
+              )}
               {/* Collum  */}
               <div className="absolute bottom-0 bg-[#9b9b9b]  shadow-2 shadow-[#9e9e9e] w-full h-2/3">
                 <p className="text-[80px] text-white font-semibold text-center">
@@ -63,25 +65,27 @@ const Result = () => {
             </div>
             {/* Top 1  */}
             <div className="col-span-1 w-full bg-#6d5ff6 relative">
-              <div className="absolute bottom-100 w-full">
-                <div className="bg-white w-1/2 mx-auto rounded-2xl shadow-4 shadow-purple-500 px-2 py-1">
-                  <p className="text-center font-medium">
-                    {top1.totalPoints} P
+              {top1 && (
+                <div className="absolute bottom-100 w-full">
+                  <div className="bg-white w-1/2 mx-auto rounded-2xl shadow-4 shadow-purple-500 px-2 py-1">
+                    <p className="text-center font-medium">
+                      {top1.totalPoints} P
+                    </p>
+                  </div>
+                  <img
+                    src={
+                      top1.idUser.urlAvatar !== "Loading..."
+                        ? top1.idUser.urlAvatar
+                        : "/images/avatar-loading.png"
+                    }
+                    alt="avatar"
+                    className="w-25 h-25 rounded-full shadow-4 shadow-whiten mx-auto object-cover"
+                  />
+                  <p className="text-lg font-medium text-center mt-5 text-white">
+                    {top1 ? top1.idUser.fullName : ""}
                   </p>
                 </div>
-                <img
-                  src={
-                    top1.idUser.urlAvatar !== "Loading..."
-                      ? top1.idUser.urlAvatar
-                      : "/images/avatar-loading.png"
-                  }
-                  alt="avatar"
-                  className="w-25 h-25 rounded-full shadow-4 shadow-whiten mx-auto object-cover"
-                />
-                <p className="text-lg font-medium text-center mt-5 text-white">
-                  {dataResult.length > 1 ? top1.idUser.fullName : ""}
-                </p>
-              </div>
+              )}
               {/* Collum  */}
               <div className="absolute bottom-0 bg-[#c9ba6e] shadow-2 shadow-[#cabb70]  w-full h-full">
                 <p className="text-[80px] text-white font-semibold text-center">
@@ -91,25 +95,27 @@ const Result = () => {
             </div>
             {/* Top 3 */}
             <div className="col-span-1 w-full bg-#6d5ff6 relative">
-              <div className="absolute bottom-40 w-full">
-                <div className="bg-white w-1/2 mx-auto rounded-2xl shadow-4 shadow-purple-500 px-2 py-1">
-                  <p className="text-center font-medium">
-                    {top3.totalPoints} P
+              {top3 && (
+                <div className="absolute bottom-40 w-full">
+                  <div className="bg-white w-1/2 mx-auto rounded-2xl shadow-4 shadow-purple-500 px-2 py-1">
+                    <p className="text-center font-medium">
+                      {top3.totalPoints} P
+                    </p>
+                  </div>
+                  <img
+                    src={
+                      top3.idUser.urlAvatar !== "Loading..."
+                        ? top3.idUser.urlAvatar
+                        : "/images/avatar-loading.png"
+                    }
+                    alt="avatar"
+                    className="w-25 h-25 rounded-full shadow-4 shadow-whiten mx-auto object-cover"
+                  />
+                  <p className="text-lg font-medium text-center mt-5 text-white">
+                    {top3 ? top3.idUser.fullName : ""}
                   </p>
                 </div>
-                <img
-                  src={
-                    top3.idUser.urlAvatar !== "Loading..."
-                      ? top3.idUser.urlAvatar
-                      : "/images/avatar-loading.png"
-                  }
-                  alt="avatar"
-                  className="w-25 h-25 rounded-full shadow-4 shadow-whiten mx-auto object-cover"
-                />
-                <p className="text-lg font-medium text-center mt-5 text-white">
-                  {dataResult.length > 1 ? top3.idUser.fullName : ""}
-                </p>
-              </div>
+              )}
               {/* Collum  */}
               <div className="absolute bottom-0 bg-[#ce8d46]  shadow-2 shadow-[#ce8d46] w-full h-1/3">
                 <p className="text-[80px] text-white font-semibold text-center">
@@ -162,4 +168,4 @@ const Result = () => {
   );
 };
 
-export default Result;
+export default Rank;

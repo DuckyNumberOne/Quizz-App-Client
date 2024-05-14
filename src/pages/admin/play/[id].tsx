@@ -50,9 +50,7 @@ const Play = () => {
     setTimerA(
       setTimeout(() => {
         if (start) {
-          if (indexs !== 0 && indexs < question.length) {
-            console.log("startTimerA Submit");
-
+          if (indexs !== -1 && indexs < question.length) {
             handleSubmit();
           }
         }
@@ -112,7 +110,7 @@ const Play = () => {
         const resutlt = {
           index: indexs,
           point: isAllCorrect ? question[indexs].point : 0,
-          time: timeLeft,
+          time: question[indexs].time - timeLeft,
           rightAnswer: isAllCorrect,
         };
         dispatch(addResult(resutlt));
@@ -148,7 +146,9 @@ const Play = () => {
   useEffect(() => {
     setStopTime(false);
     setNotification("");
-    startTimerA();
+    if (question.length !== 1) {
+      startTimerA();
+    }
   }, [start, indexs, question]);
 
   useEffect(() => {
@@ -286,7 +286,7 @@ const Play = () => {
                         </p>
                         <div className="cursor-pointer">
                           <div className="absolute right-3 top-5 rounded-full border-4 border-white p-1 ease-in-out duration-300 w-[40px] h-[40px]">
-                            {idsArray.includes(items._id) && (
+                            {idsArray.includes(String(items._id)) && (
                               <Image
                                 src="/images/doneLight.png"
                                 width={30}
