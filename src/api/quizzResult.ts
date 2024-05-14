@@ -58,9 +58,9 @@ export const updateItemQuizzResult = async (data: QuizzResult, id: string) => {
   }
 };
 
-export const deleteQuizz = async (id: string) => {
+export const deleteQuizzResult = async (id: string) => {
   try {
-    const response = await axios.delete(`/quizz/deleteQuizz/${id}`);
+    const response = await axios.delete(`/quizz/deleteQuizzResult/${id}`);
     const quizz = response.data;
     return quizz;
   } catch (error) {

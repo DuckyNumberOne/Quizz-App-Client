@@ -364,8 +364,8 @@ const Play = () => {
                   </div>
                 </div>
                 <div className="h-[180px] overflow-y-scroll">
-                  {dataResult.map((items) => (
-                    <div className="grid grid-cols-3 border-b">
+                  {dataResult.map((items, index) => (
+                    <div className="grid grid-cols-3 border-b" key={index}>
                       <div
                         className={`border-r p-2 text-white ${
                           items.rightAnswer ? "bg-green-400" : "bg-rose-600"
