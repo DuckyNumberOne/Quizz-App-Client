@@ -49,8 +49,12 @@ const Play = () => {
     clearTimeout(timerA);
     setTimerA(
       setTimeout(() => {
-        if (indexs !== -1 && indexs < question.length - 1) {
-          handleSubmit();
+        if (start) {
+          if (indexs !== 0 && indexs < question.length) {
+            console.log("startTimerA Submit");
+
+            handleSubmit();
+          }
         }
       }, timeQuestion)
     );
@@ -87,12 +91,12 @@ const Play = () => {
   };
 
   const handleSubmit = async () => {
+    const id = query.id;
     if (dataResult.length === question.length) {
-      push("/admin/result");
+      push(`/admin/result/${id}`);
     } else {
       clearTimer();
       setStopTime(true);
-      const id = query.id;
       const data = {
         idsArrayAnswer: idsArray,
         idQuestion: question[indexs]._id,
@@ -155,7 +159,6 @@ const Play = () => {
   useEffect(() => {
     const audio = new Audio("/music/music-play-game.mp3");
     const count = new Audio("/music/count-down.mp3");
-
     if (start) {
       count.pause();
       audio.play();
@@ -190,7 +193,7 @@ const Play = () => {
   return (
     <div className="">
       {start ? (
-        <div className="bg-bts-hero-search-bg bg-no-repeat bg-right bg-cover">
+        <div className="bg-bts-hero-search-bg bg-no-repeat bg-right bg-cover h-screen">
           <div className="pb-10 grid grid-cols-3 gap-4 container mx-auto">
             {/* Box 1 */}
             <div></div>

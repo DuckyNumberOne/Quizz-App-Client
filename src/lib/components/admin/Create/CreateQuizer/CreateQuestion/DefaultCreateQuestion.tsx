@@ -21,6 +21,7 @@ import {
   clearAnswer,
 } from "@/lib/state/answer/answerSlice";
 import { useRouter } from "next/router";
+import { postQuizz } from "@/api/quizz";
 
 interface PropsData {
   title: string;
@@ -35,13 +36,14 @@ const DefaultCreateQuestion = () => {
   const dispatch = useDispatch();
   const dataQuestion = useSelector((state: RootState) => state.question);
   const dataQuizz = useSelector((state: RootState) => state.quizz);
-  const { popup_error_question } = useSelector(
-    (state: RootState) => state.popup
-  );
+  const dataUser = useSelector((state: RootState) => state.user);
+  const { push } = useRouter();
   const [popupRule, setPopupRule] = useState(true);
   const [indexs, setIndex] = useState(-1);
   const [error, setError] = useState("");
-
+  const { popup_error_question } = useSelector(
+    (state: RootState) => state.popup
+  );
   const defaultAnswer = {
     number: 0,
     text: "",
@@ -234,11 +236,25 @@ const DefaultCreateQuestion = () => {
     }
   };
 
-  const handCreateQuizz = () => {
-    // dataQuestion
-    // dataQuizz
-    console.log("🚀 ~ handCreateQuizz ~ dataQuestion:", dataQuestion);
-    console.log("🚀 ~ handCreateQuizz ~ dataQuizz:", dataQuizz);
+  const handCreateQuizz = async () => {
+    try {
+      const questionsWithoutId = dataQuestion.map((question) => {
+        const { _id, ...rest } = question;
+        return rest;
+      });
+      const dataQuizzConvert = {
+        ...dataQuizz,
+        idUser: dataUser._id,
+        question: questionsWithoutId,
+      };
+      console.log("🚀 ~ handCreateQuizz ~ dataQuizzConvert:", dataQuizzConvert);
+      const res = await postQuizz(dataQuizzConvert);
+      if (res) {
+        push(`admin/quizz/${res._id}`);
+      }
+    } catch (error: any) {
+      setError(error.response.data);
+    }
   };
 
   useEffect(() => {
@@ -409,8 +425,8 @@ const DefaultCreateQuestion = () => {
                       message: "Title is empty",
                     },
                     maxLength: {
-                      value: 50,
-                      message: "Title cannot exceed 50 characters",
+                      value: 500,
+                      message: "Title cannot exceed 500 characters",
                     },
                     minLength: {
                       value: 5,

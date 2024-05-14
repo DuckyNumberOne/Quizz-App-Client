@@ -15,3 +15,18 @@ export interface Question {
   updatedAt?: string;
   createdAt?: string;
 }
+
+
+export interface AnwsersPost {
+  number: number;
+  text: string;
+  isCorrect: boolean;
+}
+
+export interface QuestionPost {
+  title: string;
+  imgQuestion: string;
+  time: number;
+  point: number;
+  anwsers: Array<AnwsersPost>;
+}
