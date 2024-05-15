@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import Form from "@/lib/components/common/Form";
 import Input from "@/lib/components/common/Input";
@@ -41,11 +41,12 @@ interface PropsDefaultCreateQuestion {
 const DefaultCreateQuestion: React.FC<PropsDefaultCreateQuestion> = ({
   mode,
 }) => {
+  const previousIndex = useRef(-1);
   const dispatch = useDispatch();
   const dataQuestion = useSelector((state: RootState) => state.question);
   const dataQuizz = useSelector((state: RootState) => state.quizz);
   const dataUser = useSelector((state: RootState) => state.user);
-  const { push } = useRouter();
+  const { push, pathname } = useRouter();
   const [popupRule, setPopupRule] = useState(true);
   const [indexs, setIndex] = useState(-1);
   const [error, setError] = useState("");
@@ -201,10 +202,10 @@ const DefaultCreateQuestion: React.FC<PropsDefaultCreateQuestion> = ({
         if (!titleChanged) {
           // Title is not changed, continue without checking existence
           dispatch(updateQuestion(validatedData));
-          if (mode === "Normal") {
-            dispatch(setTurnOffPopup("popup_create_question"));
-            dispatch(setTurnOnPopup("popup_choose_category_question"));
-          }
+          // if (mode === "Normal") {
+          dispatch(setTurnOffPopup("popup_create_question"));
+          dispatch(setTurnOnPopup("popup_choose_category_question"));
+          // }
         } else {
           // Title is changed, check existence
           const existsTitle = dataQuestion.some(
@@ -214,10 +215,10 @@ const DefaultCreateQuestion: React.FC<PropsDefaultCreateQuestion> = ({
             setError("This title question already exists !");
           } else {
             dispatch(updateQuestion(validatedData));
-            if (mode === "Normal") {
-              dispatch(setTurnOffPopup("popup_create_question"));
-              dispatch(setTurnOnPopup("popup_choose_category_question"));
-            }
+            // if (mode === "Normal") {
+            dispatch(setTurnOffPopup("popup_create_question"));
+            dispatch(setTurnOnPopup("popup_choose_category_question"));
+            // }
           }
         }
       } else {
@@ -229,10 +230,10 @@ const DefaultCreateQuestion: React.FC<PropsDefaultCreateQuestion> = ({
         } else {
           dispatch(clearAnswer());
           dispatch(addQuestion(validatedData));
-          if (mode === "Normal") {
-            dispatch(setTurnOffPopup("popup_create_question"));
-            dispatch(setTurnOnPopup("popup_choose_category_question"));
-          }
+          // if (mode === "Normal") {
+          dispatch(setTurnOffPopup("popup_create_question"));
+          dispatch(setTurnOnPopup("popup_choose_category_question"));
+          // }
         }
       }
     }
@@ -261,11 +262,18 @@ const DefaultCreateQuestion: React.FC<PropsDefaultCreateQuestion> = ({
   useEffect(() => {
     if (indexs != -1) {
       const anwsers = dataQuestion[indexs].anwsers;
+      dispatch(clearAnswer());
       dispatch(addMultipleAnswers({ anwsers }));
     }
-    setError("");
   }, [indexs]);
 
+  useEffect(() => {
+    if (pathname !== "/admin/quizz/create") {
+      dispatch(clearAnswer());
+      dispatch(resetQuestions());
+      dispatch(resetQuizz());
+    }
+  }, [pathname]);
   return (
     <div
       className={`px-3 py-4 border md:p-4 bg-white border-[#e5e5e5] my-4 rounded-lg fade-in-1s h-[935px] relative ${
@@ -561,3 +569,6 @@ const DefaultCreateQuestion: React.FC<PropsDefaultCreateQuestion> = ({
   );
 };
 export default DefaultCreateQuestion;
+function resetQuizz(): any {
+  throw new Error("Function not implemented.");
+}

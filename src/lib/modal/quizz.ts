@@ -50,3 +50,13 @@ export interface QuizzPost {
   keyword: string;
   question: QuestionPost[]
 }
+export interface QuizzPostOption {
+  // idUser: string;
+  urlThumbnail: string;
+  title: string;
+  description: string;
+  idCollection: string;
+  visibility: string;
+  keyword: string;
+  // question: QuestionPost[]
+}

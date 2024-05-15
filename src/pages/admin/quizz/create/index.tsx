@@ -115,6 +115,11 @@ const CreateQuizerPage = () => {
                     <DefaultCreateQuizerByExcel />
                   </div>
                 )}
+                {popup_choose_category_question && (
+                  <div className="mx-6 pt-4 col-span-4 ">
+                    <DefaultChooseCategoryQuestion />{" "}
+                  </div>
+                )}
                 {popup_create_question && (
                   <div className="mx-6 pt-4 col-span-4 ">
                     <DefaultCreateQuestion mode="Excel" />{" "}

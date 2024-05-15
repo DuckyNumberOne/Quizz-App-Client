@@ -1,7 +1,7 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { QuizzPost } from "@/lib/modal/quizz";
+import { QuizzPost, QuizzPostOption } from "@/lib/modal/quizz";
 
-const initialState: QuizzPost = {
+const initialState: QuizzPostOption = {
   urlThumbnail: "",
   title: "",
   description: "",
@@ -22,6 +22,9 @@ const quizzSlice = createSlice({
         ...state,
         ...action.payload,
       };
+    },
+    resetQuizz: (state) => {
+      return initialState; // Trả về giá trị initialState để reset state
     },
   },
 });

@@ -25,7 +25,6 @@ function Test() {
 
   // submit
   const [excelData, setExcelData] = useState<Question[]>([]);
-  console.log("🚀 ~ Test ~ excelData:", excelData);
 
   const fileType = ["application/vnd.ms-excel"];
   const handleFile = (e: ChangeEvent<HTMLInputElement>) => {

@@ -52,7 +52,6 @@ const DefaultCreateQuizerByExcel = () => {
   const [excelFileError, setExcelFileError] = useState("");
   // submit
   const [excelData, setExcelData] = useState<Question[]>([]);
-  console.log("🚀 ~ DefaultCreateQuizerByExcel ~ excelData:", excelData);
   const [notification, setNotification] = useState(true);
 
   const convertDataFormat = (
@@ -81,7 +80,6 @@ const DefaultCreateQuizerByExcel = () => {
     let selectedFile =
       e.target.files && e.target.files.length > 0 && e.target.files[0];
     if (selectedFile) {
-      // console.log(selectedFile.type);
       if (selectedFile && fileType.includes(selectedFile.type)) {
         let reader = new FileReader();
         reader.readAsArrayBuffer(selectedFile);
