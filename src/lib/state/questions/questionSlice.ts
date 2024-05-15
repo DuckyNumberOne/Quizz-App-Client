@@ -7,6 +7,9 @@ const questionSlice = createSlice({
   name: "question",
   initialState,
   reducers: {
+    addQuestions: (state, action: PayloadAction<Question[]>) => {
+      state.push(...action.payload);
+    },
     addQuestion: (state, action: PayloadAction<Question>) => {
       state.push(action.payload);
     },
@@ -31,5 +34,5 @@ const questionSlice = createSlice({
   },
 });
 
-export const { addQuestion, updateQuestion,deleteQuestionByIndex ,resetQuestions} = questionSlice.actions;
+export const {addQuestions, addQuestion, updateQuestion,deleteQuestionByIndex ,resetQuestions} = questionSlice.actions;
 export default questionSlice.reducer;
