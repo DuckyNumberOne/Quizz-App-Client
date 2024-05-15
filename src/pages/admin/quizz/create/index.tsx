@@ -4,12 +4,15 @@ import DefaultChooseCategoryQuestion from "@/lib/components/admin/Create/CreateQ
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "@/lib/state/store";
 import DefaultCreateQuestion from "@/lib/components/admin/Create/CreateQuizer/CreateQuestion/DefaultCreateQuestion";
-import { setTurnOffPopup } from "@/lib/state/popup/popupSlice";
+import { setTurnOffPopup, setTurnOnPopup } from "@/lib/state/popup/popupSlice";
 import Image from "next/image";
 import DefaultCreateQuizerByExcel from "@/lib/components/admin/Create/CreateQuizer/CreateQuizerByExcel/DefaultCreateQuizerByExcel";
+import { useRouter } from "next/router";
 
 const CreateQuizerPage = () => {
   const dispatch = useDispatch();
+  const { pathname } = useRouter();
+
   const {
     popup_choose_category_question,
     popup_create_question,
@@ -24,8 +27,11 @@ const CreateQuizerPage = () => {
   };
 
   useEffect(() => {
-    if (popup_quizz_creation_mode) {
-      document.body.classList.add("disable-scroll");
+    if (quizznMode == "" && !popup_quizz_creation_mode) {
+      dispatch(setTurnOnPopup("popup_quizz_creation_mode"));
+    }
+    if (pathname !== "/admin/quizz/create") {
+      dispatch(setTurnOffPopup("popup_quizz_creation_mode"));
     }
   }, [popup_quizz_creation_mode]);
 

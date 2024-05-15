@@ -270,105 +270,57 @@ const DefaultCreateQuizerByExcel = () => {
                   </div>
                   <div className="overflow-y-scroll h-[550px]">
                     {excelData.map((items, index) => (
-                      <div className="grid grid-cols-12 h-[90px]" key={index}>
-                        <div
-                          className={`${
-                            index === excelData.length ? "" : ""
-                          } border-r border-b text-xs p-1`}
-                        >
+                      <div className="grid grid-cols-12 h-[270px]" key={index}>
+                        <div className={`border-r border-b text-xs p-1`}>
                           <p className="break-words">{items.title}</p>
                         </div>
-                        <div
-                          className={`${
-                            index === excelData.length ? "" : ""
-                          } border-r border-b text-xs p-1`}
-                        >
+                        <div className={`border-r border-b text-xs p-1`}>
                           <p className="break-words">{items.imgQuestion}</p>
                         </div>
-                        <div
-                          className={`${
-                            index === excelData.length ? "" : ""
-                          } border-r border-b text-xs p-1`}
-                        >
+                        <div className={`border-r border-b text-xs p-1`}>
                           <p className="break-words text-center">
                             {items.time}
                           </p>
                         </div>
-                        <div
-                          className={`${
-                            index === excelData.length ? "" : ""
-                          } border-r border-b text-xs p-1`}
-                        >
+                        <div className={`border-r border-b text-xs p-1`}>
                           <p className="break-words text-center">
                             {items.point}
                           </p>
                         </div>
-                        <div
-                          className={`${
-                            index === excelData.length ? "" : ""
-                          } border-r border-b text-xs p-1`}
-                        >
+                        <div className={`border-r border-b text-xs p-1`}>
                           <p className="break-words">{items.text1}</p>
                         </div>
-                        <div
-                          className={`${
-                            index === excelData.length ? "" : ""
-                          } border-r border-b text-xs p-1`}
-                        >
+                        <div className={`border-r border-b text-xs p-1`}>
                           <p className="break-words text-center">
                             {items.isCorrect1 === 1
                               ? String(true)
                               : String(false)}
                           </p>
                         </div>
-                        <div
-                          className={`${
-                            index === excelData.length ? "" : ""
-                          } border-r border-b text-xs p-1`}
-                        >
+                        <div className={`border-r border-b text-xs p-1`}>
                           <p className="break-words">{items.text2}</p>
                         </div>
-                        <div
-                          className={`${
-                            index === excelData.length ? "" : ""
-                          } border-r border-b text-xs p-1`}
-                        >
+                        <div className={`border-r border-b text-xs p-1`}>
                           <p className="break-words text-center">
                             {items.isCorrect2 === 1
                               ? String(true)
                               : String(false)}
                           </p>
                         </div>
-                        <div
-                          className={`${
-                            index === excelData.length ? "" : ""
-                          } border-r border-b text-xs p-1`}
-                        >
+                        <div className={`border-r border-b text-xs p-1`}>
                           <p className="break-words">{items.text3}</p>
                         </div>
-                        <div
-                          className={`${
-                            index === excelData.length ? "" : ""
-                          } border-r border-b text-xs p-1`}
-                        >
+                        <div className={`border-r border-b text-xs p-1`}>
                           <p className="break-words text-center">
                             {items.isCorrect3 === 1
                               ? String(true)
                               : String(false)}
                           </p>
                         </div>
-                        <div
-                          className={`${
-                            index === excelData.length ? "" : ""
-                          } border-r border-b text-xs p-1`}
-                        >
+                        <div className={`border-r border-b text-xs p-1`}>
                           <p className="break-words">{items.text4}</p>
                         </div>
-                        <div
-                          className={`${
-                            index === excelData.length ? "" : ""
-                          } border-r border-b text-xs p-1`}
-                        >
+                        <div className={`border-r border-b text-xs p-1`}>
                           <p className="break-words text-center">
                             {items.isCorrect4 === 1
                               ? String(true)

@@ -7,7 +7,7 @@ interface PopupState {
 const initialState: PopupState = {
   "popup_login": false, 
   "popup_loading_page_admin": false,
-  "popup_quizz_creation_mode": true,
+  "popup_quizz_creation_mode": false,
   "popup_create_quizer": true,
   "popup_create_mode_excel": false,
   "popup_choose_category_question": false,

@@ -294,12 +294,14 @@ const Play = () => {
                       className="flex gap-5 p-4 rounded-xl shadow-4 shadow-[#5c4f7ea6] hover:bg-[#e5e5e571] ease-in-out duration-300"
                       key={items._id}
                     >
-                      <div className="w-1/3 h-[200px] relative rounded-lg ">
+                      <div className="w-[300px] h-[200px] relative rounded-lg ">
                         <img
                           src={
                             items.imgQuestion || "/images/image-loading.webp"
                           }
-                          className="w-full h-full rounded-lg"
+                          width={300}
+                          height={200}
+                          className="rounded-lg h-[200px] bg-cover"
                           alt={items.title}
                         />
                         {/* shadow  */}
