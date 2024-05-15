@@ -11,6 +11,7 @@ import CountdownTimer from "@/lib/components/common/CountdownTimer/DefaultCountd
 import { addResult, resetResult } from "@/lib/state/result/resultSlice";
 import { RootState } from "@/lib/state/store";
 import Link from "next/link";
+import { colorCardAnswer } from "@/lib/config/colorCardAnswer";
 
 const Play = () => {
   const dispatch = useDispatch();
@@ -73,13 +74,6 @@ const Play = () => {
   const clearTimer = () => {
     clearTimeout(timerA);
   };
-
-  const colorCardAnswer = [
-    { id: 1, colorBackground: "#e35454", colorBoder: "#bf2d49" },
-    { id: 2, colorBackground: "#30b0c7", colorBoder: "#0093ad" },
-    { id: 3, colorBackground: "#ff9500", colorBoder: "#c27810" },
-    { id: 4, colorBackground: "#3ed684", colorBoder: "#81ab8b" },
-  ];
 
   const indexQuestionPercent = Number(
     (indexs + 1) * (1 / question?.length) * 100

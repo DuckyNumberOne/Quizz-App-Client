@@ -134,11 +134,15 @@ const Play = () => {
                       </p>
                     </div>
                   </div>
-                  <ButtonDefault
-                    content="Follow"
-                    className="text-white bg-black rounded-full py-4 px-8 text-lg  hover:text-black hover:bg-white hover:shadow-sm hover:shadow-black ease-in-out duration-300"
-                    onClick={handleFollow}
-                  />
+                  {!checkUser ? (
+                    <ButtonDefault
+                      content="Follow"
+                      className="text-white bg-black rounded-full py-4 px-8 text-lg  hover:text-black hover:bg-white hover:shadow-sm hover:shadow-black ease-in-out duration-300"
+                      onClick={handleFollow}
+                    />
+                  ) : (
+                    <div></div>
+                  )}
                 </div>
                 {/* Descripsiom  */}
                 <div className="mt-12">

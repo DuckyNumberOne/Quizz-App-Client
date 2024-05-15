@@ -22,6 +22,8 @@ import {
 } from "@/lib/state/answer/answerSlice";
 import { useRouter } from "next/router";
 import { postQuizz } from "@/api/quizz";
+import { colorCardAnswer } from "@/lib/config/colorCardAnswer";
+import { generateUniqueId } from "@/utils/generateUniqueId";
 
 interface PropsData {
   title: string;
@@ -32,7 +34,13 @@ interface PropsData {
   [key: string]: string | number | Anwsers[];
 }
 
-const DefaultCreateQuestion = () => {
+interface PropsDefaultCreateQuestion {
+  mode: string;
+}
+
+const DefaultCreateQuestion: React.FC<PropsDefaultCreateQuestion> = ({
+  mode,
+}) => {
   const dispatch = useDispatch();
   const dataQuestion = useSelector((state: RootState) => state.question);
   const dataQuizz = useSelector((state: RootState) => state.quizz);
@@ -62,13 +70,6 @@ const DefaultCreateQuestion = () => {
     { id: 33333, title: "1.500 Point", value: 1500 },
     { id: 33332, title: "1.000 Point", value: 1000 },
     { id: 33334, title: "500 Point", value: 500 },
-  ];
-
-  const colorCardAnser = [
-    { id: 1, colorBackground: "#e35454", colorBoder: "#bf2d49" },
-    { id: 2, colorBackground: "#30b0c7", colorBoder: "#0093ad" },
-    { id: 3, colorBackground: "#ff9500", colorBoder: "#c27810" },
-    { id: 4, colorBackground: "#3ed684", colorBoder: "#81ab8b" },
   ];
 
   useEffect(() => {
@@ -151,26 +152,21 @@ const DefaultCreateQuestion = () => {
     if (indexs !== -1) {
       dispatch(deleteQuestionByIndex(indexs));
       setIndex(-1); // Đặt lại giá trị của indexs sau khi xóa thành -1
-      dispatch(setTurnOffPopup("popup_create_question"));
-      dispatch(setTurnOnPopup("popup_choose_category_question"));
+      if (mode == "Normal") {
+        dispatch(setTurnOffPopup("popup_create_question"));
+        dispatch(setTurnOnPopup("popup_choose_category_question"));
+      }
+      if (mode == "Excel") {
+        // dispatch(setTurnOffPopup("popup_create_question"));
+        // dispatch(setTurnOnPopup("popup_choose_category_question"));
+      }
     }
   };
-
-  function generateUniqueId() {
-    // Tạo một chuỗi ngẫu nhiên có độ dài 8 ký tự từ các ký tự a-z và số từ 0-9
-    const randomString = Math.random().toString(36).substring(2, 10);
-    // Tạo một timestamp từ thời gian hiện tại
-    const timestamp = Date.now();
-    // Kết hợp chuỗi ngẫu nhiên và timestamp để tạo ID
-    const uniqueId = randomString + timestamp;
-    return uniqueId;
-  }
 
   const valueId = indexs != -1 ? dataQuestion[indexs]._id : generateUniqueId();
 
   const handleSubmitForm = async (data: PropsData) => {
     if (!data) return;
-
     const validatedData = transformData(data);
     const isCorrectTrue = validatedData.anwsers.filter(
       (item) => item.isCorrect
@@ -205,8 +201,10 @@ const DefaultCreateQuestion = () => {
         if (!titleChanged) {
           // Title is not changed, continue without checking existence
           dispatch(updateQuestion(validatedData));
-          dispatch(setTurnOffPopup("popup_create_question"));
-          dispatch(setTurnOnPopup("popup_choose_category_question"));
+          if (mode === "Normal") {
+            dispatch(setTurnOffPopup("popup_create_question"));
+            dispatch(setTurnOnPopup("popup_choose_category_question"));
+          }
         } else {
           // Title is changed, check existence
           const existsTitle = dataQuestion.some(
@@ -216,8 +214,10 @@ const DefaultCreateQuestion = () => {
             setError("This title question already exists !");
           } else {
             dispatch(updateQuestion(validatedData));
-            dispatch(setTurnOffPopup("popup_create_question"));
-            dispatch(setTurnOnPopup("popup_choose_category_question"));
+            if (mode === "Normal") {
+              dispatch(setTurnOffPopup("popup_create_question"));
+              dispatch(setTurnOnPopup("popup_choose_category_question"));
+            }
           }
         }
       } else {
@@ -229,8 +229,10 @@ const DefaultCreateQuestion = () => {
         } else {
           dispatch(clearAnswer());
           dispatch(addQuestion(validatedData));
-          dispatch(setTurnOffPopup("popup_create_question"));
-          dispatch(setTurnOnPopup("popup_choose_category_question"));
+          if (mode === "Normal") {
+            dispatch(setTurnOffPopup("popup_create_question"));
+            dispatch(setTurnOnPopup("popup_choose_category_question"));
+          }
         }
       }
     }
@@ -440,7 +442,7 @@ const DefaultCreateQuestion = () => {
                 <div className="w-full flex-row flex-wrap mt-12">
                   {/* Box */}
                   <div className="w-full border-r-[5px] border-white mb-3 grid grid-cols-2 grid-rows-2 gap-4">
-                    {colorCardAnser.map((items, index) => (
+                    {colorCardAnswer.map((items, index) => (
                       <div key={items.id}>
                         <DefaultCardAnsswer
                           indexs={indexs}

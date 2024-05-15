@@ -12,7 +12,11 @@ import { RootState } from "@/lib/state/store";
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
-const DefaulCreateQuizer = () => {
+interface PropsDefaultCreateQuestion {
+  mode: string;
+}
+
+const DefaulCreateQuizer: React.FC<PropsDefaultCreateQuestion> = ({ mode }) => {
   const dispatch = useDispatch();
   const [collection, setCollection] = useState<Collection[]>([]);
   const dataQuizer = useSelector((state: RootState) => state.quizz);
@@ -38,11 +42,14 @@ const DefaulCreateQuizer = () => {
 
   const handleSubmitForm = async (data: QuizzPost) => {
     if (dataQuizer.title !== " ") {
-      console.log("dataQuizer.title !== ");
       dispatch(addQuizz(data));
-      dispatch(setTurnOnPopup("popup_choose_category_question"));
+      if (mode === "Normal") {
+        dispatch(setTurnOnPopup("popup_choose_category_question"));
+      }
+      if (mode === "Excel") {
+        dispatch(setTurnOnPopup("popup_create_mode_excel"));
+      }
     } else {
-      console.log("dataQuizer.title == ");
       dispatch(updateQuizz(data));
     }
   };
