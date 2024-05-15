@@ -133,8 +133,7 @@ const Result = () => {
                   <p>
                     <span>{resultUser.rightAnswer}</span> /{" "}
                     <span className="font-medium">
-                      {quizz?.question.length}
-                      right answer
+                      {quizz?.question.length} right answer
                     </span>{" "}
                   </p>
                 </div>
