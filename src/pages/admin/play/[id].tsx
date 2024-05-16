@@ -5,13 +5,14 @@ import { useDispatch, useSelector } from "react-redux";
 import Image from "next/image";
 import DefaultCardAnsswer from "@components/admin/CardAnswer/DefaultCardAnswer";
 import { getAnwsersIsTrue, getItemQuizz, getQuestionById } from "@/api/quizz";
-import { Question } from "@/lib/modal/question";
+import { Anwsers, Question } from "@/lib/modal/question";
 import { questionInit } from "@/lib/config/initQuestion";
 import CountdownTimer from "@/lib/components/common/CountdownTimer/DefaultCountdownTimer";
 import { addResult, resetResult } from "@/lib/state/result/resultSlice";
 import { RootState } from "@/lib/state/store";
 import Link from "next/link";
 import { colorCardAnswer } from "@/lib/config/colorCardAnswer";
+import { randomUtils } from "@/utils/randomUtils ";
 
 const Play = () => {
   const dispatch = useDispatch();
@@ -29,6 +30,7 @@ const Play = () => {
   const timeQuestion = timeQuestionIndex * 1000;
   const dataResult = useSelector((state: RootState) => state.result);
   const [timeLeft, setTimeLeft] = useState(timeQuestionIndex);
+  const [dataAnwsersRandom, setDataAnwsersRandom] = useState<Anwsers[]>([]);
 
   const handleStart = () => {
     setStart(true);
@@ -141,6 +143,7 @@ const Play = () => {
     setStopTime(false);
     setNotification("");
     if (question.length !== 1) {
+      setDataAnwsersRandom(randomUtils.shuffleArray(question[indexs].anwsers));
       startTimerA();
     }
   }, [start, indexs, question]);
@@ -264,7 +267,7 @@ const Play = () => {
                   {question[indexs].title}
                 </p>
                 <div className="w-full border-r-[5px] border-white mb-3 grid grid-cols-2 grid-rows-2 gap-4">
-                  {question[indexs].anwsers.map((items, index) => (
+                  {dataAnwsersRandom.map((items, index) => (
                     <div key={items._id}>
                       <div
                         className={`hover:shadow-2 hover:shadow-green-400 hover:scale-105 ease-in-out duration-300 cursor-pointer border-r-4 border-b-4 py-3 px-6 rounded-2xl w-full h-[170px] flex justify-center items-center relative`}
