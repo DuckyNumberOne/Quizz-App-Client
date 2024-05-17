@@ -232,6 +232,7 @@ const config: Config = {
           backgroundImage: {
             video: "url('../images/video/video.png')",
            "bts-hero-search-bg":"url('/images/admin/background-homeAdmin.png')",
+           "bts-hero-2":"url('/images/admin/background1.jpg')",
 
           },
           content: {

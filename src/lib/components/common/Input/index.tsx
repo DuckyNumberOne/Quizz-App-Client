@@ -18,6 +18,7 @@ interface InputProps {
   control?: any;
   onInputChange?: any;
   onInputBlur?: any;
+  children?: (props: any) => React.JSX.Element;
 }
 
 const Input: React.FC<InputProps> = ({
@@ -34,6 +35,7 @@ const Input: React.FC<InputProps> = ({
   onInputChange,
   onInputBlur,
   control,
+  // children
 }) => {
   const keys = errorsOption ? Object.keys(errorsOption) : [];
   const url = label.toLowerCase().indexOf("url") === 0;
@@ -74,8 +76,38 @@ const Input: React.FC<InputProps> = ({
     case "text":
       return (
         <>
-          {url &&
+          {label == "urlAvatar" ? (
+            <div>
+              {inputValue != "" ? (
+                <>
+                  <div className="w-full flex justify-center items-center">
+                    <img
+                      src={String(inputValue)}
+                      width={120}
+                      height={120}
+                      alt="Avatar loading"
+                      className="bg-cover bg-no-repeat max-w-[120px] max-h-[120px] object-cover rounded-full border-2 shadow-3 shadow-purple-600"
+                    />
+                  </div>
+                </>
+              ) : (
+                <>
+                  <div className="w-full flex justify-center items-center">
+                    <Image
+                      src="/images/avatar-loading.png"
+                      width={120}
+                      height={120}
+                      alt="Avatar loading"
+                      className="bg-cover bg-no-repeat max-w-[120px] max-h-[120px] object-cover rounded-full border-2 shadow-3 shadow-purple-600"
+                    />
+                  </div>
+                </>
+              )}
+            </div>
+          ) : (
+            url &&
             (inputValue != "" ? (
+              // {children}
               <div className="h-[250px] rounded-xl border-[#dacd79] border-6 bg-[#fafaf2] relative z-1">
                 <img
                   src={String(inputValue)}
@@ -100,7 +132,8 @@ const Input: React.FC<InputProps> = ({
                   </div>
                 </div>
               </div>
-            ))}
+            ))
+          )}
           <label className={classLabel} htmlFor={name}>
             {label}
           </label>
@@ -121,7 +154,7 @@ const Input: React.FC<InputProps> = ({
             keys.map((items) => (
               <div key={items}>
                 {errors?.[name]?.type === items && (
-                  <p className="text-red mt-3 font-medium text-sm">
+                  <p className="text-red mt-3 font-medium text-xs">
                     {errors?.[name]?.message}
                   </p>
                 )}
@@ -152,7 +185,7 @@ const Input: React.FC<InputProps> = ({
             keys.map((items) => (
               <div key={items}>
                 {errors?.[name]?.type === items && (
-                  <p className="text-red mt-3 font-medium text-sm">
+                  <p className="text-red mt-3 font-medium text-xs">
                     {errors?.[name]?.message}
                   </p>
                 )}
@@ -181,7 +214,7 @@ const Input: React.FC<InputProps> = ({
             keys.map((items) => (
               <div key={items}>
                 {errors?.[name]?.type === items && (
-                  <p className="text-red mt-3 font-medium text-sm">
+                  <p className="text-red mt-3 font-medium text-xs">
                     {errors?.[name]?.message}
                   </p>
                 )}
@@ -234,7 +267,7 @@ const Input: React.FC<InputProps> = ({
                     {errors?.[name]?.type === items && (
                       <div
                         key={items}
-                        className="text-red mt-3 font-medium text-sm"
+                        className="text-red  font-medium text-xs"
                       >
                         {errors?.[name]?.message}
                       </div>

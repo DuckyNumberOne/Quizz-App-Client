@@ -156,11 +156,11 @@ const Play = () => {
                 {/* Play  */}
                 <div className="flex gap-5 justify-between items-center mt-10">
                   <ButtonDefault
-                    className="text-white bg-black shadow-4 shadow-[#6d5ff6] p-4 rounded-full text-sm w-[30%] transition ease-in-out hover:scale-105"
+                    className="text-white bg-black shadow-4 shadow-[#6d5ff6] p-4 rounded-full text-sm w-[35%] transition ease-in-out hover:scale-105"
                     content="Play with friends"
                   />
                   <ButtonDefault
-                    className="text-black bg-white shadow-4 shadow-[#6d5ff6] p-4 rounded-full text-sm w-[30%] transition ease-in-out hover:scale-105"
+                    className="text-black bg-white shadow-4 shadow-[#6d5ff6] p-4 rounded-full text-sm w-[35%] transition ease-in-out hover:scale-105"
                     content="Play solo"
                     onClick={handlPlaySolo}
                   />

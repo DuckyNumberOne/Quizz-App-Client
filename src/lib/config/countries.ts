@@ -1,0 +1,27 @@
+const countries = [
+  { id: 31, name: "Viet Nam 🇻🇳", code: "VN" },
+  { id: 32, name: "USA 🇺🇸", code: "US" },
+  { id: 33, name: "Korean 🇰🇷", code: "KR" },
+  { id: 35, name: "Japan 🇯🇵", code: "JP" },
+  { id: 16, name: "Azerbaijan 🇦🇿", code: "AZ" },
+  { id: 12, name: "Bahamas 🇧🇸 ", code: "BS" },
+  { id: 13, name: "Bahrain 🇧🇭", code: "BH" },
+  { id: 14, name: "Bangladesh 🇧🇩", code: "BD" },
+  { id: 15, name: "Barbados 🇧🇧", code: "BB" },
+  { id: 16, name: "Belarus 🇧🇾 ", code: "BY" },
+  { id: 17, name: "Belgium 🇧🇪", code: "BE" },
+  { id: 18, name: "Belize 🇧🇿", code: "BZ" },
+  { id: 19, name: "Benin", code: "BJ" },
+  { id: 20, name: "Bhutan 🇧🇹", code: "BT" },
+  { id: 21, name: "Bolivia 🇧🇴", code: "BO" },
+  { id: 22, name: "Bosnia and Herzegovina 🇧🇦", code: "BA" },
+  { id: 23, name: "Botswana 🇧🇼", code: "BW" },
+  { id: 24, name: "Brazil 🇧🇷", code: "BR" },
+  { id: 25, name: "Brunei 🇧🇳 ", code: "BN" },
+  { id: 26, name: "Bulgaria 🇧🇬", code: "BG" },
+  { id: 28, name: "Burundi", code: "BI" },
+  { id: 29, name: "Cabo Verde 🇨🇻", code: "CV" },
+  { id: 30, name: "Cambodia 🇰🇭", code: "KH" },
+];
+
+export default countries;

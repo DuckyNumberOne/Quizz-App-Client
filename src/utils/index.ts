@@ -12,15 +12,15 @@ const instance = axios.create({
 
 export default instance;
 
-// instance.interceptors.request.use(
-//   function (config: any) {
-//     const token = useAuth();
-//     config.headers = {
-//       token: `Bearer ${token}`,
-//     };
-//     return config;
-//   },
-//   function (error) {
-//     return Promise.reject(error);
-//   }
-// );
+instance.interceptors.request.use(
+  function (config: any) {
+    const token = window.localStorage.getItem("token");
+    config.headers = {
+      token: `Bearer ${token}`,
+    };
+    return config;
+  },
+  function (error) {
+    return Promise.reject(error);
+  }
+);
