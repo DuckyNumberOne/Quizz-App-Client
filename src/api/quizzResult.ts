@@ -23,6 +23,18 @@ export const getItemQuizzResultByUser = async (id: string | string[]) => {
   }
 };
 
+export const getQuestionPercentagesByQuizzId = async (id: string | string[]) => {
+  try {
+    const response = await axios.get(
+      `/quizzResult/getQuestionPercentagesByQuizzId/${id}`
+    );
+    const quizz = response.data;
+    return quizz;
+  } catch (error) {
+    console.error(error);
+  }
+};
+
 export const getItemQuizzResultByQuizz = async (id: string | string[]) => {
   try {
     const response = await axios.get(
@@ -57,7 +69,17 @@ export const updateItemQuizzResult = async (data: QuizzResult, id: string) => {
 
 export const deleteQuizzResult = async (id: string) => {
   try {
-    const response = await axios.delete(`/quizz/deleteQuizzResult/${id}`);
+    const response = await axios.delete(`/quizzResult/deleteQuizzResult/${id}`);
+    const quizz = response.data;
+    return quizz;
+  } catch (error) {
+    console.error(error);
+  }
+};
+
+export const deleteAllQuizzResult = async () => {
+  try {
+    const response = await axios.delete(`/quizzResult/deleteAllQuizzResult/`);
     const quizz = response.data;
     return quizz;
   } catch (error) {

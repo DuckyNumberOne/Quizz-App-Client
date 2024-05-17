@@ -43,6 +43,7 @@ const Result = () => {
   const resultUser = calculateResult(results);
   const dataResult = {
     ...resultUser,
+    questions: results,
     idUser: String(user._id),
     idQuizz: String(param),
   };
@@ -108,7 +109,7 @@ const Result = () => {
                     key={index}
                     className="grid grid-cols-4 border-b border-x h-10"
                   >
-                    <div className="border-r text-center">{r.index}</div>
+                    <div className="border-r text-center">{r.index + 1}</div>
                     <div className="border-r text-center">
                       {String(r.rightAnswer)}
                     </div>
