@@ -1,15 +1,15 @@
 import { userInit } from "@/lib/config/initUser";
-import { User } from "@/lib/modal/user";
+import { User, UserOption } from "@/lib/modal/user";
 import { createSlice, configureStore, PayloadAction } from "@reduxjs/toolkit";
 
 
-const initialState: User = userInit;
+const initialState: UserOption = userInit;
 
 const userSlice = createSlice({
   name: "user",
   initialState,
   reducers: {
-    addUser: (state, action: PayloadAction<User>) => {
+    addUser: (state, action: PayloadAction<UserOption>) => {
       return action.payload;
     },
   },

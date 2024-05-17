@@ -1,7 +1,6 @@
 const useAuth = () => {
-  const localStorageToken = window.localStorage.getItem("root");
-  const dataToken = JSON.parse(localStorageToken ?? "");
-  let tokenValue = dataToken.token?.slice(1, -1);
+  const localStorageToken = window.localStorage.getItem("token");
+  const tokenValue = JSON.parse(localStorageToken ?? "");
   return tokenValue;
 };
 

@@ -48,13 +48,9 @@ export const getUserByCategoryId = async (id: string | undefined) => {
 };
 
 export const updateUser = async (data: User, id: string) => {
-  try {
     const response = await axios.put(`/user/updateUser/${id}`, data);
     const users = response.data;
     return users;
-  } catch (error) {
-    console.error(error);
-  }
 };
 
 export const postUser = async (data: User) => {

@@ -30,8 +30,6 @@ const Layout = ({ children }: Props) => {
 
   useEffect(() => {
     if (popup_quizz_creation_mode && path == "/admin") {
-      console.log("2");
-
       dispatch(setTurnOffPopup("popup_quizz_creation_mode"));
     }
   }, [popup_quizz_creation_mode, path]);

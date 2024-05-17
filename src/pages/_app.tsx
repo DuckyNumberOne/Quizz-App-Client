@@ -10,7 +10,7 @@ export default function App({ Component, pageProps }: AppProps) {
     <Provider store={store}>
       <Layout>
         <div className="bg-white">
-          <Component {...pageProps} />;
+          <Component {...pageProps} />
         </div>
       </Layout>
     </Provider>
