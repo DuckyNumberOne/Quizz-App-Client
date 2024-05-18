@@ -169,7 +169,7 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }: SidebarProps) => {
               {/* <!-- Menu Item Tables --> */}
               <li>
                 <Link
-                  href="/admin/my-quizz"
+                  href={`/admin/my-quizz/${idUser}`}
                   className={`group relative flex items-center gap-2.5 rounded-sm px-4 py-2 font-medium text-black duration-300 ease-in-out hover:bg-slate-200 dark:hover:bg-meta-4 ${
                     pathname.includes("tables") && "bg-slate-200 dark:bg-meta-4"
                   }`}

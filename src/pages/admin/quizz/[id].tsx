@@ -273,19 +273,25 @@ const Play = () => {
                 <p className="text-2xl mb-4">
                   {quizz?.question.length} question 🙋
                 </p>
-                <button
-                  onClick={handleHidden}
-                  className="w-10 h-10 rounded-full bg-white shadow-2 flex items-center justify-center border-2 shadow-purple-500"
-                >
-                  <Image
-                    src={
-                      hidden ? "/images/preview-2.webp" : "/images/hidden.webp"
-                    }
-                    width={30}
-                    height={30}
-                    alt="hidden"
-                  />
-                </button>
+                {checkUser ? (
+                  <button
+                    onClick={handleHidden}
+                    className="w-10 h-10 rounded-full bg-white shadow-2 flex items-center justify-center border-2 shadow-purple-500"
+                  >
+                    <Image
+                      src={
+                        hidden
+                          ? "/images/preview-2.webp"
+                          : "/images/hidden.webp"
+                      }
+                      width={30}
+                      height={30}
+                      alt="hidden"
+                    />
+                  </button>
+                ) : (
+                  <></>
+                )}
               </div>
               <div className="space-y-4 h-[900px] overflow-y-auto p-4 text-xl font-bold">
                 {quizz ? (
@@ -305,10 +311,24 @@ const Play = () => {
                           alt={items.title}
                         />
                         {/* shadow  */}
-                        {hidden && checkUser && (
+                        {!checkUser && (
+                          <div
+                            className={`absolute top-0 left-0 w-full h-full flex items-center justify-center bg-black-shadow rounded-lg`}
+                          >
+                            <div className="p-5 rounded-full bg-[#8854c0]">
+                              <Image
+                                src="/images/quizzes-question.png"
+                                alt="quizzes question"
+                                width={50}
+                                height={50}
+                              />
+                            </div>
+                          </div>
+                        )}
+                        {hidden && (
                           <div
                             className={`${
-                              hidden ? "fade-in-01s" : ""
+                              hidden ? "fade-in-01s " : "hidden"
                             } absolute top-0 left-0 w-full h-full flex items-center justify-center bg-black-shadow rounded-lg`}
                           >
                             <div className="p-5 rounded-full bg-[#8854c0]">

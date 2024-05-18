@@ -114,14 +114,14 @@ const MyProfile = () => {
                 <div className="absolute w-full bottom-[-115px] flex justify-center">
                   <div>
                     <img
-                      src={dataUser.urlAvatar}
+                      src={dataUser?.urlAvatar}
                       width={150}
                       height={150}
                       alt="avatar"
                       className="rounded-full border-6 border-white"
                     />
                     <p className="text-center font-medium">
-                      {dataUser.fullName}
+                      {dataUser?.fullName}
                     </p>
                     {/* <p>@{dataUser.username}</p> */}
                   </div>
@@ -157,20 +157,23 @@ const MyProfile = () => {
                   <p className="border-b font-medium">Time create account: </p>
                 </div>
                 <div className=" space-y-4 p-4 border-l">
-                  <p className="border-b font-normal">{dataUser.country}</p>
-                  <p className="border-b font-normal">{dataUser.email}</p>
-                  <p className="border-b font-normal">{dataUser.dateBirday}</p>
-                  <p className="border-b font-normal">{dataUser.phoneNumber}</p>
+                  <p className="border-b font-normal">{dataUser?.country}</p>
+                  <p className="border-b font-normal">{dataUser?.email}</p>
+                  <p className="border-b font-normal">{dataUser?.dateBirday}</p>
                   <p className="border-b font-normal">
-                    {dataUser.typeAccount === "Loading...."
+                    {dataUser?.phoneNumber}
+                  </p>
+                  <p className="border-b font-normal">
+                    {dataUser && dataUser?.typeAccount === "Loading...."
                       ? "Loading...."
-                      : typeAccount.filter(
-                          (items) => items.id == dataUser.typeAccount
+                      : dataUser &&
+                        typeAccount.filter(
+                          (items) => items.id == dataUser?.typeAccount
                         )[0].title}
                   </p>
                   <p className="border-b">
-                    {dataUser.createdAt
-                      ? dataUser.createdAt.split("T")[0]
+                    {dataUser?.createdAt
+                      ? dataUser?.createdAt.split("T")[0]
                       : "Loading...."}
                   </p>
                 </div>
@@ -200,7 +203,7 @@ const MyProfile = () => {
                         type="text"
                         register={props.registers}
                         errors={props.error}
-                        defaultValue={dataUser.urlAvatar}
+                        defaultValue={dataUser?.urlAvatar}
                         placeholder="Title question"
                         errorsOption={{
                           required: {
