@@ -10,9 +10,19 @@ const ReactApexChart = dynamic(() => import("react-apexcharts"), {
   ssr: false,
 });
 
-const ChartThree: React.FC = () => {
+interface propsData {
+  title: string;
+  text: Array<string>;
+  persen: Array<number>;
+  color: Array<string>;
+}
+interface Props {
+  data: propsData;
+}
+
+const ChartThree: React.FC<Props> = ({ data }) => {
   const [state, setState] = useState<ChartThreeState>({
-    series: [65, 34, 12, 56],
+    series: data.persen,
   });
 
   const options: ApexOptions = {
@@ -20,8 +30,8 @@ const ChartThree: React.FC = () => {
       fontFamily: "Satoshi, sans-serif",
       type: "donut",
     },
-    colors: ["#3C50E0", "#6577F3", "#8FD0EF", "#0FADCF"],
-    labels: ["Desktop", "Tablet", "Mobile", "Unknown"],
+    colors: data.color,
+    labels: data.text,
     legend: {
       show: false,
       position: "bottom",
@@ -58,13 +68,20 @@ const ChartThree: React.FC = () => {
   };
 
   useEffect(() => {
+    const check = {
+      series: data.persen,
+    };
+    setState(check);
+  }, [data]);
+
+  useEffect(() => {
     handleReset();
   }, []);
 
   const handleReset = () => {
     setState((prevState) => ({
       ...prevState,
-      series: [65, 34, 12, 56],
+      series: data.persen,
     }));
   };
 
@@ -73,11 +90,11 @@ const ChartThree: React.FC = () => {
       <div className="mb-3 justify-between gap-4 sm:flex">
         <div>
           <h5 className="text-xl font-semibold text-black dark:text-white">
-            Visitors Analytics
+            {data.title}
           </h5>
         </div>
         <div>
-          <div className="relative z-20 inline-block">
+          {/* <div className="relative z-20 inline-block">
             <select
               name=""
               id=""
@@ -110,7 +127,7 @@ const ChartThree: React.FC = () => {
                 />
               </svg>
             </span>
-          </div>
+          </div> */}
         </div>
       </div>
 
@@ -124,43 +141,21 @@ const ChartThree: React.FC = () => {
         </div>
       </div>
 
-      <div className="-mx-8 flex flex-wrap items-center justify-center gap-y-3">
-        <div className="w-full px-8 sm:w-1/2">
-          <div className="flex w-full items-center">
-            <span className="mr-2 block h-3 w-full max-w-3 rounded-full bg-primary"></span>
-            <p className="flex w-full justify-between text-sm font-medium text-black dark:text-white">
-              <span> Desktop </span>
-              <span> 65% </span>
-            </p>
+      <div className="mt-5 -mx-8 flex items-center justify-center gap-y-3">
+        {data.persen.map((items, index) => (
+          <div className="w-full px-8 sm:w-1/2" key={index}>
+            <div className="flex w-full items-center">
+              <span
+                className="mr-2 block h-3 w-full max-w-3 rounded-full"
+                style={{ backgroundColor: ` ${data.color[index]}` }}
+              ></span>
+              <p className="flex w-full justify-between text-sm font-medium text-black dark:text-white">
+                <span> {data.text[index]} </span>
+                <span> {items} %</span>
+              </p>
+            </div>
           </div>
-        </div>
-        <div className="w-full px-8 sm:w-1/2">
-          <div className="flex w-full items-center">
-            <span className="mr-2 block h-3 w-full max-w-3 rounded-full bg-[#6577F3]"></span>
-            <p className="flex w-full justify-between text-sm font-medium text-black dark:text-white">
-              <span> Tablet </span>
-              <span> 34% </span>
-            </p>
-          </div>
-        </div>
-        <div className="w-full px-8 sm:w-1/2">
-          <div className="flex w-full items-center">
-            <span className="mr-2 block h-3 w-full max-w-3 rounded-full bg-[#8FD0EF]"></span>
-            <p className="flex w-full justify-between text-sm font-medium text-black dark:text-white">
-              <span> Mobile </span>
-              <span> 45% </span>
-            </p>
-          </div>
-        </div>
-        <div className="w-full px-8 sm:w-1/2">
-          <div className="flex w-full items-center">
-            <span className="mr-2 block h-3 w-full max-w-3 rounded-full bg-[#0FADCF]"></span>
-            <p className="flex w-full justify-between text-sm font-medium text-black dark:text-white">
-              <span> Unknown </span>
-              <span> 12% </span>
-            </p>
-          </div>
-        </div>
+        ))}
       </div>
     </div>
   );

@@ -66,6 +66,11 @@ const defaultOptions: ApexOptions = {
   },
 };
 
+interface ChartTwoProps {
+  data: SeriesData[];
+  title: string; // Thêm prop title
+}
+
 interface ChartTwoState {
   series: {
     name: string;
@@ -78,7 +83,7 @@ interface SeriesData {
   data: number[];
 }
 
-const ChartTwo: React.FC<{ data: SeriesData[] }> = ({ data }) => {
+const ChartTwo: React.FC<ChartTwoProps> = ({ data, title }) => {
   const [state, setState] = useState<ChartTwoState>({
     series: data,
   });
@@ -115,7 +120,7 @@ const ChartTwo: React.FC<{ data: SeriesData[] }> = ({ data }) => {
       <div className="mb-4 justify-between gap-4 sm:flex">
         <div>
           <h4 className="text-xl font-semibold text-black dark:text-white">
-            Questionnaire Results
+            {title}
           </h4>
         </div>
         <div>
