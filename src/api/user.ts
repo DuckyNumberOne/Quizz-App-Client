@@ -47,6 +47,16 @@ export const getUserByCategoryId = async (id: string | undefined) => {
   }
 };
 
+export const getAllUserByFullName = async (fullName: string | undefined) => {
+  try {
+    const response = await axios.get(`/user/getAllUserByFullName/${fullName}`);
+    const users = response.data;
+    return users;
+  } catch (error) {
+    console.error(error);
+  }
+};
+
 export const updateUser = async (data: User, id: string) => {
     const response = await axios.put(`/user/updateUser/${id}`, data);
     const users = response.data;
