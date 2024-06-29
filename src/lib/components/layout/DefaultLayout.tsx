@@ -4,7 +4,6 @@ import Header from "./header/DefaultHeader";
 import Footer from "./footer/DefaultFooter";
 import { usePathname, useRouter } from "next/navigation";
 import AdminLayout from "./AdminLayout";
-import useLocalStorage from "@/lib/hook/useLocalStorage";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "@/lib/state/store";
 import { setTurnOffPopup } from "@/lib/state/popup/popupSlice";
@@ -18,7 +17,6 @@ const Layout = ({ children }: Props) => {
   const path = usePathname();
   const { push } = useRouter();
   const isAdminPage = path && path.split("/")[1] === "admin";
-  console.log("🚀 ~ Layout ~ isAdminPage:", isAdminPage);
   const { popup_quizz_creation_mode } = useSelector(
     (state: RootState) => state.popup
   );
