@@ -1,5 +1,5 @@
 import axios from "@/utils/index";
-import { User } from "@lib/modal/user";
+import { User, UserPost } from "@lib/modal/user";
 
 export const getListUser = async () => {
   try {
@@ -63,7 +63,7 @@ export const updateUser = async (data: User, id: string) => {
     return users;
 };
 
-export const postUser = async (data: User) => {
+export const postUser = async (data: UserPost) => {
   try {
     const response = await axios.post("/user/createUser", data);
     const users = response.data;

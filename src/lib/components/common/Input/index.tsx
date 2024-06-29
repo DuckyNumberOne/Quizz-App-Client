@@ -75,7 +75,7 @@ const Input: React.FC<InputProps> = ({
   switch (type) {
     case "text":
       return (
-        <>
+        <div className="relative">
           {label == "urlAvatar" ? (
             <div>
               {inputValue != "" ? (
@@ -154,17 +154,17 @@ const Input: React.FC<InputProps> = ({
             keys.map((items) => (
               <div key={items}>
                 {errors?.[name]?.type === items && (
-                  <p className="text-red mt-3 font-medium text-xs">
+                  <p className="text-red font-medium text-xs absolute">
                     {errors?.[name]?.message}
                   </p>
                 )}
               </div>
             ))}
-        </>
+        </div>
       );
     case "number":
       return (
-        <>
+        <div className="relative">
           <label className={classLabel} htmlFor={name}>
             {label}
           </label>
@@ -185,17 +185,17 @@ const Input: React.FC<InputProps> = ({
             keys.map((items) => (
               <div key={items}>
                 {errors?.[name]?.type === items && (
-                  <p className="text-red mt-3 font-medium text-xs">
+                  <p className="text-red font-medium text-xs absolute">
                     {errors?.[name]?.message}
                   </p>
                 )}
               </div>
             ))}
-        </>
+        </div>
       );
     case "password":
       return (
-        <>
+        <div className="relative">
           <label className={classLabel} htmlFor={name}>
             {label}
           </label>
@@ -214,13 +214,13 @@ const Input: React.FC<InputProps> = ({
             keys.map((items) => (
               <div key={items}>
                 {errors?.[name]?.type === items && (
-                  <p className="text-red mt-3 font-medium text-xs">
+                  <p className="text-red font-medium text-xs absolute">
                     {errors?.[name]?.message}
                   </p>
                 )}
               </div>
             ))}
-        </>
+        </div>
       );
     case "file":
       return (
@@ -267,7 +267,7 @@ const Input: React.FC<InputProps> = ({
                     {errors?.[name]?.type === items && (
                       <div
                         key={items}
-                        className="text-red  font-medium text-xs"
+                        className="text-red font-medium text-xs absolute"
                       >
                         {errors?.[name]?.message}
                       </div>

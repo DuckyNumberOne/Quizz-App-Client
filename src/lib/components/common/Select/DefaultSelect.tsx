@@ -57,9 +57,9 @@ const Select: React.FC<SelectProps> = ({
           {textSelect}
         </option>
         {options &&
-          options.map((item) => (
+          options.map((item, index) => (
             <option
-              key={item.value}
+              key={index}
               value={item.value}
               // selected={item.value === defaultValue ? true : false}
             >
@@ -72,7 +72,7 @@ const Select: React.FC<SelectProps> = ({
         keys.map((items, index) => (
           <div key={index}>
             {errors?.[name]?.type === items && (
-              <p key={items} className="text-red mt-3 font-medium">
+              <p key={items} className="text-red font-medium text-xs absolute">
                 {errors?.[name]?.message}
               </p>
             )}

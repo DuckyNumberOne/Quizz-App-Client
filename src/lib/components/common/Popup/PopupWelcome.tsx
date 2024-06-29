@@ -20,7 +20,7 @@ const PopupDefault: React.FC<PropsPopupWelcome> = ({ children }) => {
 
   return (
     <div className="absolute inset-0 z-10 bg-bts-hero-2 bg-cover bg-no-repeat justify-center flex items-center">
-      <div className=" bg-white lg:min-w-[500px] min-w-[300px] lg:min-h-[800px] min-h-[600px] rounded-xl shadow-lg shadow-black p-4 relative popup-up">
+      <div className="bg-white lg:w-[500px] w-[300px] lg:h-[800px] h-[600px] rounded-xl shadow-lg shadow-black p-4 relative popup-up">
         {pathname !== "/" && (
           <Image
             src={close}

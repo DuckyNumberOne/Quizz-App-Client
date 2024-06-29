@@ -29,8 +29,20 @@ export interface UserOption {
   updatedAt?: string;
   createdAt?: string;
   __v?: string;
-
 }
+
+export interface UserPost {
+  _id?: string;
+  fullName: string;
+  username: string;
+  typeAccount: string;
+  dateBirday: string;
+  phoneNumber: string;
+  country: string;
+  email: string;
+  password?:string;
+}
+
 export interface UserVerify {
   accessToken: string;
   userFilter: User;
