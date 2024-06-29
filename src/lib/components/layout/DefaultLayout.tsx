@@ -18,12 +18,14 @@ const Layout = ({ children }: Props) => {
   const path = usePathname();
   const { push } = useRouter();
   const isAdminPage = path && path.split("/")[1] === "admin";
+  console.log("🚀 ~ Layout ~ isAdminPage:", isAdminPage);
   const { popup_quizz_creation_mode } = useSelector(
     (state: RootState) => state.popup
   );
+
   useEffect(() => {
     const token = localStorage.getItem("token");
-    if (isAdminPage && !token) {
+    if (isAdminPage && token && JSON.parse(token) === "") {
       push("/");
     }
   }, [path]);
