@@ -1,8 +1,8 @@
 import { getItemQuizz } from "@/api/quizz";
 import { getItemQuizzResultByQuizz } from "@/api/quizzResult";
 import DefaultPopupAdmin from "@/lib/components/admin/popupAdmin/defaultPopupAdmin";
-import ButtonDefault from "@/lib/components/common/button/ButtonDefault";
-import DefaultLoading from "@/lib/components/common/loading/DefaultLoading";
+import ButtonDefault from "@/lib/components/common/button/buttonDefault";
+import DefaultLoading from "@/lib/components/common/loading/defaultLoading";
 import { initResult } from "@lib/config/initResult";
 import { Quizz } from "@lib/modal/quizz";
 import { QuizzResult, QuizzResultOption } from "@lib/modal/quizzResult";

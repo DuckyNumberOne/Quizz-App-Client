@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import Input from "../../common/input";
+import Input from "../../common/input/defaultInput";
 import { Anwsers } from "@lib/modal/question";
 import { useDispatch, useSelector } from "react-redux";
 import { addAnswer } from "@lib/state/answer/answerSlice";

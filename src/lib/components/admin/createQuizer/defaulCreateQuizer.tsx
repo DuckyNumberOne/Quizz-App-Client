@@ -1,8 +1,8 @@
 import { getListCollection } from "@/api/collection";
-import ButtonDefault from "@/lib/components/common/button/ButtonDefault";
-import Form from "@/lib/components/common/form";
-import Input from "@/lib/components/common/input";
-import Select from "@/lib/components/common/select/DefaultSelect";
+import ButtonDefault from "@/lib/components/common/button/buttonDefault";
+import Form from "@/lib/components/common/form/defaultForm";
+import Input from "@/lib/components/common/input/defaultInput";
+import Select from "@/lib/components/common/select/defaultSelect";
 import { Collection } from "@lib/modal/collection";
 import { QuizzPost } from "@lib/modal/quizz";
 import { setTurnOnPopup } from "@lib/state/popup/popupSlice";

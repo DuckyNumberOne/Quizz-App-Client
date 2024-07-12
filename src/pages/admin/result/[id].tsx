@@ -1,6 +1,6 @@
 import { getItemQuizz } from "@/api/quizz";
 import { getItemQuizzResultByQuizz, postQuizzResult } from "@/api/quizzResult";
-import ButtonDefault from "@/lib/components/common/button/ButtonDefault";
+import ButtonDefault from "@/lib/components/common/button/buttonDefault";
 import { colorCardAnswer } from "@lib/config/colorCardAnswer";
 import { initResult } from "@lib/config/initResult";
 import { Quizz } from "@lib/modal/quizz";
