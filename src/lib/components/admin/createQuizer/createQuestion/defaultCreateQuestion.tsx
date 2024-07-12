@@ -4,7 +4,7 @@ import Form from "@/lib/components/common/form";
 import Input from "@/lib/components/common/input";
 import Select from "@/lib/components/common/select/DefaultSelect";
 import ButtonDefault from "@/lib/components/common/button/ButtonDefault";
-import DefaultCardAnsswer from "../../../cardAnswer/DefaultCardAnswer";
+import DefaultCardAnsswer from "../../cardAnswer/defaultCardAnswer";
 import { Anwsers, Question } from "@lib/modal/question";
 import { useDispatch, useSelector } from "react-redux";
 import {

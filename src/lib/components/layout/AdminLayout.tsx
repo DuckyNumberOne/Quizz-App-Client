@@ -1,7 +1,5 @@
 "use client";
 import React, { useState, ReactNode, useRef, useEffect } from "react";
-import Sidebar from "../admin/Sidebar";
-import Header from "../admin/Header";
 import { usePathname } from "next/navigation";
 import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch, RootState } from "@lib/state/store";
@@ -11,6 +9,8 @@ import useLocalStorage from "@lib/hook/useLocalStorage";
 import { addUser } from "@lib/state/user/userSlice";
 import { User } from "@lib/modal/user";
 import { userInit } from "@lib/config/initUser";
+import Header from "../admin/header";
+import Sidebar from "../admin/sidebar";
 
 export default function AdminLayout({
   children,

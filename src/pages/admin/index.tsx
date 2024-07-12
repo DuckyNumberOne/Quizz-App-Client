@@ -7,7 +7,6 @@ import { useRouter } from "next/router";
 import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch, RootState } from "@lib/state/store";
 import { setTurnOnPopup } from "@lib/state/popup/popupSlice";
-import DefaultLoadingPage from "@/lib/components/admin/loadingPage/DefaultLoadingPage";
 import { scrollToTop } from "@/utils/scrollToTop";
 import { getListCollection } from "@/api/collection";
 import { getAllUserByFullName } from "@/api/user";
@@ -16,6 +15,7 @@ import { typeAccount } from "@lib/config/typeAccount";
 import { getItemFriend, postFriend } from "@/api/friend";
 import { Friend, FriendOption } from "@lib/modal/friend";
 import { Anwsers } from "@lib/modal/question";
+import DefaultLoadingPage from "@/lib/components/admin/loadingPage/defaultLoadingPage";
 
 interface Question {
   title: string;
