@@ -6,3 +6,8 @@ export interface Collection {
   updatedAt?: string;
   createdAt?: string;
 }
+
+export interface CollectionOption2 {
+  _id: string;
+  title: string;
+}

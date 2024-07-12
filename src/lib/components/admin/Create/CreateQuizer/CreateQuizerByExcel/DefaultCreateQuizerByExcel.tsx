@@ -48,7 +48,7 @@ interface Question {
 const DefaultCreateQuizerByExcel = () => {
   const dispatch = useDispatch();
   // on change states
-  const [excelFile, setExcelFile] = useState(null);
+  const [excelFile, setExcelFile] = useState<string | ArrayBuffer | null>(null);
   const [excelFileError, setExcelFileError] = useState("");
   // submit
   const [excelData, setExcelData] = useState<Question[]>([]);
@@ -76,6 +76,7 @@ const DefaultCreateQuizerByExcel = () => {
   };
 
   const fileType = ["application/vnd.ms-excel"];
+
   const handleFile = (e: ChangeEvent<HTMLInputElement>) => {
     let selectedFile =
       e.target.files && e.target.files.length > 0 && e.target.files[0];
@@ -84,15 +85,17 @@ const DefaultCreateQuizerByExcel = () => {
         let reader = new FileReader();
         reader.readAsArrayBuffer(selectedFile);
         reader.onload = (e) => {
-          setExcelFileError("");
-          setExcelFile(e.target.result);
+          if (e.target?.result) {
+            setExcelFileError("");
+            setExcelFile(e.target.result);
+          }
         };
       } else {
         setExcelFileError("Please select only excel file types");
         setExcelFile(null);
       }
     } else {
-      console.log("plz select your file");
+      console.log("Please select your file");
     }
   };
 

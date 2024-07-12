@@ -21,7 +21,7 @@ export default function AdminLayout({
   const currentPage = usePathname();
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const savedPathNameRef = useRef(currentPage);
-  const [inforUser, setInforUser] = useLocalStorage<User>("user", userInit);
+  const [inforUser, setInforUser] = useLocalStorage("user", userInit);
 
   const handleClearState = () => {
     dispatch(setTurnOffPopup("popup_choose_category_question"));

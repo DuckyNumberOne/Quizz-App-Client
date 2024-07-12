@@ -1,25 +1,52 @@
 import ButtonDefault from "@/lib/components/common/Button/ButtonDefault";
 import React, { useEffect, useRef, useState } from "react";
 import Image from "next/image";
-import Link from "next/link";
 import DefaulltSlider from "@/lib/components/common/Slider/DefaulltSlider";
 import { getListQuizz } from "@/api/quizz";
-import { QuizzOption2 } from "@/lib/modal/quizz";
 import { useRouter } from "next/router";
-import DefaultLoading from "@/lib/components/common/Loading/DefaultLoading";
-import DefaultPopupAdmin from "@/lib/components/admin/PopupAdmin/DefaultPopupAdmin";
 import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch, RootState } from "@/lib/state/store";
 import { setTurnOnPopup } from "@/lib/state/popup/popupSlice";
 import DefaultLoadingPage from "@/lib/components/admin/LoadingPage/DefaultLoadingPage";
 import { scrollToTop } from "@/utils/scrollToTop";
 import { getListCollection } from "@/api/collection";
-import { initQuizzOption2 } from "@/lib/config/initQuizz";
 import { getAllUserByFullName } from "@/api/user";
 import { debounce } from "@/utils/debounce";
 import { typeAccount } from "@/lib/config/typeAccount";
 import { getItemFriend, postFriend } from "@/api/friend";
 import { Friend, FriendOption } from "@/lib/modal/friend";
+import { Anwsers } from "@/lib/modal/question";
+
+interface Question {
+  title: string;
+  imgQuestion: string;
+  time: number;
+  point: number;
+  anwsers: Anwsers[];
+  _id: string;
+}
+
+interface Collection {
+  _id: string;
+  title: string;
+}
+
+interface Quizz {
+  _id: string;
+  idUser: string;
+  urlThumbnail: string;
+  title: string;
+  description: string;
+  idCollection: Collection;
+  visibility: string;
+  keyword: string;
+  play: number;
+  share: number;
+  question: Question[];
+  createdAt: string;
+  updatedAt: string;
+  __v: number;
+}
 
 interface UserFindFriend {
   _id: string;
@@ -56,12 +83,9 @@ const Admin = () => {
   const [listFriendByUserId, setListFriendByUserId] = useState<FriendOption[]>(
     []
   );
-  const [dataQuizz, setDataQuizz] = useState<QuizzOption2[]>([
-    initQuizzOption2,
-  ]);
-  const [dataCollection, setDataCollection] = useState<QuizzOption2[]>([
-    initQuizzOption2,
-  ]);
+  const [dataQuizz, setDataQuizz] = useState<Quizz[]>([]);
+  const [dataCollection, setDataCollection] = useState<Collection[]>([]);
+
   const [listFriend, setListfriend] = useState<UserFindFriend[]>([]);
   const user = useSelector((state: RootState) => state.user);
 
@@ -253,8 +277,8 @@ const Admin = () => {
           {/* Header Slider  */}
           <section className="bg-[#f2f2f2] h-fit px-6" id="welcome">
             {/* Demo Category 1*/}
-            {dataCollection.map((col) => (
-              <div key={col._id}>
+            {dataCollection.map((col, index) => (
+              <div key={index}>
                 <div className="mb-4 pt-10">
                   <div className="flex items-center mb-4">
                     <div className="flex items-center">

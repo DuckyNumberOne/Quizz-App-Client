@@ -24,7 +24,7 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }: SidebarProps) => {
   const router = useRouter();
   const idUser = useSelector((state: RootState) => state.user._id);
   const [token, setToken] = useLocalStorage("token", "");
-  const [inforUser, setInforUser] = useLocalStorage("user", "");
+  const [inforUser, setInforUser] = useLocalStorage("user", userInit);
   let storedSidebarExpanded = "true";
 
   const [sidebarExpanded, setSidebarExpanded] = useState(
