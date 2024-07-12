@@ -1,7 +1,6 @@
 import { getItemQuizz } from "@/api/quizz";
 import { getItemQuizzResultByQuizz } from "@/api/quizzResult";
-import ButtonDefault from "@/lib/components/common/button/buttonDefault";
-import DefaultLoading from "@/lib/components/common/loading/defaultLoading";
+import ButtonDefault from "@lib/components/common/buttons/buttonDefaults";
 import { initResult } from "@lib/config/initResult";
 import { Quizz } from "@lib/modal/quizz";
 import { QuizzResult, QuizzResultOption } from "@lib/modal/quizzResult";
@@ -14,7 +13,7 @@ import { useParams, usePathname } from "next/navigation";
 import { useRouter } from "next/router";
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import DefaultLoadingPage from "@/lib/components/admin/loadingPage/defaultLoadingPage";
+import DefaultLoadingPage from "@lib/components/admin/LoadingPage/DefaultLoadingPage";
 
 const Play = () => {
   const path = usePathname();

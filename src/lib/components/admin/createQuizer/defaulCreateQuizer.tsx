@@ -1,16 +1,16 @@
 import { getListCollection } from "@/api/collection";
-import ButtonDefault from "@/lib/components/common/button/buttonDefault";
-import Form from "@/lib/components/common/form/defaultForm";
-import Input from "@/lib/components/common/input/defaultInput";
-import Select from "@/lib/components/common/select/defaultSelect";
+import Form from "@lib/components/common/form/defaultForm";
+import Input from "@lib/components/common/input/defaultInput";
 import { Collection } from "@lib/modal/collection";
 import { QuizzPost } from "@lib/modal/quizz";
 import { setTurnOnPopup } from "@lib/state/popup/popupSlice";
-import { addQuestion } from "@lib/state/questions/questionSlice";
 import { addQuizz, updateQuizz } from "@lib/state/quizz/quizzSlice";
 import { RootState } from "@lib/state/store";
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import Select from "@lib/components/common/selects/DefaultSelect";
+// import ButtonDefault from "../../common/buttons/buttonDefaults";
+import ButtonDefault from "@lib/components/common/buttons/buttonDefaults";
 
 interface PropsDefaultCreateQuestion {
   mode: string;

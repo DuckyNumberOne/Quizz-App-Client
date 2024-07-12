@@ -1,8 +1,8 @@
 import Link from "next/link";
 import Image from "next/image";
 import { useRouter } from "next/router";
-import DropdownMessage from "./dropdownMessage";
-import DropdownUser from "./dropdownUser";
+import DropdownMessage from "./DropdownMessage";
+import DropdownUser from "./DropdownUser";
 import DropdownNotification from "./dropdown-notification";
 
 const Header = (props: {

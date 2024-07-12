@@ -9,8 +9,11 @@ import useLocalStorage from "@lib/hook/useLocalStorage";
 import { addUser } from "@lib/state/user/userSlice";
 import { User } from "@lib/modal/user";
 import { userInit } from "@lib/config/initUser";
-import Header from "../admin/header";
-import Sidebar from "../admin/sidebar";
+// import Header from "../admin/header";
+import Header from "@lib/components/admin/Header/index";
+
+// import Sidebar from "../admin/sidebar";
+import Sidebar from "@lib/components/admin/Sidebar/index";
 
 export default function AdminLayout({
   children,

@@ -4,7 +4,7 @@ import React, { useEffect, useRef, useState } from "react";
 import { usePathname } from "next/navigation";
 import Link from "next/link";
 import Image from "next/image";
-import ButtonDefault from "../../common/button/buttonDefault";
+import ButtonDefault from "../../common/buttons/buttonDefaults";
 import { useRouter } from "next/router";
 import { useSelector } from "react-redux";
 import { RootState } from "@lib/state/store";
