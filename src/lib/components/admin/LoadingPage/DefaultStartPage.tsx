@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
-import DefaultPopupAdmin from "../popupAdmin/DefaultPopupAdmin";
 import { useSelector } from "react-redux";
 import { RootState } from "@lib/state/store";
+import DefaultPopupAdmin from "../popupAdmin/defaultPopupAdmin";
 
 interface PropsDefaultLoading {
   children: React.ReactNode;

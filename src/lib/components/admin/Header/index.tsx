@@ -1,10 +1,9 @@
 import Link from "next/link";
-import DarkModeSwitcher from "./DarkModeSwitcher";
-import DropdownMessage from "./DropdownMessage";
-import DropdownNotification from "./DropdownNotification";
-import DropdownUser from "./DropdownUser";
 import Image from "next/image";
 import { useRouter } from "next/router";
+import DropdownNotification from "./dropdownNotification";
+import DropdownMessage from "./dropdownMessage";
+import DropdownUser from "./dropdownUser";
 
 const Header = (props: {
   sidebarOpen: string | boolean | undefined;

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import DefaultPopupAdmin from "../popupAdmin/DefaultPopupAdmin";
+import DefaultPopupAdmin from "../popupAdmin/defaultPopupAdmin";
 import { useSelector } from "react-redux";
 import { RootState } from "@lib/state/store";
 

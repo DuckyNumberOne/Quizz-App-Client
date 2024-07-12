@@ -3,7 +3,6 @@ import { useRouter } from "next/router";
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import Image from "next/image";
-import DefaultCardAnsswer from "@/lib/components/admin/cardAnswer/DefaultCardAnswer";
 import { getAnwsersIsTrue, getItemQuizz, getQuestionById } from "@/api/quizz";
 import { Anwsers, Question } from "@lib/modal/question";
 import { questionInit } from "@lib/config/initQuestion";

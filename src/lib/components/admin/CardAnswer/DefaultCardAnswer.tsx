@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from "react";
 import Input from "../../common/input";
-import DefaultCheckBoxAnswer from "./CheckBoxAnswer/DefaultCheckBoxAnswer";
 import { Anwsers } from "@lib/modal/question";
 import { useDispatch, useSelector } from "react-redux";
 import { addAnswer } from "@lib/state/answer/answerSlice";
 import { RootState } from "@lib/state/store";
+import DefaultCheckBoxAnswer from "./checkBoxAnswer/defaultCheckBoxAnswer";
 // import { debounce } from "lodash";
 
 interface DefaultCardAnswerProps {
