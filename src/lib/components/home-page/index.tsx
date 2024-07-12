@@ -1,6 +1,6 @@
 "use client";
 import React, { useEffect, useState } from "react";
-import Login from "@lib/components/home-page/Login";
+import Login from "@lib/components/home-page/Login/index";
 import { useRouter } from "next/router";
 import useLocalStorage from "@lib/hook/useLocalStorage";
 import Image from "next/image";
