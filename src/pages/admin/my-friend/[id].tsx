@@ -5,8 +5,40 @@ import { useRouter } from "next/router";
 import { Friend, FriendOption } from "@/lib/modal/friend";
 import ButtonDefault from "@/lib/components/common/Button/ButtonDefault";
 import { getItemQuizzByUser } from "@/api/quizz";
-import { QuizzOption2 } from "@/lib/modal/quizz";
 import Link from "next/link";
+import { Anwsers } from "@/lib/modal/question";
+
+interface Question {
+  title: string;
+  imgQuestion: string;
+  time: number;
+  point: number;
+  anwsers: Anwsers[];
+  _id: string;
+}
+
+interface Collection {
+  _id: string;
+  title: string;
+}
+
+interface Quizz {
+  _id: string;
+  idUser: string;
+  urlThumbnail: string;
+  title: string;
+  description: string;
+  idCollection: Collection;
+  visibility: string;
+  keyword: string;
+  play: number;
+  share: number;
+  question: Question[];
+  createdAt: string;
+  updatedAt: string;
+  __v: number;
+}
+
 const MyFriend = () => {
   const { query } = useRouter();
   const fetch = async () => {
@@ -19,7 +51,7 @@ const MyFriend = () => {
   };
   const [dataListFriend, setDataListFriend] = useState<FriendOption[]>([]);
   const [indexs, setIndex] = useState(-1);
-  const [dataQuizByUser, setDataQuizByUser] = useState<QuizzOption2[]>([]);
+  const [dataQuizByUser, setDataQuizByUser] = useState<Quizz[]>([]);
   const handleUnfollow = async (id: string) => {
     try {
       const res = await deleteFriend(id);

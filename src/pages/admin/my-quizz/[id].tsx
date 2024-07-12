@@ -3,18 +3,48 @@ import ChartThree from "@/lib/components/common/Charts/ChartThree";
 import ChartTwo from "@/lib/components/common/Charts/ChartTwo";
 import React, { useEffect, useState } from "react";
 import Image from "next/image";
-import { QuizzOption2 } from "@/lib/modal/quizz";
-import { initQuizzOption2 } from "@/lib/config/initQuizz";
 import { useRouter } from "next/router";
 import { getItemQuizzByUser, getListQuizz } from "@/api/quizz";
 import { getQuestionPercentagesByQuizzId } from "@/api/quizzResult";
 import ButtonDefault from "@/lib/components/common/Button/ButtonDefault";
 import Link from "next/link";
 import { debounce } from "@/utils/debounce";
+import { Anwsers } from "@/lib/modal/question";
 
 interface SeriesData {
   name: string;
   data: number[];
+}
+
+interface Question {
+  title: string;
+  imgQuestion: string;
+  time: number;
+  point: number;
+  anwsers: Anwsers[];
+  _id: string;
+}
+
+interface Collection {
+  _id: string;
+  title: string;
+}
+
+interface Quizz {
+  _id: string;
+  idUser: string;
+  urlThumbnail: string;
+  title: string;
+  description: string;
+  idCollection: Collection;
+  visibility: string;
+  keyword: string;
+  play: number;
+  share: number;
+  question: Question[];
+  createdAt: string;
+  updatedAt: string;
+  __v: number;
 }
 
 const MyQuizz = () => {
@@ -31,15 +61,11 @@ const MyQuizz = () => {
 
   const { push, pathname, query } = useRouter();
   const [idQuizz, setIdQuizz] = useState("");
-  const [filteredDataQuizz, setFilteredDataQuizz] = useState<QuizzOption2[]>(
-    []
-  );
+  const [filteredDataQuizz, setFilteredDataQuizz] = useState<Quizz[]>([]);
   const [titleQuizz, setTitleQuizz] = useState("");
   const [analyticalDataQuizz, setAnalyticalDataQuizz] =
     useState<SeriesData[]>(analyticalDataQuizzs);
-  const [dataQuizz, setDataQuizz] = useState<QuizzOption2[]>([
-    initQuizzOption2,
-  ]);
+  const [dataQuizz, setDataQuizz] = useState<Quizz[]>([]);
 
   const filterDataQuizz = () => {
     const filteredQuizz = dataQuizz.filter((qz) =>

@@ -112,7 +112,7 @@ const DefaultCreateQuestion: React.FC<PropsDefaultCreateQuestion> = ({
       point: Number(question.point),
       time: Number(question.time),
       title: String(question.title),
-    };
+    } as { [key: string]: any };
     for (let i = 0; i < question.anwsers.length; i++) {
       newQuestion["isCorrect" + (i + 1)] = question.anwsers[i].isCorrect;
       newQuestion["text" + (i + 1)] = question.anwsers[i].text;

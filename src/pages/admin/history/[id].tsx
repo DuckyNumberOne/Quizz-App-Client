@@ -7,7 +7,6 @@ import Link from "next/link";
 import { Question } from "@/lib/modal/question";
 import ChartThree from "@/lib/components/common/Charts/ChartThree";
 import { debounce } from "@/utils/debounce";
-import { QuizzOption2 } from "@/lib/modal/quizz";
 
 interface Question2 {
   index: number;
@@ -40,7 +39,7 @@ interface QuizzResult {
 const History = () => {
   const { query } = useRouter();
   const [titleQuizz, setTitleQuizz] = useState("");
-  const [quizz, setQuizz] = useState<QuizzResult[]>();
+  const [quizz, setQuizz] = useState<QuizzResult[]>([]);
   const [indexs, setIndex] = useState(-1);
   const [persenPoint, setPersenPoint] = useState(0);
   const [persenCompletionTime, setPersenCompletionTime] = useState(0);
@@ -166,39 +165,49 @@ const History = () => {
               </option>
             </select>
             <div className="space-y-4 mt-4 p-5 border h-[600px] overflow-y-scroll">
-              {filteredDataQuizz?.map((items, index) => (
-                <div
-                  key={index}
-                  className={`grid grid-cols-6 border cursor-pointer hover:bg-slate-200 ${
-                    index === indexs &&
-                    "scale-105 shadow-4 shadow-purple-600 ease-in-out duration-300"
-                  }`}
-                  onClick={() => handleClick(index)}
-                >
-                  <img
-                    src={items.idQuizz.urlThumbnail}
-                    alt="Thumbnail"
-                    className="w-full h-[120px] col-span-2 bg-contain"
-                  />
-                  <div className="col-span-4 ml-4 text-base">
-                    <p className="font-medium h-10">{items.idQuizz.title}</p>
-                    <div className="text-base">
-                      <div className="flex gap-2 items-center">
-                        <p className="font-normal">Right answer:</p>
-                        <p>{items.rightAnswer}</p>
-                      </div>
-                      <div className="flex gap-2 items-center">
-                        <p className="font-normal">Total points:</p>
-                        <p>{items.totalPoints}</p>
-                      </div>
-                      <div className="flex gap-2 items-center">
-                        <p className="font-normal">Completion time:</p>
-                        <p>{items.completionTime}</p>
+              {filteredDataQuizz.length > 0 ? (
+                filteredDataQuizz?.map((items, index) => (
+                  <div
+                    key={index}
+                    className={`grid grid-cols-6 border cursor-pointer hover:bg-slate-200 ${
+                      index === indexs &&
+                      "scale-105 shadow-4 shadow-purple-600 ease-in-out duration-300"
+                    }`}
+                    onClick={() => handleClick(index)}
+                  >
+                    <img
+                      src={items.idQuizz.urlThumbnail}
+                      alt="Thumbnail"
+                      className="w-full h-[120px] col-span-2 bg-contain"
+                    />
+                    <div className="col-span-4 ml-4 text-base">
+                      <p className="font-medium h-10">{items.idQuizz.title}</p>
+                      <div className="text-base">
+                        <div className="flex gap-2 items-center">
+                          <p className="font-normal">Right answer:</p>
+                          <p>{items.rightAnswer}</p>
+                        </div>
+                        <div className="flex gap-2 items-center">
+                          <p className="font-normal">Total points:</p>
+                          <p>{items.totalPoints}</p>
+                        </div>
+                        <div className="flex gap-2 items-center">
+                          <p className="font-normal">Completion time:</p>
+                          <p>{items.completionTime}</p>
+                        </div>
                       </div>
                     </div>
                   </div>
-                </div>
-              ))}
+                ))
+              ) : (
+                <p className="text-2xl">
+                  You have not played any quizzes yet. Start playing now to see
+                  your quiz history here.{" "}
+                  <Link href="/admin" className="font-semibold text-blue-600">
+                    Play quizz
+                  </Link>
+                </p>
+              )}
             </div>
           </div>
           {indexs !== -1 && (

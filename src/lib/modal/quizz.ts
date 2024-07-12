@@ -24,21 +24,6 @@ export interface CollectionOption2{
   _id:string;
   title:string
 }
-export interface QuizzOption2 {
-  user: User;
-  _id: string;
-  idUser: string;
-  title: string;
-  description: string;
-  urlThumbnail: string;
-  idCollection: CollectionOption2
-  keyword: string;
-  play: number;
-  share: number;
-  question: Array<Question>;
-  updatedAt?: string;
-  createdAt?: string;
-}
 
 export interface QuizzPost {
   idUser: string;
