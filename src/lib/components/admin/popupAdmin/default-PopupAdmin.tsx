@@ -1,6 +1,6 @@
 import React, { useCallback, useEffect, useState } from "react";
 import Image from "next/image";
-import DefaultLoading from "../../common/loading/defaultLoading";
+import DefaultLoading from "@lib/components/common/Loading/DefaultLoading";
 
 interface PropsPopupAdmin {
   popupDefault: boolean;

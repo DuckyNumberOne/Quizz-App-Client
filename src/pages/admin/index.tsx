@@ -1,7 +1,7 @@
-import ButtonDefault from "@/lib/components/common/button/buttonDefault";
+import ButtonDefault from "@lib/components/common/buttons/buttonDefaults";
 import React, { useEffect, useRef, useState } from "react";
 import Image from "next/image";
-import DefaulltSlider from "@/lib/components/common/slider/defaulltSlider";
+import DefaulltSlider from "@lib/components/common/Slider/DefaulltSlider";
 import { getListQuizz } from "@/api/quizz";
 import { useRouter } from "next/router";
 import { useDispatch, useSelector } from "react-redux";
@@ -15,7 +15,7 @@ import { typeAccount } from "@lib/config/typeAccount";
 import { getItemFriend, postFriend } from "@/api/friend";
 import { Friend, FriendOption } from "@lib/modal/friend";
 import { Anwsers } from "@lib/modal/question";
-import DefaultLoadingPage from "@/lib/components/admin/loadingPage/defaultLoadingPage";
+import DefaultLoadingPage from "@lib/components/admin/LoadingPage/DefaultLoadingPage";
 
 interface Question {
   title: string;

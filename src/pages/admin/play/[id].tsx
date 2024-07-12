@@ -6,7 +6,7 @@ import Image from "next/image";
 import { getAnwsersIsTrue, getItemQuizz, getQuestionById } from "@/api/quizz";
 import { Anwsers, Question } from "@lib/modal/question";
 import { questionInit } from "@lib/config/initQuestion";
-import CountdownTimer from "@/lib/components/common/countdownTimer/defaultCountdownTimer";
+import CountdownTimer from "@lib/components/common/CountdownTimer/DefaultCountdownTimer";
 import { addResult, resetResult } from "@lib/state/result/resultSlice";
 import { RootState } from "@lib/state/store";
 import Link from "next/link";

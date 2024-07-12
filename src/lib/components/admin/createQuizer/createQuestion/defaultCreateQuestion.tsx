@@ -1,10 +1,10 @@
 import React, { useEffect, useRef, useState } from "react";
 import Image from "next/image";
-import Form from "@/lib/components/common/form/defaultForm";
-import Input from "@/lib/components/common/input/defaultInput";
-import Select from "@/lib/components/common/select/defaultSelect";
-import ButtonDefault from "@/lib/components/common/button/buttonDefault";
-import DefaultCardAnsswer from "../../cardAnswer/default-CardAnswer";
+import Form from "@lib/components/common/form/defaultForm";
+import Input from "@lib/components/common/input/defaultInput";
+import Select from "@lib/components/common/selects/DefaultSelect";
+import ButtonDefault from "@lib/components/common/buttons/buttonDefaults";
+import DefaultCardAnsswer from "../../cardAnswers/default-CardAnswer";
 import { Anwsers, Question } from "@lib/modal/question";
 import { useDispatch, useSelector } from "react-redux";
 import {
