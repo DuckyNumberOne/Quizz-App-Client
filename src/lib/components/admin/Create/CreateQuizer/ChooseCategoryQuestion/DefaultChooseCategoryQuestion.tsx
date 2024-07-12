@@ -1,4 +1,4 @@
-import { setTurnOffPopup, setTurnOnPopup } from "@/lib/state/popup/popupSlice";
+import { setTurnOffPopup, setTurnOnPopup } from "@lib/state/popup/popupSlice";
 import React from "react";
 import { useDispatch } from "react-redux";
 

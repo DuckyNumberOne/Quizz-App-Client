@@ -1,4 +1,4 @@
-import { Anwsers } from "@/lib/modal/question";
+import { Anwsers } from "@lib/modal/question";
 import { PayloadAction, createSlice } from "@reduxjs/toolkit";
 
 interface AddAnswerPayload {

@@ -1,28 +1,28 @@
 import React, { useEffect, useRef, useState } from "react";
 import Image from "next/image";
-import Form from "@/lib/components/common/Form";
-import Input from "@/lib/components/common/Input";
-import Select from "@/lib/components/common/Select/DefaultSelect";
-import ButtonDefault from "@/lib/components/common/Button/ButtonDefault";
+import Form from "@lib/components/common/Form";
+import Input from "@lib/components/common/Input";
+import Select from "@lib/components/common/Select/DefaultSelect";
+import ButtonDefault from "@lib/components/common/Button/ButtonDefault";
 import DefaultCardAnsswer from "../../../CardAnswer/DefaultCardAnswer";
-import { Anwsers, Question } from "@/lib/modal/question";
+import { Anwsers, Question } from "@lib/modal/question";
 import { useDispatch, useSelector } from "react-redux";
 import {
   addQuestion,
   deleteQuestionByIndex,
   resetQuestions,
   updateQuestion,
-} from "@/lib/state/questions/questionSlice";
-import { RootState } from "@/lib/state/store";
-import { setTurnOffPopup, setTurnOnPopup } from "@/lib/state/popup/popupSlice";
+} from "@lib/state/questions/questionSlice";
+import { RootState } from "@lib/state/store";
+import { setTurnOffPopup, setTurnOnPopup } from "@lib/state/popup/popupSlice";
 import {
   addAnswer,
   addMultipleAnswers,
   clearAnswer,
-} from "@/lib/state/answer/answerSlice";
+} from "@lib/state/answer/answerSlice";
 import { useRouter } from "next/router";
 import { postQuizz } from "@/api/quizz";
-import { colorCardAnswer } from "@/lib/config/colorCardAnswer";
+import { colorCardAnswer } from "@lib/config/colorCardAnswer";
 import { generateUniqueId } from "@/utils/generateUniqueId";
 
 interface PropsData {

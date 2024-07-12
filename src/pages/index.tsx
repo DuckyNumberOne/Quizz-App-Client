@@ -1,4 +1,4 @@
-import HomePage from "@/lib/components/home-page";
+import HomePage from "@lib/components/home-page";
 import { Inter } from "next/font/google";
 import React from "react";
 

@@ -1,12 +1,12 @@
 import React, { useEffect, useRef, useState } from "react";
-import DefaulCreateQuizer from "@/lib/components/admin/Create/CreateQuizer/DefaulCreateQuizer";
-import DefaultChooseCategoryQuestion from "@/lib/components/admin/Create/CreateQuizer/ChooseCategoryQuestion/DefaultChooseCategoryQuestion";
+import DefaulCreateQuizer from "@lib/components/admin/Create/CreateQuizer/DefaulCreateQuizer";
+import DefaultChooseCategoryQuestion from "@lib/components/admin/Create/CreateQuizer/ChooseCategoryQuestion/DefaultChooseCategoryQuestion";
 import { useDispatch, useSelector } from "react-redux";
-import { RootState } from "@/lib/state/store";
-import DefaultCreateQuestion from "@/lib/components/admin/Create/CreateQuizer/CreateQuestion/DefaultCreateQuestion";
-import { setTurnOffPopup, setTurnOnPopup } from "@/lib/state/popup/popupSlice";
+import { RootState } from "@lib/state/store";
+import DefaultCreateQuestion from "@lib/components/admin/Create/CreateQuizer/CreateQuestion/DefaultCreateQuestion";
+import { setTurnOffPopup, setTurnOnPopup } from "@lib/state/popup/popupSlice";
 import Image from "next/image";
-import DefaultCreateQuizerByExcel from "@/lib/components/admin/Create/CreateQuizer/CreateQuizerByExcel/DefaultCreateQuizerByExcel";
+import DefaultCreateQuizerByExcel from "@lib/components/admin/Create/CreateQuizer/CreateQuizerByExcel/DefaultCreateQuizerByExcel";
 import { useRouter } from "next/router";
 
 const CreateQuizerPage = () => {

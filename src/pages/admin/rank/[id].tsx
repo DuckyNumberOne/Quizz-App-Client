@@ -1,6 +1,6 @@
 import { getItemQuizzResultByQuizz } from "@/api/quizzResult";
-import { initResult } from "@/lib/config/initResult";
-import { QuizzResult, QuizzResultOption } from "@/lib/modal/quizzResult";
+import { initResult } from "@lib/config/initResult";
+import { QuizzResult, QuizzResultOption } from "@lib/modal/quizzResult";
 import { useRouter } from "next/router";
 import React, { useEffect, useState } from "react";
 const Rank = () => {

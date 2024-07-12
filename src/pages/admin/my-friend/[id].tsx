@@ -2,11 +2,11 @@ import React, { useEffect, useState } from "react";
 import Image from "next/image";
 import { deleteFriend, getItemFriend } from "@/api/friend";
 import { useRouter } from "next/router";
-import { Friend, FriendOption } from "@/lib/modal/friend";
-import ButtonDefault from "@/lib/components/common/Button/ButtonDefault";
+import { Friend, FriendOption } from "@lib/modal/friend";
+import ButtonDefault from "@lib/components/common/Button/ButtonDefault";
 import { getItemQuizzByUser } from "@/api/quizz";
 import Link from "next/link";
-import { Anwsers } from "@/lib/modal/question";
+import { Anwsers } from "@lib/modal/question";
 
 interface Question {
   title: string;

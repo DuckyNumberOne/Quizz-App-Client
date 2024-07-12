@@ -2,9 +2,9 @@ import React, { ReactNode, useEffect } from "react";
 import Image from "next/image";
 import close from "../../../../../public/incons/close.png";
 
-import { setTurnOffPopup } from "@/lib/state/popup/popupSlice";
+import { setTurnOffPopup } from "@lib/state/popup/popupSlice";
 import { useDispatch } from "react-redux";
-import { AppDispatch } from "@/lib/state/store";
+import { AppDispatch } from "@lib/state/store";
 import { useRouter } from "next/router";
 
 interface PropsPopupWelcome {

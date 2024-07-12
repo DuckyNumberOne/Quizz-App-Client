@@ -1,10 +1,10 @@
 import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
-import useLocalStorage from "@/lib/hook/useLocalStorage";
-import { User } from "@/lib/modal/user";
+import useLocalStorage from "@lib/hook/useLocalStorage";
+import { User } from "@lib/modal/user";
 import { useSelector } from "react-redux";
-import { RootState } from "@/lib/state/store";
+import { RootState } from "@lib/state/store";
 
 const DropdownUser = () => {
   const [dropdownOpen, setDropdownOpen] = useState(false);

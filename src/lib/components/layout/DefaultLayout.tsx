@@ -5,8 +5,8 @@ import Footer from "./footer/DefaultFooter";
 import { usePathname, useRouter } from "next/navigation";
 import AdminLayout from "./AdminLayout";
 import { useDispatch, useSelector } from "react-redux";
-import { RootState } from "@/lib/state/store";
-import { setTurnOffPopup } from "@/lib/state/popup/popupSlice";
+import { RootState } from "@lib/state/store";
+import { setTurnOffPopup } from "@lib/state/popup/popupSlice";
 
 interface Props {
   children?: ReactNode;

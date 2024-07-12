@@ -1,18 +1,15 @@
 import React, { useEffect, useState } from "react";
 import Image from "next/image";
 import { verifyLogin } from "@/api/auth";
-import { getListQuizz } from "@/api/quizz";
-import { useForm } from "react-hook-form";
-import { User } from "@/lib/modal/user";
 import PopupDefault from "../../common/Popup/PopupWelcome";
 import Form from "../../common/Form";
 import Input from "../../common/Input";
 import ButtonDefault from "../../common/Button/ButtonDefault";
 import { useRouter } from "next/router";
 import { useDispatch } from "react-redux";
-import { AppDispatch } from "@/lib/state/store";
-import { setTurnOffPopup } from "@/lib/state/popup/popupSlice";
-import useLocalStorage from "@/lib/hook/useLocalStorage";
+import { AppDispatch } from "@lib/state/store";
+import { setTurnOffPopup } from "@lib/state/popup/popupSlice";
+import useLocalStorage from "@lib/hook/useLocalStorage";
 // import WelcomeImage from "/images/welcome-popup/welcome-1.png";
 
 interface PropSubmit {

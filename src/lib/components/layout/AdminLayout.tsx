@@ -4,13 +4,13 @@ import Sidebar from "../admin/Sidebar";
 import Header from "../admin/Header";
 import { usePathname } from "next/navigation";
 import { useDispatch, useSelector } from "react-redux";
-import { AppDispatch, RootState } from "@/lib/state/store";
-import { setTurnOffPopup } from "@/lib/state/popup/popupSlice";
-import { resetQuestions } from "@/lib/state/questions/questionSlice";
-import useLocalStorage from "@/lib/hook/useLocalStorage";
-import { addUser } from "@/lib/state/user/userSlice";
-import { User } from "@/lib/modal/user";
-import { userInit } from "@/lib/config/initUser";
+import { AppDispatch, RootState } from "@lib/state/store";
+import { setTurnOffPopup } from "@lib/state/popup/popupSlice";
+import { resetQuestions } from "@lib/state/questions/questionSlice";
+import useLocalStorage from "@lib/hook/useLocalStorage";
+import { addUser } from "@lib/state/user/userSlice";
+import { User } from "@lib/modal/user";
+import { userInit } from "@lib/config/initUser";
 
 export default function AdminLayout({
   children,

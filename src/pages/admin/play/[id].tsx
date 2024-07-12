@@ -5,13 +5,13 @@ import { useDispatch, useSelector } from "react-redux";
 import Image from "next/image";
 import DefaultCardAnsswer from "@components/admin/CardAnswer/DefaultCardAnswer";
 import { getAnwsersIsTrue, getItemQuizz, getQuestionById } from "@/api/quizz";
-import { Anwsers, Question } from "@/lib/modal/question";
-import { questionInit } from "@/lib/config/initQuestion";
-import CountdownTimer from "@/lib/components/common/CountdownTimer/DefaultCountdownTimer";
-import { addResult, resetResult } from "@/lib/state/result/resultSlice";
-import { RootState } from "@/lib/state/store";
+import { Anwsers, Question } from "@lib/modal/question";
+import { questionInit } from "@lib/config/initQuestion";
+import CountdownTimer from "@lib/components/common/CountdownTimer/DefaultCountdownTimer";
+import { addResult, resetResult } from "@lib/state/result/resultSlice";
+import { RootState } from "@lib/state/store";
 import Link from "next/link";
-import { colorCardAnswer } from "@/lib/config/colorCardAnswer";
+import { colorCardAnswer } from "@lib/config/colorCardAnswer";
 import { randomUtils } from "@/utils/randomUtils ";
 
 const Play = () => {
