@@ -1,5 +1,5 @@
 import React from "react";
-import { navbarMenu } from "@/lib/config/navbar";
+import { navbarMenu } from "@lib/config/navbar";
 import Link from "next/link";
 const Header = () => {
   return (

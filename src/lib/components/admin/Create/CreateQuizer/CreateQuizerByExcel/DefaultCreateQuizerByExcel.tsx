@@ -1,6 +1,6 @@
-import ButtonDefault from "@/lib/components/common/Button/ButtonDefault";
-import { setTurnOffPopup, setTurnOnPopup } from "@/lib/state/popup/popupSlice";
-import { addQuestions } from "@/lib/state/questions/questionSlice";
+import ButtonDefault from "@lib/components/common/Button/ButtonDefault";
+import { setTurnOffPopup, setTurnOnPopup } from "@lib/state/popup/popupSlice";
+import { addQuestions } from "@lib/state/questions/questionSlice";
 import { generateUniqueId } from "@/utils/generateUniqueId";
 import Image from "next/image";
 import { ChangeEvent, SetStateAction, useState } from "react";

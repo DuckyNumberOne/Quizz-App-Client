@@ -1,4 +1,4 @@
-import { RootState } from "@/lib/state/store";
+import { RootState } from "@lib/state/store";
 import Image from "next/image";
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";

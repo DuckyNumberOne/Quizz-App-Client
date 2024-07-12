@@ -1,14 +1,14 @@
 import { getListCollection } from "@/api/collection";
-import ButtonDefault from "@/lib/components/common/Button/ButtonDefault";
-import Form from "@/lib/components/common/Form";
-import Input from "@/lib/components/common/Input";
-import Select from "@/lib/components/common/Select/DefaultSelect";
-import { Collection } from "@/lib/modal/collection";
-import { QuizzPost } from "@/lib/modal/quizz";
-import { setTurnOnPopup } from "@/lib/state/popup/popupSlice";
-import { addQuestion } from "@/lib/state/questions/questionSlice";
-import { addQuizz, updateQuizz } from "@/lib/state/quizz/quizzSlice";
-import { RootState } from "@/lib/state/store";
+import ButtonDefault from "@lib/components/common/Button/ButtonDefault";
+import Form from "@lib/components/common/Form";
+import Input from "@lib/components/common/Input";
+import Select from "@lib/components/common/Select/DefaultSelect";
+import { Collection } from "@lib/modal/collection";
+import { QuizzPost } from "@lib/modal/quizz";
+import { setTurnOnPopup } from "@lib/state/popup/popupSlice";
+import { addQuestion } from "@lib/state/questions/questionSlice";
+import { addQuizz, updateQuizz } from "@lib/state/quizz/quizzSlice";
+import { RootState } from "@lib/state/store";
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 

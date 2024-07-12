@@ -8,9 +8,9 @@ import SidebarLinkGroup from "./SidebarLinkGroup";
 import ButtonDefault from "../../common/Button/ButtonDefault";
 import { useRouter } from "next/router";
 import { useSelector } from "react-redux";
-import { RootState } from "@/lib/state/store";
-import useLocalStorage from "@/lib/hook/useLocalStorage";
-import { userInit } from "@/lib/config/initUser";
+import { RootState } from "@lib/state/store";
+import useLocalStorage from "@lib/hook/useLocalStorage";
+import { userInit } from "@lib/config/initUser";
 
 interface SidebarProps {
   sidebarOpen: boolean;

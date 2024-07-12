@@ -1,11 +1,11 @@
 import { getItemQuizz } from "@/api/quizz";
 import { getItemQuizzResultByQuizz, postQuizzResult } from "@/api/quizzResult";
-import ButtonDefault from "@/lib/components/common/Button/ButtonDefault";
-import { colorCardAnswer } from "@/lib/config/colorCardAnswer";
-import { initResult } from "@/lib/config/initResult";
-import { Quizz } from "@/lib/modal/quizz";
-import { QuizzResult, QuizzResultOption } from "@/lib/modal/quizzResult";
-import { RootState } from "@/lib/state/store";
+import ButtonDefault from "@lib/components/common/Button/ButtonDefault";
+import { colorCardAnswer } from "@lib/config/colorCardAnswer";
+import { initResult } from "@lib/config/initResult";
+import { Quizz } from "@lib/modal/quizz";
+import { QuizzResult, QuizzResultOption } from "@lib/modal/quizzResult";
+import { RootState } from "@lib/state/store";
 import { useRouter } from "next/router";
 import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
