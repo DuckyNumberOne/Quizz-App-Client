@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from "react";
 import Image from "next/image";
 import { verifyLogin } from "@/api/auth";
-import PopupDefault from "../../common/Popup/PopupWelcome";
-import Form from "../../common/Form";
-import Input from "../../common/Input";
-import ButtonDefault from "../../common/Button/ButtonDefault";
+import PopupDefault from "../../common/popup/PopupWelcome";
+import Form from "../../common/form";
+import Input from "../../common/input";
+import ButtonDefault from "../../common/button/ButtonDefault";
 import { useRouter } from "next/router";
 import { useDispatch } from "react-redux";
 import { AppDispatch } from "@lib/state/store";

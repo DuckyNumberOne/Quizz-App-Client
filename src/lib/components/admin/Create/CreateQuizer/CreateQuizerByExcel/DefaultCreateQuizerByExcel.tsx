@@ -1,4 +1,4 @@
-import ButtonDefault from "@lib/components/common/Button/ButtonDefault";
+import ButtonDefault from "@/lib/components/common/button/ButtonDefault";
 import { setTurnOffPopup, setTurnOnPopup } from "@lib/state/popup/popupSlice";
 import { addQuestions } from "@lib/state/questions/questionSlice";
 import { generateUniqueId } from "@/utils/generateUniqueId";

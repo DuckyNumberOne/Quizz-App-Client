@@ -1,13 +1,13 @@
-import ButtonDefault from "@lib/components/common/Button/ButtonDefault";
+import ButtonDefault from "@/lib/components/common/button/ButtonDefault";
 import React, { useEffect, useRef, useState } from "react";
 import Image from "next/image";
-import DefaulltSlider from "@lib/components/common/Slider/DefaulltSlider";
+import DefaulltSlider from "@/lib/components/common/slider/DefaulltSlider";
 import { getListQuizz } from "@/api/quizz";
 import { useRouter } from "next/router";
 import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch, RootState } from "@lib/state/store";
 import { setTurnOnPopup } from "@lib/state/popup/popupSlice";
-import DefaultLoadingPage from "@lib/components/admin/LoadingPage/DefaultLoadingPage";
+import DefaultLoadingPage from "@/lib/components/admin/loadingPage/DefaultLoadingPage";
 import { scrollToTop } from "@/utils/scrollToTop";
 import { getListCollection } from "@/api/collection";
 import { getAllUserByFullName } from "@/api/user";
