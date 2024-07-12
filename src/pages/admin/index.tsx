@@ -1,7 +1,7 @@
-import ButtonDefault from "@/lib/components/common/button/ButtonDefault";
+import ButtonDefault from "@/lib/components/common/button/buttonDefault";
 import React, { useEffect, useRef, useState } from "react";
 import Image from "next/image";
-import DefaulltSlider from "@/lib/components/common/slider/DefaulltSlider";
+import DefaulltSlider from "@/lib/components/common/slider/defaulltSlider";
 import { getListQuizz } from "@/api/quizz";
 import { useRouter } from "next/router";
 import { useDispatch, useSelector } from "react-redux";
