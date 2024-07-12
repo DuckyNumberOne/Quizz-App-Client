@@ -4,7 +4,7 @@ import HowToPlay from "@lib/components/home-page/How-to-play";
 import Welcome from "@lib/components/home-page/Welcome";
 import { useSelector } from "react-redux";
 import { RootState } from "@lib/state/store";
-import Login from "@lib/components/home-page/Login";
+import Login from "@/lib/components/home-page/login";
 
 const LandingPage = ({ data }: any) => {
   const { popup_login } = useSelector((state: RootState) => state.popup);
