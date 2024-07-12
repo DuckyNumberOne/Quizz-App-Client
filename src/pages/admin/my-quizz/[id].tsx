@@ -1,12 +1,12 @@
-import ChartOne from "@lib/components/common/Charts/ChartOne";
-import ChartThree from "@lib/components/common/Charts/ChartThree";
-import ChartTwo from "@lib/components/common/Charts/ChartTwo";
+import ChartOne from "@/lib/components/common/charts/ChartOne";
+import ChartThree from "@/lib/components/common/charts/ChartThree";
+import ChartTwo from "@/lib/components/common/charts/ChartTwo";
 import React, { useEffect, useState } from "react";
 import Image from "next/image";
 import { useRouter } from "next/router";
 import { getItemQuizzByUser, getListQuizz } from "@/api/quizz";
 import { getQuestionPercentagesByQuizzId } from "@/api/quizzResult";
-import ButtonDefault from "@lib/components/common/Button/ButtonDefault";
+import ButtonDefault from "@/lib/components/common/button/ButtonDefault";
 import Link from "next/link";
 import { debounce } from "@/utils/debounce";
 import { Anwsers } from "@lib/modal/question";

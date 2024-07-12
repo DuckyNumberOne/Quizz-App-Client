@@ -4,16 +4,16 @@ import Login from "./login/index";
 import { useRouter } from "next/router";
 import useLocalStorage from "@lib/hook/useLocalStorage";
 import Image from "next/image";
-import ButtonDefault from "../common/Button/ButtonDefault";
+import ButtonDefault from "../common/button/ButtonDefault";
 import { typeAccount } from "@lib/config/typeAccount";
-import Form from "../common/Form";
-import Select from "../common/Select/DefaultSelect";
-import Input from "../common/Input";
+import Form from "../common/form";
+import Select from "../common/select/DefaultSelect";
+import Input from "../common/input";
 import countries from "@lib/config/countries";
 import { verifyLogin } from "@/api/auth";
 import { checkEmail, postUser } from "@/api/user";
 import { useForm } from "react-hook-form";
-import PopupDefault from "../common/Popup/PopupWelcome";
+import PopupDefault from "../common/popup/PopupWelcome";
 
 interface UserInfo {
   fullName: string;

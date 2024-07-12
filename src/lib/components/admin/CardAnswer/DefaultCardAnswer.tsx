@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import Input from "../../common/Input";
+import Input from "../../common/input";
 import DefaultCheckBoxAnswer from "./CheckBoxAnswer/DefaultCheckBoxAnswer";
 import { Anwsers } from "@lib/modal/question";
 import { useDispatch, useSelector } from "react-redux";
