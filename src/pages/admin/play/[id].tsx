@@ -10,7 +10,7 @@ import {
 } from "@/api/quizz.api";
 import { Anwsers, Question } from "@/lib/interface/question.interface";
 import { questionInit } from "@lib/config/initQuestion";
-import CountdownTimer from "@lib/components/common/countdownTimers/defaultCountdownTimers";
+import CountdownTimer from "@/lib/components/common/countdownTimer/defaultCountdownTimer";
 import { addResult, resetResult } from "@lib/state/result/resultSlice";
 import { RootState } from "@lib/state/store";
 import Link from "next/link";

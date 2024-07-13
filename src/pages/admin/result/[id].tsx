@@ -3,7 +3,7 @@ import {
   getItemQuizzResultByQuizz,
   postQuizzResult,
 } from "@/api/quizzResult.api";
-import ButtonDefault from "@lib/components/common/buttons/buttonDefaults";
+import ButtonDefault from "@/lib/components/common/buttons/buttonDefault";
 import { colorCardAnswer } from "@lib/config/colorCardAnswer";
 import { initResult } from "@lib/config/initResult";
 import { Quizz } from "@/lib/interface/quizz.interface";

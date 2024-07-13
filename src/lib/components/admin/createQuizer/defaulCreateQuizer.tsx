@@ -8,9 +8,8 @@ import { addQuizz, updateQuizz } from "@lib/state/quizz/quizzSlice";
 import { RootState } from "@lib/state/store";
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import Select from "@lib/components/common/selects/defaultSelects";
-// import ButtonDefault from "../../common/buttons/buttonDefaults";
-import ButtonDefault from "@lib/components/common/buttons/buttonDefaults";
+import Select from "@lib/components/common/selects/defaultSelect";
+import ButtonDefault from "@/lib/components/common/buttons/buttonDefault";
 
 interface PropsDefaultCreateQuestion {
   mode: string;
