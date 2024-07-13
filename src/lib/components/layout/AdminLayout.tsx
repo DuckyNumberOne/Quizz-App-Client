@@ -10,10 +10,10 @@ import { addUser } from "@lib/state/user/userSlice";
 import { User } from "@/lib/interface/user.interface";
 import { userInit } from "@lib/config/initUser";
 // import Header from "../admin/header";
-import Header from "@lib/components/admin/Header/index";
+import Header from "@/lib/components/admin/headers/index";
 
 // import Sidebar from "../admin/sidebar";
-import Sidebar from "@lib/components/admin/sidebars/index";
+import Sidebar from "@/lib/components/admin/sidebar/index";
 
 export default function AdminLayout({
   children,

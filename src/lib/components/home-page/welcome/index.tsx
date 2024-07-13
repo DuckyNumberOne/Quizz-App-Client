@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import Image from "next/image";
-import ButtonDefault from "../../common/buttons/buttonDefaults";
-import PopupDefault from "@lib/components/common/popups/popupWelcomes";
+import ButtonDefault from "../../common/buttons/buttonDefault";
+import PopupDefault from "@lib/components/common/popups/popupWelcome";
 
 const Welcome = () => {
   return (

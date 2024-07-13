@@ -3,7 +3,7 @@ import Image from "next/image";
 import { deleteFriend, getItemFriend } from "@/api/friend.api";
 import { useRouter } from "next/router";
 import { Friend, FriendOption } from "@/lib/interface/friend.interface";
-import ButtonDefault from "@lib/components/common/buttons/buttonDefaults";
+import ButtonDefault from "@/lib/components/common/buttons/buttonDefault";
 import { getItemQuizzByUser } from "@/api/quizz.api";
 import Link from "next/link";
 import { Anwsers } from "@/lib/interface/question.interface";

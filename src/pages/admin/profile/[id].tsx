@@ -1,8 +1,8 @@
 import { getUserById, updateUser } from "@/api/user.api";
-import ButtonDefault from "@lib/components/common/buttons/buttonDefaults";
+import ButtonDefault from "@/lib/components/common/buttons/buttonDefault";
 import Form from "@lib/components/common/form/defaultForm";
 import Input from "@lib/components/common/input/defaultInput";
-import Select from "@lib/components/common/selects/defaultSelects";
+import Select from "@lib/components/common/selects/defaultSelect";
 import countries from "@lib/config/countries";
 import { typeAccount } from "@lib/config/typeAccount";
 import useLocalStorage from "@lib/hook/useLocalStorage";

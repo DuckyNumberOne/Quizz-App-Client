@@ -2,10 +2,10 @@ import React, { useEffect, useState } from "react";
 import Image from "next/image";
 import { useRouter } from "next/router";
 import { getItemQuizzResultByUser } from "@/api/quizzResult.api";
-import ButtonDefault from "@lib/components/common/buttons/buttonDefaults";
+import ButtonDefault from "@/lib/components/common/buttons/buttonDefault";
 import Link from "next/link";
 import { Question } from "@/lib/interface/question.interface";
-import ChartThree from "@lib/components/common/chart/chartThrees";
+import ChartThree from "@/lib/components/common/charts/chartThree";
 import { debounce } from "@/utils/debounce";
 
 interface Question2 {
