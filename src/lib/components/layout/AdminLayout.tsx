@@ -7,13 +7,13 @@ import { setTurnOffPopup } from "@lib/state/popup/popupSlice";
 import { resetQuestions } from "@lib/state/questions/questionSlice";
 import useLocalStorage from "@lib/hook/useLocalStorage";
 import { addUser } from "@lib/state/user/userSlice";
-import { User } from "@lib/modal/user";
+import { User } from "@/lib/interface/user.interface";
 import { userInit } from "@lib/config/initUser";
 // import Header from "../admin/header";
 import Header from "@lib/components/admin/Header/index";
 
 // import Sidebar from "../admin/sidebar";
-import Sidebar from "@lib/components/admin/Sidebar/index";
+import Sidebar from "@lib/components/admin/sidebars/index";
 
 export default function AdminLayout({
   children,

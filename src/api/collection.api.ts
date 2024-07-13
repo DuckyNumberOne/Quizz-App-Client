@@ -1,5 +1,5 @@
 import axios from "@/utils/index";
-import { Collection } from "@lib/modal/collection";
+import { Collection } from "@/lib/interface/collection.interface";
 
 export const getListCollection = async () => {
   try {

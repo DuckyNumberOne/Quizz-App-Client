@@ -1,9 +1,9 @@
 import Link from "next/link";
 import Image from "next/image";
 import { useRouter } from "next/router";
-import DropdownMessage from "./DropdownMessage";
-import DropdownUser from "./DropdownUser";
-import DropdownNotification from "./dropdown-notification";
+import DropdownMessage from "./dropdownMessages";
+import DropdownUser from "./dropdownUsers";
+import DropdownNotification from "./dropdownNotification";
 
 const Header = (props: {
   sidebarOpen: string | boolean | undefined;

@@ -2,10 +2,10 @@ import React, { useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import Form from "@lib/components/common/form/defaultForm";
 import Input from "@lib/components/common/input/defaultInput";
-import Select from "@lib/components/common/selects/DefaultSelect";
+import Select from "@lib/components/common/selects/defaultSelects";
 import ButtonDefault from "@lib/components/common/buttons/buttonDefaults";
 import DefaultCardAnsswer from "../../cardAnswers/default-CardAnswer";
-import { Anwsers, Question } from "@lib/modal/question";
+import { Anwsers, Question } from "@/lib/interface/question.interface";
 import { useDispatch, useSelector } from "react-redux";
 import {
   addQuestion,
@@ -21,7 +21,7 @@ import {
   clearAnswer,
 } from "@lib/state/answer/answerSlice";
 import { useRouter } from "next/router";
-import { postQuizz } from "@/api/quizz";
+import { postQuizz } from "@/api/quizz.api";
 import { colorCardAnswer } from "@lib/config/colorCardAnswer";
 import { generateUniqueId } from "@/utils/generateUniqueId";
 

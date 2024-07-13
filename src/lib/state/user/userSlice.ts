@@ -1,5 +1,5 @@
 import { userInit } from "@lib/config/initUser";
-import { User, UserOption } from "@lib/modal/user";
+import { User, UserOption } from "@/lib/interface/user.interface";
 import { createSlice, configureStore, PayloadAction } from "@reduxjs/toolkit";
 
 

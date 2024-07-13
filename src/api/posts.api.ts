@@ -1,5 +1,5 @@
 import axios from "@/utils/index";
-import { Posts } from "@lib/modal/posts";
+import { Posts } from "@/lib/interface/posts.interface";
 
 export const getListPosts = async () => {
   try {

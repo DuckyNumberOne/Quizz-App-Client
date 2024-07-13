@@ -1,5 +1,5 @@
 import axios from "@/utils/index";
-import { Category } from "@lib/modal/category";
+import { Category } from "@/lib/interface/category.interface";
 
 export const getListCategory = async () => {
   try {

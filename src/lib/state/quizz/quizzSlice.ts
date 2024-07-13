@@ -1,5 +1,5 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { QuizzPost, QuizzPostOption } from "@lib/modal/quizz";
+import { QuizzPost, QuizzPostOption } from "@/lib/interface/quizz.interface";
 
 const initialState: QuizzPostOption = {
   urlThumbnail: "",

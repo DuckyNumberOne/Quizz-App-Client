@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from "react";
 import Image from "next/image";
 import { useRouter } from "next/router";
-import { getItemQuizzResultByUser } from "@/api/quizzResult";
+import { getItemQuizzResultByUser } from "@/api/quizzResult.api";
 import ButtonDefault from "@lib/components/common/buttons/buttonDefaults";
 import Link from "next/link";
-import { Question } from "@lib/modal/question";
-import ChartThree from "@lib/components/common/Charts/ChartThree";
+import { Question } from "@/lib/interface/question.interface";
+import ChartThree from "@lib/components/common/chart/chartThrees";
 import { debounce } from "@/utils/debounce";
 
 interface Question2 {

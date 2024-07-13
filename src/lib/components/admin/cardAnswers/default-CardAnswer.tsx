@@ -1,6 +1,6 @@
 import React from "react";
 import Input from "../../common/input/defaultInput";
-import { Anwsers } from "@lib/modal/question";
+import { Anwsers } from "@/lib/interface/question.interface";
 import { useDispatch } from "react-redux";
 import { addAnswer } from "@lib/state/answer/answerSlice";
 import DefaultCheckBoxAnswer from "./check-box-answer/defaultCheckBoxAnswer";

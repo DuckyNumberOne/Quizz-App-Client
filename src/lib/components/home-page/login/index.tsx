@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import Image from "next/image";
-import { verifyLogin } from "@/api/auth";
-import PopupDefault from "@lib/components/common/Popup/PopupWelcome";
+import { verifyLogin } from "@/api/auth.api";
+import PopupDefault from "@lib/components/common/popups/popupWelcomes";
 import Form from "../../common/form/defaultForm";
 import Input from "../../common/input/defaultInput";
 import ButtonDefault from "../../common/buttons/buttonDefaults";

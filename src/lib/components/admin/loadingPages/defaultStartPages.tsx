@@ -1,14 +1,14 @@
 import React, { useEffect, useState } from "react";
-import DefaultPopupAdmin from "../popupAdmin/default-PopupAdmin";
 import { useSelector } from "react-redux";
 import { RootState } from "@lib/state/store";
+import DefaultPopupAdmin from "../popupAdmin/defaultPopupAdmin";
 
 interface PropsDefaultLoading {
   children: React.ReactNode;
   animation: string;
 }
 
-const DefaultLoadingPage: React.FC<PropsDefaultLoading> = ({
+const DefaultStartPage: React.FC<PropsDefaultLoading> = ({
   children,
   animation,
 }) => {
@@ -28,4 +28,4 @@ const DefaultLoadingPage: React.FC<PropsDefaultLoading> = ({
     </>
   );
 };
-export default DefaultLoadingPage;
+export default DefaultStartPage;
