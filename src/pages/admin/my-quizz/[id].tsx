@@ -1,13 +1,13 @@
-import ChartTwo from "@lib/components/common/Charts/ChartTwo";
+import ChartTwo from "@lib/components/common/chart/chartTwos";
 import React, { useEffect, useState } from "react";
 import Image from "next/image";
 import { useRouter } from "next/router";
-import { getItemQuizzByUser, getListQuizz } from "@/api/quizz";
-import { getQuestionPercentagesByQuizzId } from "@/api/quizzResult";
+import { getItemQuizzByUser, getListQuizz } from "@/api/quizz.api";
+import { getQuestionPercentagesByQuizzId } from "@/api/quizzResult.api";
 import ButtonDefault from "@lib/components/common/buttons/buttonDefaults";
 import Link from "next/link";
 import { debounce } from "@/utils/debounce";
-import { Anwsers } from "@lib/modal/question";
+import { Anwsers } from "@/lib/interface/question.interface";
 
 interface SeriesData {
   name: string;

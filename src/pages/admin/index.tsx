@@ -1,21 +1,21 @@
 import ButtonDefault from "@lib/components/common/buttons/buttonDefaults";
 import React, { useEffect, useRef, useState } from "react";
 import Image from "next/image";
-import DefaulltSlider from "@lib/components/common/Slider/DefaulltSlider";
-import { getListQuizz } from "@/api/quizz";
+import DefaulltSlider from "@lib/components/common/sliders/defaulltSliders";
+import { getListQuizz } from "@/api/quizz.api";
 import { useRouter } from "next/router";
 import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch, RootState } from "@lib/state/store";
 import { setTurnOnPopup } from "@lib/state/popup/popupSlice";
 import { scrollToTop } from "@/utils/scrollToTop";
-import { getListCollection } from "@/api/collection";
-import { getAllUserByFullName } from "@/api/user";
+import { getListCollection } from "@/api/collection.api";
+import { getAllUserByFullName } from "@/api/user.api";
 import { debounce } from "@/utils/debounce";
 import { typeAccount } from "@lib/config/typeAccount";
-import { getItemFriend, postFriend } from "@/api/friend";
-import { Friend, FriendOption } from "@lib/modal/friend";
-import { Anwsers } from "@lib/modal/question";
-import DefaultLoadingPage from "@lib/components/admin/LoadingPage/DefaultLoadingPage";
+import { getItemFriend, postFriend } from "@/api/friend.api";
+import { Friend, FriendOption } from "@/lib/interface/friend.interface";
+import { Anwsers } from "@/lib/interface/question.interface";
+import DefaultLoadingPage from "@lib/components/admin/loadingPages/defaultLoadingPages";
 
 interface Question {
   title: string;

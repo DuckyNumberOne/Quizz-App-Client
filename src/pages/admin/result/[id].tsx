@@ -1,10 +1,16 @@
-import { getItemQuizz } from "@/api/quizz";
-import { getItemQuizzResultByQuizz, postQuizzResult } from "@/api/quizzResult";
+import { getItemQuizz } from "@/api/quizz.api";
+import {
+  getItemQuizzResultByQuizz,
+  postQuizzResult,
+} from "@/api/quizzResult.api";
 import ButtonDefault from "@lib/components/common/buttons/buttonDefaults";
 import { colorCardAnswer } from "@lib/config/colorCardAnswer";
 import { initResult } from "@lib/config/initResult";
-import { Quizz } from "@lib/modal/quizz";
-import { QuizzResult, QuizzResultOption } from "@lib/modal/quizzResult";
+import { Quizz } from "@/lib/interface/quizz.interface";
+import {
+  QuizzResult,
+  QuizzResultOption,
+} from "@/lib/interface/quizzResult.interface";
 import { RootState } from "@lib/state/store";
 import { useRouter } from "next/router";
 import React, { useEffect, useState } from "react";

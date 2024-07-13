@@ -1,5 +1,5 @@
 import axios from "@/utils/index";
-import { QuizzResult } from "@lib/modal/quizzResult";
+import { QuizzResult } from "@/lib/interface/quizzResult.interface";
 
 export const getItemQuizzResult = async (id: string | string[]) => {
   try {

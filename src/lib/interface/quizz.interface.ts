@@ -1,6 +1,6 @@
-import { Collection } from './collection';
-import { Question, QuestionPost } from "./question";
-import { User } from "./user";
+import { Collection } from './collection.interface';
+import { Question, QuestionPost } from "./question.interface";
+import { User } from "./user.interface";
 
 export interface Quizz {
   user: User;

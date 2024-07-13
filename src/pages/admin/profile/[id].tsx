@@ -1,12 +1,12 @@
-import { getUserById, updateUser } from "@/api/user";
+import { getUserById, updateUser } from "@/api/user.api";
 import ButtonDefault from "@lib/components/common/buttons/buttonDefaults";
 import Form from "@lib/components/common/form/defaultForm";
 import Input from "@lib/components/common/input/defaultInput";
-import Select from "@lib/components/common/selects/DefaultSelect";
+import Select from "@lib/components/common/selects/defaultSelects";
 import countries from "@lib/config/countries";
 import { typeAccount } from "@lib/config/typeAccount";
 import useLocalStorage from "@lib/hook/useLocalStorage";
-import { User, UserOption } from "@lib/modal/user";
+import { User, UserOption } from "@/lib/interface/user.interface";
 import { RootState } from "@lib/state/store";
 import Image from "next/image";
 import { useRouter } from "next/router";

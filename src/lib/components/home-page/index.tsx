@@ -7,13 +7,13 @@ import Image from "next/image";
 import ButtonDefault from "../common/buttons/buttonDefaults";
 import { typeAccount } from "@lib/config/typeAccount";
 import Form from "../common/form/defaultForm";
-import Select from "@lib/components/common/selects/DefaultSelect";
+import Select from "@lib/components/common/selects/defaultSelects";
 import Input from "../common/input/defaultInput";
 import countries from "@lib/config/countries";
-import { verifyLogin } from "@/api/auth";
-import { checkEmail, postUser } from "@/api/user";
+import { verifyLogin } from "@/api/auth.api";
+import { checkEmail, postUser } from "@/api/user.api";
 import { useForm } from "react-hook-form";
-import PopupDefault from "@lib/components/common/Popup/PopupWelcome";
+import PopupDefault from "@lib/components/common/popups/popupWelcomes";
 
 interface UserInfo {
   fullName: string;

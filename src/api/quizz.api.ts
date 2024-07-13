@@ -1,6 +1,6 @@
 import axios from "@/utils/index";
-import { Question } from "@lib/modal/question";
-import { QuizzPost } from "@lib/modal/quizz";
+import { Question } from "@/lib/interface/question.interface";
+import { QuizzPost } from "@/lib/interface/quizz.interface";
 
 export const getListQuizz = async () => {
   try {

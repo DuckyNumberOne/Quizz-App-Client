@@ -1,5 +1,5 @@
 import axios from "@/utils/index";
-import { Friend } from "@lib/modal/friend";
+import { Friend } from "@/lib/interface/friend.interface";
 
 export const getListFriends = async () => {
   try {

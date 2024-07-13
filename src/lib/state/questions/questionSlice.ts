@@ -1,5 +1,5 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { Question } from "@lib/modal/question";
+import { Question } from "@/lib/interface/question.interface";
 
 const initialState: Question[] = [];
 
