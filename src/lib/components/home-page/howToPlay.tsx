@@ -1,5 +1,5 @@
 import React from "react";
-import step1 from "../../../../../public/images/how-to-play/step1.jpg";
+import step1 from "@images/how-to-play/step1.jpg";
 import Image from "next/image";
 
 const HowToPlay = () => {
