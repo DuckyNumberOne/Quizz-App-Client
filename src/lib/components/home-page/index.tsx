@@ -103,7 +103,7 @@ const HomePage = ({ data }: any) => {
       {/* Start  */}
       {mode === "Start" && (
         <PopupDefault>
-          <h3 className="text-[30px] font-bold">
+          <h3 className="xl:text-[30px] text-2xl font-bold">
             Everything is here to enjoy quiz!
           </h3>
           <p className="text-base font-semibold">
@@ -118,12 +118,12 @@ const HomePage = ({ data }: any) => {
             />
           </div>
           <ButtonDefault
-            className={`font-bold mb-5 w-full p-5 rounded-full text-black border-b-[5px] border-r-[4px] text-base ease-in-out duration-300 bg-[#f6f5fa] border-[#b5b2c1]`}
+            className={`font-bold mb-5 w-full xl:p-5 p-2 rounded-full text-black border-b-[5px] border-r-[4px] md:text-base text-sm ease-in-out duration-300 bg-[#f6f5fa] border-[#b5b2c1]`}
             content={"I have a account"}
             onClick={() => setMode("Login")}
           />
           <ButtonDefault
-            className={`font-bold w-full p-5 rounded-full text-white border-b-[5px] border-r-[4px] text-base ease-in-out duration-300 bg-[#000000] border-[#6d5ff6]`}
+            className={`font-bold w-full xl:p-5 p-2 rounded-full text-white border-b-[5px] border-r-[4px] md:text-base text-sm ease-in-out duration-300 bg-[#000000] border-[#6d5ff6]`}
             content={"Get started"}
             onClick={() => setMode("Register")}
           />
@@ -153,7 +153,7 @@ const HomePage = ({ data }: any) => {
                   </div>
                   <div></div>
                 </div>
-                <h3 className="text-[30px] font-bold">
+                <h3 className="xl:text-[30px] text-2xl font-bold">
                   What type of account will you open?
                 </h3>
                 <p className="text-base font-semibold">
@@ -167,7 +167,7 @@ const HomePage = ({ data }: any) => {
                         ac.id === typeAccountId
                           ? `bg-[#ffcc00] scale-105 shadow-xl `
                           : `bg-[#f6f5fa] duration-200 hover:bg-slate-100`
-                      } flex items-center p-4 gap-4 rounded-full  cursor-pointer hover:scale-105 ease-in-out `}
+                      } flex items-center xl:p-4 md:p-3 p-2 gap-4 rounded-full  cursor-pointer hover:scale-105 ease-in-out `}
                       onClick={() => handleChoiceTypeAccount(ac.id)}
                     >
                       <div
@@ -206,7 +206,9 @@ const HomePage = ({ data }: any) => {
                   </div>
                   <div></div>
                 </div>
-                <h3 className="text-[30px] font-bold">Create an account</h3>
+                <h3 className="xl:text-[30px] text-2xl font-bold">
+                  Create an account
+                </h3>
                 <p className="text-base font-semibold">
                   Please complere your profile.
                 </p>
@@ -243,7 +245,7 @@ const HomePage = ({ data }: any) => {
                               },
                             }}
                             classLabel="hidden"
-                            classInput="bg-[#f6f5fa] w-full px-5 py-5 rounded-[13px]"
+                            classInput="bg-[#f6f5fa] w-full xl:px-5 px-2 xl:py-5 py-2 rounded-[13px]"
                           />
                           <Input
                             label="Date of birth"
@@ -275,7 +277,7 @@ const HomePage = ({ data }: any) => {
                               },
                             }}
                             classLabel="hidden"
-                            classInput="bg-[#f6f5fa] w-full px-5 py-5 rounded-[13px]"
+                            classInput="bg-[#f6f5fa] w-full xl:px-5 px-2 xl:py-5 py-2 rounded-[13px]"
                           />
                           <Input
                             label="Phone number"
@@ -304,7 +306,7 @@ const HomePage = ({ data }: any) => {
                               },
                             }}
                             classLabel="hidden"
-                            classInput="bg-[#f6f5fa] w-full px-5 py-5 rounded-[13px]"
+                            classInput="bg-[#f6f5fa] w-full xl:px-5 px-2 xl:py-5 py-2 rounded-[13px]"
                           />
                           <Input
                             label="Username"
@@ -329,7 +331,7 @@ const HomePage = ({ data }: any) => {
                               },
                             }}
                             classLabel="hidden"
-                            classInput="bg-[#f6f5fa] w-full px-5 py-5 rounded-[13px]"
+                            classInput="bg-[#f6f5fa] w-full xl:px-5 px-2 xl:py-5 py-2 rounded-[13px]"
                           />
                           <Input
                             label="Email"
@@ -358,7 +360,7 @@ const HomePage = ({ data }: any) => {
                               },
                             }}
                             classLabel="hidden"
-                            classInput="bg-[#f6f5fa] w-full px-5 py-5 rounded-[13px]"
+                            classInput="bg-[#f6f5fa] w-full xl:px-5 px-2 xl:py-5 py-2 rounded-[13px]"
                           />
                           <Input
                             label="Password"
@@ -383,7 +385,7 @@ const HomePage = ({ data }: any) => {
                               },
                             }}
                             classLabel="hidden"
-                            classInput="bg-[#f6f5fa] w-full px-5 py-5 rounded-[13px]"
+                            classInput="bg-[#f6f5fa] w-full xl:px-5 px-2 xl:py-5 py-2 rounded-[13px]"
                           />
                           <Select
                             options={arr}
@@ -398,13 +400,13 @@ const HomePage = ({ data }: any) => {
                               },
                             }}
                             classLabel="hidden"
-                            classSelect="bg-[#f6f5fa] w-full px-5 py-5 rounded-[13px]"
+                            classSelect="bg-[#f6f5fa] w-full xl:px-5 px-2 xl:py-5 py-2 rounded-[13px]"
                             label={""}
                           />
                         </div>
                         <div className="flex items-center justify-center w-full mt-6">
                           <ButtonDefault
-                            className={`absolute bottom-0 font-bold w-full  p-5 rounded-full text-white border-b-[5px] border-r-[4px] text-base ease-in-out duration-300 bg-[#000000] border-[#6d5ff6]`}
+                            className={`absolute bottom-0 font-bold w-full xl:p-5 md:p-3 p-2 rounded-full text-white border-b-[5px] border-r-[4px] text-base ease-in-out duration-300 bg-[#000000] border-[#6d5ff6]`}
                             content={"Continue"}
                             // onClick={handleContinue}
                           />
@@ -434,7 +436,9 @@ const HomePage = ({ data }: any) => {
                   </div>
                   <div></div>
                 </div>
-                <h3 className="text-[30px] font-bold">Welcome to Quizer 😎</h3>
+                <h3 className="xl:text-[30px] text-2xl font-bold">
+                  Welcome to Quizer 😎
+                </h3>
                 <p className="text-base font-semibold">
                   You choose Personal plan.
                 </p>
@@ -450,7 +454,7 @@ const HomePage = ({ data }: any) => {
             )}
             {(step === 1 || step === 3) && (
               <ButtonDefault
-                className={`absolute bottom-0 font-bold w-full  p-5 rounded-full text-white border-b-[5px] border-r-[4px] text-base ease-in-out duration-300 bg-[#000000] border-[#6d5ff6]`}
+                className={`absolute bottom-0 font-bold w-full xl:p-5 p-3 rounded-full text-white border-b-[5px] border-r-[4px] text-base ease-in-out duration-300 bg-[#000000] border-[#6d5ff6]`}
                 content={step === 1 ? "Continue" : "Create account"}
                 onClick={handleContinue}
               />

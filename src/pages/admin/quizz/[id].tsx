@@ -73,7 +73,7 @@ const Play = () => {
   return (
     <DefaultLoadingPage animation="popup-dow">
       <div className="grid grid-cols-12">
-        <section className="mx-6 pt-4 col-span-4 h-full">
+        <section className="mx-6 pt-4 xl:col-span-4 md:col-span-6 col-span-12 h-full">
           <div className="px-3 py-4 border md:p-4 bg-white border-[#e5e5e5]  my-4 rounded-lg h-full">
             <div className="text-xl font-bold py-4">
               <div className="w-full h-[300px]">
@@ -92,25 +92,25 @@ const Play = () => {
                 {/* Analyst Quizer  */}
                 <div className="grid grid-cols-4 mt-10 border-4 border-[#c5c3ce] p-4 rounded-xl shadow-4">
                   <div className=" text-center">
-                    <h3 className="font-medium text-lg text-[#c5c3ce]">
+                    <h3 className="2xl:text-lg text-sm font-medium text-[#c5c3ce]">
                       Played
                     </h3>
                     <p>{quizz?.play}</p>
                   </div>
                   <div className=" text-center">
-                    <h3 className="font-medium text-lg text-[#c5c3ce]">
+                    <h3 className="2xl:text-lg text-sm font-medium text-[#c5c3ce]">
                       Share
                     </h3>
                     <p>{quizz?.share}</p>
                   </div>
                   <div className=" text-center">
-                    <h3 className="font-medium text-lg text-[#c5c3ce]">
+                    <h3 className="2xl:text-lg text-sm font-medium text-[#c5c3ce]">
                       Followw
                     </h3>
                     <p>12</p>
                   </div>
                   <div className=" text-center">
-                    <h3 className="font-medium text-lg text-[#c5c3ce]">
+                    <h3 className="2xl:text-lg text-sm font-medium text-[#c5c3ce]">
                       Question
                     </h3>
                     <p>{quizz?.question.length}</p>
@@ -124,13 +124,13 @@ const Play = () => {
                       width={100}
                       height={100}
                       alt={quizz?.user.fullName}
-                      className="rounded-full border-[4px] border-[#8854c0] border-solid shadow-4"
+                      className="2xl:w-[100px] w-[80px] 2xl:h-[100px] h-[80px] rounded-full border-[4px] border-[#8854c0] border-solid shadow-4"
                     />
                     <div className="">
-                      <p className="text-xl font-semibold cursor-pointer text-black transition ease-in-out delay-150 hover:-translate-y-1 hover:scale-110 duration-300">
+                      <p className="2xl:text-xl text-base font-semibold cursor-pointer text-black transition ease-in-out delay-150 hover:-translate-y-1 hover:scale-110 duration-300">
                         {quizz?.user.fullName}
                       </p>
-                      <p className="text-base text-[#c4c2ce] font-medium">
+                      <p className="2xl:text-base text-sm text-[#c4c2ce] font-medium">
                         @{quizz?.user.username}
                       </p>
                     </div>
@@ -149,7 +149,7 @@ const Play = () => {
                 <div className="mt-12">
                   <p className="text-xl font-bold">Description</p>
                   <div className="h-[140px] overflow-y-auto mt-4">
-                    <p className="text-base font-medium">
+                    <p className="2xl:text-base xl:text-xs text-sm font-medium">
                       {quizz?.description}
                     </p>
                   </div>
@@ -157,11 +157,11 @@ const Play = () => {
                 {/* Play  */}
                 <div className="flex gap-5 justify-between items-center mt-10">
                   <ButtonDefault
-                    className="text-white bg-black shadow-4 shadow-[#6d5ff6] p-4 rounded-full text-sm w-[35%] transition ease-in-out hover:scale-105"
+                    className="text-white bg-black shadow-4 shadow-[#6d5ff6] p-4 rounded-full 2xl:text-sm text-xs w-[35%] transition ease-in-out hover:scale-105"
                     content="Play with friends"
                   />
                   <ButtonDefault
-                    className="text-black bg-white shadow-4 shadow-[#6d5ff6] p-4 rounded-full text-sm w-[35%] transition ease-in-out hover:scale-105"
+                    className="text-black bg-white shadow-4 shadow-[#6d5ff6] p-4 rounded-full 2xl:text-sm text-xs w-[35%] transition ease-in-out hover:scale-105"
                     content="Play solo"
                     onClick={handlPlaySolo}
                   />
@@ -170,7 +170,7 @@ const Play = () => {
             </div>
           </div>
         </section>
-        <section className="mx-6 pt-4 col-span-8 h-full ">
+        <section className="mx-6 pt-4 xl:col-span-8 md:col-span-6 col-span-12 h-full ">
           <div className="px-3 py-4 border md:p-4 bg-white border-[#e5e5e5] my-4 rounded-lg h-full">
             {dataResult.length > 0 && (
               <div>
@@ -181,10 +181,10 @@ const Play = () => {
                   </p>
                 </Link>
                 {/* Rank  */}
-                <div className=" w-full h-[10%]">
+                <div className="2xl:block hidden w-full h-[10%] fade-in-01s">
                   <div className="w-full grid grid-cols-3">
                     {/* Top 1  */}
-                    <div className="flex justify-between items-center m-5 px-2 py-1 shadow-4 shadow-[#f0d321] rounded-full">
+                    <div className="flex justify-between items-center md:m-5 m-2 px-2 py-1 shadow-4 shadow-[#f0d321] rounded-full">
                       <div className="flex gap-5 items-center">
                         <img
                           src={top1.idUser.urlAvatar}
@@ -194,10 +194,10 @@ const Play = () => {
                           className="rounded-full"
                         />
                         <div>
-                          <p className="text-black font-medium text-base">
+                          <p className="md:text-start text-center text-black font-medium text-xs">
                             {top1.idUser.fullName}
                           </p>
-                          <div className="text-xs font-medium flex gap-7">
+                          <div className="md:text-start text-center text-xs font-medium flex gap-7">
                             <p>{top1.totalPoints} P</p>
                             <p>{top1.completionTime} s</p>
                           </div>
@@ -211,7 +211,7 @@ const Play = () => {
                       />
                     </div>
                     {/* Top 2 */}
-                    <div className="flex justify-between items-center m-5 px-2 py-1 shadow-4 shadow-[#a4a8ae] rounded-full">
+                    <div className="flex justify-between items-center md:m-5 m-2 px-2 py-1 shadow-4 shadow-[#f0d321] rounded-full">
                       <div className="flex gap-5 items-center">
                         <img
                           src={top2.idUser.urlAvatar}
@@ -221,7 +221,7 @@ const Play = () => {
                           className="rounded-full"
                         />
                         <div>
-                          <p className="text-black font-medium text-base">
+                          <p className="md:text-start text-center text-black font-medium text-xs">
                             {top2.idUser.fullName}
                           </p>
                           <div className="text-xs font-medium flex gap-7">
@@ -238,7 +238,7 @@ const Play = () => {
                       />
                     </div>
                     {/* Top 3  */}
-                    <div className="flex justify-between items-center m-5 px-2 py-1 shadow-4 shadow-[#c98639] rounded-full">
+                    <div className="flex justify-between items-center md:m-5 m-2 px-2 py-1 shadow-4 shadow-[#f0d321] rounded-full">
                       <div className="flex gap-5 items-center">
                         <img
                           src={top3.idUser.urlAvatar}
@@ -248,7 +248,7 @@ const Play = () => {
                           className="rounded-full"
                         />
                         <div>
-                          <p className="text-black font-medium text-base">
+                          <p className="md:text-start text-center text-black font-medium text-xs">
                             {top3.idUser.fullName}
                           </p>
                           <div className="text-xs font-medium flex gap-7">
@@ -298,10 +298,10 @@ const Play = () => {
                 {quizz ? (
                   quizz.question.map((items) => (
                     <div
-                      className="flex gap-5 p-4 rounded-xl shadow-4 shadow-[#5c4f7ea6] hover:bg-[#e5e5e571] ease-in-out duration-300"
+                      className="xl:flex gap-5 p-4 rounded-xl shadow-4 shadow-[#5c4f7ea6] hover:bg-[#e5e5e571] ease-in-out duration-300"
                       key={items._id}
                     >
-                      <div className="w-[300px] h-[200px] relative rounded-lg ">
+                      <div className="md:w-[300px] h-[200px] relative rounded-lg ">
                         <img
                           src={
                             items.imgQuestion || "/images/image-loading.webp"
@@ -344,10 +344,12 @@ const Play = () => {
                         )}
                       </div>
                       <div>
-                        <p className="h-1/3">{items.title}</p>
-                        <div className="flex gap-4">
+                        <p className="h-1/3 md:text-xl text-lg">
+                          {items.title}
+                        </p>
+                        <div className="md:flex gap-4">
                           <div className="space-y-3">
-                            <div className="px-4 py-1.5 text-lg font-semibold text-black w-[220px] shadow-4 rounded-lg ">
+                            <div className="px-4 py-1.5 text-lg font-semibold text-black md:w-[220px] w-full md:shadow-4 md:rounded-lg border ">
                               <div className="flex gap-3">
                                 <Image
                                   src="/images/time-clock.webp"
@@ -364,7 +366,7 @@ const Play = () => {
                                 </p>
                               </div>
                             </div>
-                            <div className="px-4 py-1.5 text-lg  font-semibold text-black w-[220px] shadow-4 rounded-lg ">
+                            <div className="px-4 py-1.5 text-lg  font-semibold text-black md:w-[220px] w-full md:shadow-4 md:rounded-lg border ">
                               <div className="flex gap-3">
                                 <Image
                                   src="/images/points.webp"
@@ -383,7 +385,7 @@ const Play = () => {
                             </div>
                           </div>
                           <div className="space-y-3">
-                            <div className="px-4 py-1.5 text-lg  font-semibold text-black w-[220px] shadow-4 rounded-lg ">
+                            <div className="px-4 py-1.5 text-lg  font-semibold text-black md:w-[220px] w-full md:shadow-4 md:rounded-lg border ">
                               <div className="flex gap-3">
                                 <Image
                                   src="/images/right-answer.webp"
