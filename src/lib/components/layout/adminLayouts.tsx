@@ -50,7 +50,7 @@ export default function AdminLayout({
       {/* <!-- ===== Page Wrapper Start ===== --> */}
       <div className="flex h-screen">
         {/* <!-- ===== Sidebar Start ===== --> */}
-        <div className="w-[11%] relative">
+        <div className="lg:w-[11%] relative">
           <Sidebar sidebarOpen={sidebarOpen} setSidebarOpen={setSidebarOpen} />
         </div>
         {/* <!-- ===== Sidebar End ===== --> */}

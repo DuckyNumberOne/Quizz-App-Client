@@ -60,7 +60,7 @@ const Login = () => {
 
   return (
     <PopupDefault>
-      <h3 className="text-[30px] font-bold">Hello there 👋</h3>
+      <h3 className="xl:text-[30px] text-2xl font-bold">Hello there 👋</h3>
       <Form
         classForm="space-y-4 md:space-y-6 mt-6"
         onSubmitForm={handleSubmitForm}
@@ -122,10 +122,10 @@ const Login = () => {
                     id="remember"
                     aria-describedby="remember"
                     type="checkbox"
-                    className="w-5 h-5 border border-gray-300 rounded bg-gray-50"
+                    className="xl:w-5 xl:h-5 h-3 w-3 border border-gray-300 rounded bg-gray-50"
                   />
                 </div>
-                <div className="ml-3 text-sm font-medium">
+                <div className="ml-3 xl:text-sm text-xs font-medium">
                   <label htmlFor="remember" className="text-black ">
                     Remember me
                   </label>
@@ -133,18 +133,18 @@ const Login = () => {
               </div>
               <a
                 href="#"
-                className="text-sm font-medium text-[#66a6ef] hover:underline dark:text-primary-500"
+                className="xl:text-sm text-xs font-medium text-[#66a6ef] hover:underline dark:text-primary-500"
               >
                 Forgot password?
               </a>
             </div>
             <ButtonDefault
-              className={`w-full p-5 rounded-full text-white border-b-[5px] border-r-[4px] font-medium text-base hover:font-medium ease-in-out duration-300 ${
+              className={`w-full xl:p-5 md:p-4 p-3 rounded-full text-white border-b-[5px] border-r-[4px] font-medium text-base hover:font-medium ease-in-out duration-300 ${
                 token != ""
-                  ? "bg-[#3ed684] p-5"
+                  ? "bg-[#3ed684]"
                   : props?.error?.errorSubmit?.message
-                  ? `bg-rose-600 p-5 border-rose-800`
-                  : `bg-[#000000] p-5 border-[#6d5ff6]`
+                  ? `bg-rose-600 border-rose-800`
+                  : `bg-[#000000] border-[#6d5ff6]`
               }`}
               content={
                 token != ""

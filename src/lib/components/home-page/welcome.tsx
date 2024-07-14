@@ -20,11 +20,11 @@ const Welcome = () => {
       />
       <div className="flex flex-col gap-3 mt-5">
         <ButtonDefault
-          className="w-full bg-[#f6f5fa] p-5 rounded-full text-black border-b-[5px] border-r-[4px] border-[#b5b2c1] font-normal text-base hover:font-medium ease-in-out duration-300 "
+          className="w-full bg-[#f6f5fa] md:p-5 p-2 rounded-full text-black border-b-[5px] border-r-[4px] border-[#b5b2c1] font-normal md:text-base text-sm hover:font-medium ease-in-out duration-300 "
           content="I have an account"
         />
         <ButtonDefault
-          className="w-full bg-[#000000] p-5 rounded-full text-white border-b-[5px] border-r-[4px] border-[#6d5ff6] font-normal text-base hover:font-medium ease-in-out duration-300 "
+          className="w-full bg-[#000000] md:p-5 p-2 rounded-full text-white border-b-[5px] border-r-[4px] border-[#6d5ff6] font-normal md:text-base text-sm hover:font-medium ease-in-out duration-300 "
           content="Get started"
         />
       </div>
