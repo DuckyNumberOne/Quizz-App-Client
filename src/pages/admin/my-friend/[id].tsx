@@ -84,8 +84,8 @@ const MyFriend = () => {
       <div className="absolute inset-0 w-full h-screen bg-black-shadow-2 flex justify-center items-center">
         <div className="container mx-auto grid-cols-12 grid h-[700px] gap-2">
           <div
-            className={`col-span-4 bg-white p-5 ${
-              indexs !== -1 ? "slide-left" : "col-start-5"
+            className={`4xl:col-span-4 col-span-4 bg-white p-5 ${
+              indexs !== -1 ? "slide-left" : "4xl:col-start-5 col-start-5"
             }`}
           >
             <h3 className="text-2xl font-semibold">List friends</h3>
@@ -103,6 +103,7 @@ const MyFriend = () => {
                       width={20}
                       height={20}
                       alt="search"
+                      className="w-[200px]"
                     />
                   </div>
                 </div>
@@ -113,37 +114,45 @@ const MyFriend = () => {
                 dataListFriend.map((items, index) => (
                   <div
                     key={items._id}
-                    className="flex border-2 p-4 relative cursor-pointer"
-                    onClick={() => handleCheckProfile(index)}
+                    className="flex justify-center items-center border-2 p-4 relative cursor-pointer gap-2"
                   >
-                    <div className="">
-                      <img
-                        src={items.friendId.urlAvatar}
-                        alt="Avatar"
-                        width={70}
-                        height={70}
-                        className="rounded-full mr-4 border-4"
-                      />
+                    <div className="flex items-center justify-center">
+                      <div className="w-[70px] h-[70px]">
+                        <img
+                          src={items.friendId.urlAvatar}
+                          alt="Avatar"
+                          width={70}
+                          height={70}
+                          className="rounded-full mr-4 border-4 w-full h-full"
+                        />
+                      </div>
                     </div>
                     <div>
-                      <div className="flex">
-                        <p className="font-semibold">
+                      <div className="flex items-center gap-2">
+                        <p className="text-xs 2xl:text-sm font-semibold">
                           {items.friendId.fullName}
                         </p>
-                        <p className="ml-2 text-sm">
+                        <p className=" 2xl:text-xs text-[10px]">
                           ({items.friendId.country})
                         </p>
                       </div>
                       <div>
-                        <p className="text-sm text-graydark">
+                        <p className="2xl:text-sm text-graydark text-xs">
                           {items.friendId.email}
                         </p>
                       </div>
-                      <ButtonDefault
-                        content="Unfollow"
-                        className="absolute right-3 bg-black text-white px-4 py-1 rounded-full font-medium hover:bg-rose-600 ease-in-out duration-200"
-                        onClick={() => handleUnfollow(String(items._id))}
-                      />
+                      <div className="flex gap-2 justify-end items-center mt-2">
+                        <ButtonDefault
+                          content="Unfollow"
+                          className="bg-black text-white px-4 py-1 rounded-full font-medium hover:bg-rose-600 ease-in-out duration-200"
+                          onClick={() => handleUnfollow(String(items._id))}
+                        />
+                        <ButtonDefault
+                          content="Detail"
+                          className="bg-black text-white px-4 py-1 rounded-full font-medium hover:bg-rose-600 ease-in-out duration-200"
+                          onClick={() => handleCheckProfile(index)}
+                        />
+                      </div>
                     </div>
                   </div>
                 ))
@@ -165,19 +174,19 @@ const MyFriend = () => {
               >
                 <div className="h-1/4"></div>
                 <div className="bg-white h-3/4 rounded-t-2xl relative">
-                  <div className="-top-20 right-40 absolute">
+                  <div className="absolute top-0 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
                     <img
                       src={dataListFriend[indexs].friendId.urlAvatar}
                       alt="Avatar"
                       width={160}
                       height={160}
-                      className="rounded-full border-4 "
+                      className="rounded-full border-4"
                     />
                     <p className="text-center font-semibold mt-3 text-xl">
                       {dataListFriend[indexs].friendId.fullName}
                     </p>
                   </div>
-                  <div className="grid grid-cols-3  w-full pt-[140px] px-5 mb-5">
+                  <div className="grid grid-cols-3 w-full pt-[140px] px-5 mb-5">
                     <div className="border-x border-y text-center">
                       <p className="font-semibold">Quizer</p>
                       <p>12</p>
@@ -191,7 +200,7 @@ const MyFriend = () => {
                       <p>12</p>
                     </div>
                   </div>
-                  <div className="px-5  grid grid-cols-2">
+                  <div className="px-5 grid grid-cols-2">
                     <div>
                       <p className="p-3 border-x border-y font-bold">Email:</p>
                       <p className="p-3 border-x border-b font-bold">
@@ -207,19 +216,15 @@ const MyFriend = () => {
                     </div>
                     <div>
                       <p className="p-3 border-r border-y">
-                        {" "}
                         {dataListFriend[indexs].friendId.email}
                       </p>
                       <p className="p-3 border-r border-b">
-                        {" "}
                         {dataListFriend[indexs].friendId.country}
                       </p>
                       <p className="p-3 border-r border-b">
-                        {" "}
                         {dataListFriend[indexs].friendId.dateBirday}
                       </p>
                       <p className="p-3 border-r border-b">
-                        {" "}
                         {dataListFriend[indexs].friendId.phoneNumber}
                       </p>
                       <p className="p-3 border-r border-b">

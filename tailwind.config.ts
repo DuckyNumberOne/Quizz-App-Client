@@ -12,7 +12,9 @@ const config: Config = {
         screens: {
           "2xsm": "375px",
           xsm: "425px",
-          "3xl": "2000px",
+          "3xl": "1664px",
+          "4xl": "1792px",
+          "5xl": "1920px",
           "xm":"540px",
           ...defaultTheme.screens,
         },

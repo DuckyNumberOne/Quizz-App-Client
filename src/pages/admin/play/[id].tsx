@@ -198,7 +198,7 @@ const Play = () => {
             {/* Box 1 */}
             <div></div>
             {/* Box 2  */}
-            <div className="slide-up mt-2 max-w-2xl mx-auto rounded-lg border h-full px-5 pt-5 bg-white shadow-2 shadow-purple-500 relative">
+            <div className="md:col-span-1 col-span-3 slide-up mt-2 max-w-2xl mx-auto rounded-lg border h-full px-5 pt-5 bg-white shadow-2 shadow-purple-500 relative">
               {/* Notification True  */}
               {notification === "TRUE" && (
                 <div className="slide-up absolute top-0 left-0 w-full h-[200px] bg-[#3ed684] z-10 rounded-b-3xl shadow-2 shadow-black flex justify-center items-center">
@@ -304,7 +304,7 @@ const Play = () => {
               </div>
             </div>
             {/* Box 3 */}
-            <div>
+            <div className="md:col-span-1 col-span-3 ">
               {/* Point and Time  */}
               <div className="slide-up mt-2 max-w-2xl mx-auto rounded-lg border bg-white shadow-2 shadow-purple-500 w-full grid grid-cols-2">
                 <div className="flex w-full h-full border-r p-2">

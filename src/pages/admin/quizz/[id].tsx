@@ -82,7 +82,7 @@ const Play = () => {
                   width={200}
                   height={300}
                   alt="Thumbnail"
-                  className="rounded-xl bg-cover bg-center w-full h-full shadow-2 shadow-black"
+                  className="rounded-xl bg-cover bg-center w-full h-full shadow-2 shadow-black object-fill"
                 />
               </div>
               <div className="mt-4">
@@ -155,13 +155,13 @@ const Play = () => {
                   </div>
                 </div>
                 {/* Play  */}
-                <div className="flex gap-5 justify-between items-center mt-10">
+                <div className="grid grid-cols-12 items-center mt-10 2xl:space-y-0 space-y-4">
                   <ButtonDefault
-                    className="text-white bg-black shadow-4 shadow-[#6d5ff6] p-4 rounded-full 2xl:text-sm text-xs w-[35%] transition ease-in-out hover:scale-105"
+                    className="2xl:col-span-5 col-span-12 w-full text-white bg-black shadow-4 shadow-[#6d5ff6] p-4 rounded-full 2xl:text-sm text-xs transition ease-in-out hover:scale-105"
                     content="Play with friends"
                   />
                   <ButtonDefault
-                    className="text-black bg-white shadow-4 shadow-[#6d5ff6] p-4 rounded-full 2xl:text-sm text-xs w-[35%] transition ease-in-out hover:scale-105"
+                    className="2xl:col-span-5 col-span-12 2xl:col-start-9 w-full text-black bg-white shadow-4 shadow-[#6d5ff6] p-4 rounded-full 2xl:text-sm text-xs transition ease-in-out hover:scale-105"
                     content="Play solo"
                     onClick={handlPlaySolo}
                   />
@@ -298,17 +298,17 @@ const Play = () => {
                 {quizz ? (
                   quizz.question.map((items) => (
                     <div
-                      className="xl:flex gap-5 p-4 rounded-xl shadow-4 shadow-[#5c4f7ea6] hover:bg-[#e5e5e571] ease-in-out duration-300"
+                      className="2xl:grid grid-cols-8 gap-5 p-4 rounded-xl shadow-4 shadow-[#5c4f7ea6] hover:bg-[#e5e5e571] ease-in-out duration-300"
                       key={items._id}
                     >
-                      <div className="md:w-[300px] h-[200px] relative rounded-lg ">
+                      <div className="4xl:col-span-2 md:col-span-3 relative rounded-lg ">
                         <img
                           src={
                             items.imgQuestion || "/images/image-loading.webp"
                           }
                           width={300}
                           height={200}
-                          className="rounded-lg h-[200px] bg-cover"
+                          className="rounded-lg w-full  bg-contain object-cover bg-no-repeat"
                           alt={items.title}
                         />
                         {/* shadow  */}
@@ -326,6 +326,7 @@ const Play = () => {
                             </div>
                           </div>
                         )}
+                        {/* Hidden button  */}
                         {hidden && (
                           <div
                             className={`${
@@ -343,68 +344,60 @@ const Play = () => {
                           </div>
                         )}
                       </div>
-                      <div>
-                        <p className="h-1/3 md:text-xl text-lg">
-                          {items.title}
-                        </p>
-                        <div className="md:flex gap-4">
-                          <div className="space-y-3">
-                            <div className="px-4 py-1.5 text-lg font-semibold text-black md:w-[220px] w-full md:shadow-4 md:rounded-lg border ">
-                              <div className="flex gap-3">
-                                <Image
-                                  src="/images/time-clock.webp"
-                                  width={25}
-                                  height={25}
-                                  alt="Time clock"
-                                  className="bg-cover bg-center"
-                                />
-                                <p>
-                                  Time:{" "}
-                                  <span className="text-red">
-                                    {items.time} s
-                                  </span>
-                                </p>
-                              </div>
-                            </div>
-                            <div className="px-4 py-1.5 text-lg  font-semibold text-black md:w-[220px] w-full md:shadow-4 md:rounded-lg border ">
-                              <div className="flex gap-3">
-                                <Image
-                                  src="/images/points.webp"
-                                  width={25}
-                                  height={25}
-                                  alt="Points"
-                                  className="bg-cover bg-center"
-                                />
-                                <p>
-                                  Points:{" "}
-                                  <span className="text-red">
-                                    {items.point} P
-                                  </span>
-                                </p>
-                              </div>
+                      <div className="4xl:col-span-6 md:col-span-3 m-3 h-full relative">
+                        <p className="md:text-xl text-lg">{items.title}</p>
+                        <div className="mt-5 4xl:flex gap-4 4xl:space-y-0 space-y-2">
+                          <div className="px-4 4xl:py-1.5 py-1 text-lg font-semibold text-black md:min-w-[15%] 5xl:min-w-[30%] md:shadow-4 md:rounded-lg border ">
+                            <div className="flex gap-3">
+                              <Image
+                                src="/images/time-clock.webp"
+                                width={25}
+                                height={25}
+                                alt="Time clock"
+                                className="bg-cover bg-center"
+                              />
+                              <p>
+                                Time:{" "}
+                                <span className="text-red">{items.time} s</span>
+                              </p>
                             </div>
                           </div>
-                          <div className="space-y-3">
-                            <div className="px-4 py-1.5 text-lg  font-semibold text-black md:w-[220px] w-full md:shadow-4 md:rounded-lg border ">
-                              <div className="flex gap-3">
-                                <Image
-                                  src="/images/right-answer.webp"
-                                  width={25}
-                                  height={25}
-                                  alt="Right answer"
-                                  className="bg-cover bg-center"
-                                />
-                                <p>
-                                  Right answer:{" "}
-                                  <span className="text-red">
-                                    {
-                                      items.anwsers.filter(
-                                        (anwsers) => anwsers.isCorrect === true
-                                      ).length
-                                    }
-                                  </span>
-                                </p>
-                              </div>
+                          <div className="px-4 4xl:py-1.5 py-1 text-lg  font-semibold text-black md:min-w-[15%] 5xl:min-w-[30%] md:shadow-4 md:rounded-lg border ">
+                            <div className="flex gap-3">
+                              <Image
+                                src="/images/points.webp"
+                                width={25}
+                                height={25}
+                                alt="Points"
+                                className="bg-cover bg-center"
+                              />
+                              <p>
+                                Points:{" "}
+                                <span className="text-red">
+                                  {items.point} P
+                                </span>
+                              </p>
+                            </div>
+                          </div>
+                          <div className="px-4 4xl:py-1.5 py-1 text-lg  font-semibold text-black md:min-w-[15%] 5xl:min-w-[30%] md:shadow-4 md:rounded-lg border ">
+                            <div className="flex gap-3">
+                              <Image
+                                src="/images/right-answer.webp"
+                                width={25}
+                                height={25}
+                                alt="Right answer"
+                                className="bg-cover bg-center"
+                              />
+                              <p>
+                                Right answer:{" "}
+                                <span className="text-red">
+                                  {
+                                    items.anwsers.filter(
+                                      (anwsers) => anwsers.isCorrect === true
+                                    ).length
+                                  }
+                                </span>
+                              </p>
                             </div>
                           </div>
                         </div>

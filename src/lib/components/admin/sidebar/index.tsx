@@ -124,7 +124,7 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }: SidebarProps) => {
               <li>
                 <Link
                   href="/admin"
-                  className={`text-sm group relative flex items-center gap-2.5 rounded-sm px-4 py-2 font-medium text-black duration-300 ease-in-out hover:bg-slate-200  ${
+                  className={`xl:text-sm text-xs group relative flex items-center gap-2.5 rounded-sm 2xl:px-4 p-2 py-2 font-medium text-black duration-300 ease-in-out hover:bg-slate-200  ${
                     pathname.includes("calendar") && "bg-slate-200 "
                   }`}
                 >
@@ -148,7 +148,7 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }: SidebarProps) => {
               <li>
                 <Link
                   href={`/admin/profile/${idUser}`}
-                  className={`text-sm group relative flex items-center gap-2.5 rounded-sm px-4 py-2 font-medium text-black duration-300 ease-in-out hover:bg-slate-200  ${
+                  className={`xl:text-sm text-xs group relative flex items-center gap-2.5 rounded-sm 2xl:px-4 p-2 py-2 font-medium text-black duration-300 ease-in-out hover:bg-slate-200  ${
                     pathname.includes("profile") && "bg-slate-200 "
                   }`}
                 >
@@ -176,7 +176,7 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }: SidebarProps) => {
               <li>
                 <Link
                   href={`/admin/my-quizz/${idUser}`}
-                  className={`text-sm group relative flex items-center gap-2.5 rounded-sm px-4 py-2 font-medium text-black duration-300 ease-in-out hover:bg-slate-200  ${
+                  className={`xl:text-sm text-xs group relative flex items-center gap-2.5 rounded-sm 2xl:px-4 p-2 py-2 font-medium text-black duration-300 ease-in-out hover:bg-slate-200  ${
                     pathname.includes("tables") && "bg-slate-200 "
                   }`}
                 >
@@ -193,7 +193,7 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }: SidebarProps) => {
               <li>
                 <Link
                   href={`/admin/my-friend/${idUser}`}
-                  className={`text-sm group relative flex items-center gap-2.5 rounded-sm px-4 py-2 font-medium text-black duration-300 ease-in-out hover:bg-slate-200  ${
+                  className={`xl:text-sm text-xs group relative flex items-center gap-2.5 rounded-sm 2xl:px-4 p-2 py-2 font-medium text-black duration-300 ease-in-out hover:bg-slate-200  ${
                     pathname.includes("tables") && "bg-slate-200 "
                   }`}
                 >
@@ -211,7 +211,7 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }: SidebarProps) => {
               <li>
                 <Link
                   href={`/admin/history/${idUser}`}
-                  className={`text-sm group relative flex items-center gap-2.5 rounded-sm px-4 py-2 font-medium text-black duration-300 ease-in-out hover:bg-slate-200  ${
+                  className={`xl:text-sm text-xs group relative flex items-center gap-2.5 rounded-sm 2xl:px-4 p-2 py-2 font-medium text-black duration-300 ease-in-out hover:bg-slate-200  ${
                     pathname.includes("tables") && "bg-slate-200 "
                   }`}
                 >
@@ -238,7 +238,7 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }: SidebarProps) => {
             <ul className="mb-6 flex flex-col gap-1.5">
               <li>
                 <button
-                  className={`w-full text-sm group relative flex items-center gap-2.5 rounded-sm px-4 py-2 font-medium text-black duration-300 ease-in-out hover:bg-slate-200  ${
+                  className={`w-full xl:text-sm text-xs group relative flex items-center gap-2.5 rounded-sm 2xl:px-4 p-2 py-2 font-medium text-black duration-300 ease-in-out hover:bg-slate-200  ${
                     pathname.includes("calendar") && "bg-slate-200 "
                   }`}
                   onClick={handleLogout}
