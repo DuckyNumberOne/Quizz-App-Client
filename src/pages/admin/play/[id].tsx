@@ -193,12 +193,12 @@ const Play = () => {
   return (
     <div className="">
       {start ? (
-        <div className="bg-bts-hero-search-bg bg-no-repeat bg-right bg-cover h-screen">
-          <div className="pb-10 grid grid-cols-3 gap-4 container mx-auto">
+        <div className="bg-bts-hero-search-bg bg-no-repeat bg-right bg-cover h-full">
+          <div className="pb-10 grid grid-cols-12 gap-4 container mx-auto">
             {/* Box 1 */}
-            <div></div>
+            <div className="xl:col-span-3 lg:col-span-0 xl:block lg:hidden"></div>
             {/* Box 2  */}
-            <div className="md:col-span-1 col-span-3 slide-up mt-2 max-w-2xl mx-auto rounded-lg border h-full px-5 pt-5 bg-white shadow-2 shadow-purple-500 relative">
+            <div className="w-full xl:col-span-4 lg:col-span-6 col-span-12 slide-up mt-2 max-w-2xl mx-auto rounded-lg border h-full px-5 pt-5 bg-white shadow-2 shadow-purple-500 relative">
               {/* Notification True  */}
               {notification === "TRUE" && (
                 <div className="slide-up absolute top-0 left-0 w-full h-[200px] bg-[#3ed684] z-10 rounded-b-3xl shadow-2 shadow-black flex justify-center items-center">
@@ -255,7 +255,7 @@ const Play = () => {
                   </button>
                 </div>
                 {/* Body */}
-                <div className="object-contain">
+                <div className="">
                   <img
                     src={
                       question
@@ -263,7 +263,7 @@ const Play = () => {
                         : "/images/image-loading.webp"
                     }
                     alt="Logo"
-                    className={`mt-10 rounded-xl border w-[500px] mx-auto h-[340px] fade-in-05s`}
+                    className={`mt-5 rounded-xl border w-full mx-auto sm:h-[280px] h-[300px] fade-in-05s object-fill`}
                   />
                 </div>
                 <p className="font-medium mt-5 text-xl h-[70px]">
@@ -301,36 +301,50 @@ const Play = () => {
                     </div>
                   ))}
                 </div>
+                <button
+                  className="slide-up my-2 w-full rounded-lg border  bg-white shadow-2 shadow-purple-500 hover:bg-black hover:text-white ease-linear duration-300"
+                  onClick={handleSubmit}
+                >
+                  <p className="text-center text-xl font-semibold p-4">
+                    {dataResult.length === question.length
+                      ? "Go to results !!!"
+                      : "Next question"}
+                  </p>
+                </button>
               </div>
             </div>
             {/* Box 3 */}
-            <div className="md:col-span-1 col-span-3 ">
+            <div className="xl:col-span-4 lg:col-span-4 col-span-12 ">
               {/* Point and Time  */}
               <div className="slide-up mt-2 max-w-2xl mx-auto rounded-lg border bg-white shadow-2 shadow-purple-500 w-full grid grid-cols-2">
-                <div className="flex w-full h-full border-r p-2">
-                  <Image
-                    src="/images/point.webp"
-                    width={40}
-                    height={40}
-                    alt="Logo"
-                    className="bg-contain bg-center object-cover"
-                  />
-                  <p className="p-2 font-medium text-lg">
+                <div className="flex items-center w-full h-full border-r p-2">
+                  <div className="">
+                    <Image
+                      src="/images/point.webp"
+                      width={40}
+                      height={40}
+                      alt="Logo"
+                      className="bg-contain bg-center object-cover"
+                    />
+                  </div>
+                  <p className="xl:p-2 p-1 font-medium xl:text-lg text-sm">
                     Point:{" "}
                     <span className="text-green-500">
                       {question[indexs].point}
                     </span>
                   </p>
                 </div>
-                <div className="flex w-full h-full p-2">
-                  <Image
-                    src="/images/time-clock.webp"
-                    width={40}
-                    height={40}
-                    alt="Logo"
-                    className="bg-contain bg-center object-cover"
-                  />
-                  <p className="p-2 font-medium text-lg">
+                <div className="flex items-center w-full h-full p-2">
+                  <div>
+                    <Image
+                      src="/images/time-clock.webp"
+                      width={40}
+                      height={40}
+                      alt="Logo"
+                      className="bg-contain bg-center object-cover"
+                    />
+                  </div>
+                  <p className="xl:p-2 p-1 font-medium xl:text-lg text-sm">
                     Time:{" "}
                     <span className="text-rose-600">
                       {timeQuestionIndex > 0 ? (
@@ -351,7 +365,7 @@ const Play = () => {
                 </div>
               </div>
               {/* Analytic  */}
-              <div className="slide-up mt-2 max-w-2xl mx-auto rounded-lg border h-1/4 bg-white shadow-2 shadow-purple-500 w-full">
+              <div className="slide-up mt-2 max-w-2xl mx-auto rounded-lg border lg:h-1/4 h-full bg-white shadow-2 shadow-purple-500 w-full">
                 <div className="grid grid-cols-3 border-b pr-[5px]">
                   <div className="border-r p-2">
                     <p className="text-center font-medium">Question</p>
@@ -387,16 +401,6 @@ const Play = () => {
                   ))}
                 </div>
               </div>
-              <button
-                className="slide-up mt-2 max-w-2xl mx-auto rounded-lg border  bg-white shadow-2 shadow-purple-500 w-full hover:bg-black hover:text-white ease-linear duration-300"
-                onClick={handleSubmit}
-              >
-                <p className="text-center text-xl font-semibold p-4">
-                  {dataResult.length === question.length
-                    ? "Go to results !!!"
-                    : "Next question"}
-                </p>
-              </button>
             </div>
           </div>
         </div>

@@ -86,34 +86,42 @@ const Result = () => {
   return (
     <div className="bg-bts-hero-search-bg bg-no-repeat bg-right bg-cover h-screen pt-10 ">
       <div className="max-w-7xl mx-auto grid grid-cols-2 gap-10">
-        <div className=" col-span-1 fade-in-01s mt-12 bg-white w-full h-[700px] mx-auto rounded-xl shadow-4 shadow-purple-600 relative">
-          <div className="absolute left-60 top-[-85px]">
-            <img
-              src={user.urlAvatar}
-              width={100}
-              height={100}
-              className="object-cover w-40 h-40 rounded-full border-2 shadow-4 shadow-purple-600"
-              alt="Avatar"
-            />
-            <p className="text-base text-center mt-3 font-semibold">
-              {user.fullName}
-            </p>
+        <div className=" md:col-span-1 col-span-2 fade-in-01s mt-12 bg-white w-full h-[700px] mx-auto rounded-xl shadow-4 shadow-purple-600 relative">
+          <div className="absolute top-0 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-full justify-center flex">
+            <div>
+              <img
+                src={user.urlAvatar}
+                width={100}
+                height={100}
+                className="object-cover w-40 h-40 rounded-full border-2 shadow-4 shadow-purple-600"
+                alt="Avatar"
+              />
+              <p className="text-base text-center mt-3 font-semibold">
+                {user.fullName}
+              </p>
+            </div>
           </div>
           <div className="p-5">
             <div className="mt-26">
-              <div className="grid grid-cols-4 border pr-1.5">
-                <div className="border-r text-center font-medium">Question</div>
-                <div className="border-r text-center font-medium">
+              <div className="grid grid-cols-4 border-t border-r border-l pr-1.5">
+                <div className="md:text-sm text-xs border-r text-center font-medium">
+                  Question
+                </div>
+                <div className="md:text-sm text-xs border-r text-center font-medium">
                   Right answer
                 </div>
-                <div className="border-r text-center font-medium">Point</div>
-                <div className=" text-center font-medium">Time (s)</div>
+                <div className="md:text-sm text-xs border-r text-center font-medium">
+                  Point
+                </div>
+                <div className="md:text-sm text-xs  text-center font-medium">
+                  Time (s)
+                </div>
               </div>
               <div className="border h-[200px] overflow-y-scroll mb-5">
                 {results.map((r, index) => (
                   <div
                     key={index}
-                    className="grid grid-cols-4 border-b border-x h-10"
+                    className="grid grid-cols-4 border-b border h-10"
                   >
                     <div className="border-r text-center">{r.index + 1}</div>
                     <div className="border-r text-center">
@@ -164,7 +172,7 @@ const Result = () => {
             </div>
           </div>
         </div>
-        <div className=" col-span-1 fade-in-01s mt-12 bg-white w-full h-[700px] mx-auto rounded-xl shadow-4 shadow-purple-600 relative p-5">
+        <div className=" md:col-span-1 col-span-2 fade-in-01s mt-12 bg-white w-full h-[700px] mx-auto rounded-xl shadow-4 shadow-purple-600 relative p-5">
           <div className="w-full p-4 bg-[#8854c0] mb-2 rounded-t-xl">
             <p className="text-white font-semibold text-xl text-center">
               {" "}

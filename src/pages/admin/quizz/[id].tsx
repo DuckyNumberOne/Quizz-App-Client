@@ -73,7 +73,7 @@ const Play = () => {
   return (
     <DefaultLoadingPage animation="popup-dow">
       <div className="grid grid-cols-12">
-        <section className="mx-6 pt-4 xl:col-span-4 md:col-span-6 col-span-12 h-full">
+        <section className="mx-6 pt-4 2xl:col-span-4 md:col-span-6 col-span-12 h-full">
           <div className="px-3 py-4 border md:p-4 bg-white border-[#e5e5e5]  my-4 rounded-lg h-full">
             <div className="text-xl font-bold py-4">
               <div className="w-full h-[300px]">
@@ -170,7 +170,7 @@ const Play = () => {
             </div>
           </div>
         </section>
-        <section className="mx-6 pt-4 xl:col-span-8 md:col-span-6 col-span-12 h-full ">
+        <section className="mx-6 pt-4 2xl:col-span-8 md:col-span-6 col-span-12 h-full ">
           <div className="px-3 py-4 border md:p-4 bg-white border-[#e5e5e5] my-4 rounded-lg h-full">
             {dataResult.length > 0 && (
               <div>

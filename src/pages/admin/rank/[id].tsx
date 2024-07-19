@@ -34,7 +34,7 @@ const Rank = () => {
     <div className="bg-bts-hero-search-bg bg-no-repeat bg-right bg-cover h-screen pt-10">
       <div className="bg-[#6d5ff6] fade-in-05s max-w-7xl mx-auto rounded-lg border p-5 shadow-2 shadow-purple-500 relative h-[800px] grid grid-cols-2">
         {/* Ranking 1 2 3 */}
-        <div className="h-full relative">
+        <div className="md:col-span-1 col-span-2 h-full relative">
           <div className="grid-cols-3 grid h-1/2 absolute bottom-0 max-w-xl w-full">
             {/* Top 2  */}
             <div className="col-span-1 w-full bg-#6d5ff6 relative">
@@ -129,7 +129,7 @@ const Rank = () => {
           </div>
         </div>
         {/* Ranking  other*/}
-        <div className="w-full h-full bg-[#8a7ff8]">
+        <div className="md:col-span-1 col-span-2 w-full h-full bg-[#8a7ff8]">
           <div className="h-[760px] space-y-4 overflow-scroll p-4">
             {dataResult.length > 3 ? (
               dataResult.slice(2).map((item, index) => (
