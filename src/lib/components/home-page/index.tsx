@@ -84,7 +84,7 @@ const HomePage = ({ data }: any) => {
               setTimeout(() => {
                 push("/");
                 setMode("Login");
-              }, 1000);
+              }, 500);
             }
           } catch (error) {
             console.error(error);
