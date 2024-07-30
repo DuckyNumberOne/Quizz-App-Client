@@ -21,8 +21,8 @@ import DefaultLoadingPage from "@lib/components/admin/loadingPages/defaultLoadin
 const Play = () => {
   const path = usePathname();
   const { push, query } = useRouter();
-  const splitPath = path && path.split("/");
-  const params = path && splitPath[splitPath.length - 1];
+  const splitPath = path?.split("/");
+  const params = splitPath ? splitPath[splitPath.length - 1] : "";
   const dispatch = useDispatch<AppDispatch>();
   const [quizz, setQuizz] = useState<Quizz>();
   const [dataResult, setDataResult] = useState<QuizzResultOption[]>([

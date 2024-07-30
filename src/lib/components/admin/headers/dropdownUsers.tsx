@@ -1,16 +1,18 @@
 import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
-import useLocalStorage from "@lib/hook/useLocalStorage";
-import { User } from "@/lib/interface/user.interface";
 import { useSelector } from "react-redux";
 import { RootState } from "@lib/state/store";
+import { useRouter } from "next/router";
+import { logout } from "@/api/auth.api";
 
 const DropdownUser = () => {
+  const { push } = useRouter();
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const dataUser = useSelector((state: RootState) => state.user);
   const trigger = useRef<any>(null);
   const dropdown = useRef<any>(null);
+  const idUser = useSelector((state: RootState) => state.user._id);
 
   // close on click outside
   useEffect(() => {
@@ -37,6 +39,12 @@ const DropdownUser = () => {
     document.addEventListener("keydown", keyHandler);
     return () => document.removeEventListener("keydown", keyHandler);
   });
+
+  const handleLogout = async () => {
+    const res = await logout();
+    console.log("🚀 ~ handleLogout ~ res:", res);
+    push("/");
+  };
 
   return (
     <div className="relative">
@@ -102,7 +110,7 @@ const DropdownUser = () => {
         <ul className="flex flex-col gap-5 border-b border-stroke px-6 py-7.5 dark:border-strokedark">
           <li>
             <Link
-              href="/profile"
+              href={`/admin/profile/${idUser}`}
               className="flex items-center gap-3.5 text-sm font-medium duration-300 ease-in-out hover:text-primary lg:text-base"
             >
               <svg
@@ -172,7 +180,10 @@ const DropdownUser = () => {
             </Link>
           </li>
         </ul>
-        <button className="flex items-center gap-3.5 px-6 py-4 text-sm font-medium duration-300 ease-in-out hover:text-primary lg:text-base">
+        <button
+          className="flex items-center gap-3.5 px-6 py-4 text-sm font-medium duration-300 ease-in-out hover:text-primary lg:text-base"
+          onClick={handleLogout}
+        >
           <svg
             className="fill-current"
             width="22"

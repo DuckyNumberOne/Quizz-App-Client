@@ -1,3 +1,4 @@
+"use client";
 import React from "react";
 import step1 from "@images/how-to-play/step1.jpg";
 import Image from "next/image";

@@ -4,18 +4,10 @@ import React from "react";
 
 const inter = Inter({ subsets: ["latin"] });
 
-export default function Home({ data }: any) {
+export default function Home() {
   return (
     <main>
-      <HomePage data={data} />
+      <HomePage />
     </main>
   );
-}
-export async function getServerSideProps() {
-  const data = [1, 2, 3, 4, 5];
-  return {
-    props: {
-      data,
-    },
-  };
 }

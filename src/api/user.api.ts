@@ -1,9 +1,9 @@
-import axios from "@/utils/index";
+import { clientInstance } from "@/api/services/axiosClient";
 import { User, UserPost } from "@/lib/interface/user.interface";
 
 export const getListUser = async () => {
   try {
-    const response = await axios.get("/user/getAllUser");
+    const response = await clientInstance.get("/user/getAllUser");
     const users = response.data;
     return users;
   } catch (error) {
@@ -19,7 +19,7 @@ interface PropsCheckEmail {
 
 export const checkEmail = async (data: PropsCheckEmail) => {
   try {
-    const response = await axios.post("/user/checkExisEmail", data);
+    const response = await clientInstance.post("/user/checkExisEmail", data);
     const users = response.data;
     return users;
   } catch (error) {
@@ -29,7 +29,7 @@ export const checkEmail = async (data: PropsCheckEmail) => {
 
 export const getUserById = async (id: string | undefined) => {
   try {
-    const response = await axios.get(`/user/getUser/${id}`);
+    const response = await clientInstance.get(`/user/getUser/${id}`);
     const users = response.data;
     return users;
   } catch (error) {
@@ -39,7 +39,7 @@ export const getUserById = async (id: string | undefined) => {
 
 export const getUserByCategoryId = async (id: string | undefined) => {
   try {
-    const response = await axios.get(`/user/getItemPostsByCategoryId/${id}`);
+    const response = await clientInstance.get(`/user/getItemPostsByCategoryId/${id}`);
     const users = response.data;
     return users;
   } catch (error) {
@@ -49,7 +49,7 @@ export const getUserByCategoryId = async (id: string | undefined) => {
 
 export const getAllUserByFullName = async (fullName: string | undefined) => {
   try {
-    const response = await axios.get(`/user/getAllUserByFullName/${fullName}`);
+    const response = await clientInstance.get(`/user/getAllUserByFullName/${fullName}`);
     const users = response.data;
     return users;
   } catch (error) {
@@ -58,14 +58,14 @@ export const getAllUserByFullName = async (fullName: string | undefined) => {
 };
 
 export const updateUser = async (data: User, id: string) => {
-    const response = await axios.put(`/user/updateUser/${id}`, data);
+    const response = await clientInstance.put(`/user/updateUser/${id}`, data);
     const users = response.data;
     return users;
 };
 
 export const postUser = async (data: UserPost) => {
   try {
-    const response = await axios.post("/user/createUser", data);
+    const response = await clientInstance.post("/user/createUser", data);
     const users = response.data;
     return users;
   } catch (error) {
@@ -75,7 +75,7 @@ export const postUser = async (data: UserPost) => {
 
 export const deleteUser = async (id: string) => {
   try {
-    const response = await axios.delete(`/user/deleteUser/${id}`);
+    const response = await clientInstance.delete(`/user/deleteUser/${id}`);
     const users = response.data;
     return users;
   } catch (error) {

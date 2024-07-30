@@ -1,24 +1,10 @@
-import { setTurnOnPopup } from "@lib/state/popup/popupSlice";
-import { AppDispatch, RootState } from "@lib/state/store";
+"use client";
 import Image from "next/image";
 import React from "react";
-import { useDispatch } from "react-redux";
-import ButtonDefault from "../common/buttons/buttonDefault";
-import useLocalStorage from "@lib/hook/useLocalStorage";
-import { useRouter } from "next/router";
+import ButtonDefault from "../../lib/components/common/buttons/buttonDefault";
 
 const Banner = () => {
-  const dispatch = useDispatch<AppDispatch>();
-  const { push } = useRouter();
-  const [token, setToken] = useLocalStorage("token", "");
-
-  const handleOpenPopupWel = () => {
-    if (token != "") {
-      push("/admin");
-    } else {
-      dispatch(setTurnOnPopup("popup_login"));
-    }
-  };
+  const handleOpenPopupWel = () => {};
 
   return (
     <section className="container mx-auto">
@@ -43,17 +29,17 @@ const Banner = () => {
         <div className="col-span-7 w-full h-full relative">
           <Image
             src="/images/banner-home-page.svg"
-            fill
-            sizes="300"
-            alt="Play Online Quiz &
-Win Cash Daily!"
+            layout="fill"
+            objectFit="cover"
+            alt="Play Online Quiz & Win Cash Daily!"
             priority={true}
             loading="eager"
-            className=" w-full h-full"
+            className="w-full h-full"
           />
         </div>
       </div>
     </section>
   );
 };
+
 export default Banner;

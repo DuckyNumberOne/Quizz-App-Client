@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import Image from "next/image";
 import { verifyLogin } from "@/api/auth.api";
 import PopupDefault from "@lib/components/common/popups/popupWelcome";
 import Form from "../common/form/defaultForm";
@@ -10,7 +9,6 @@ import { useDispatch } from "react-redux";
 import { AppDispatch } from "@lib/state/store";
 import { setTurnOffPopup } from "@lib/state/popup/popupSlice";
 import useLocalStorage from "@lib/hook/useLocalStorage";
-// import WelcomeImage from "/images/welcome-popup/welcome-1.png";
 
 interface PropSubmit {
   email: string;
@@ -20,17 +18,8 @@ interface PropSubmit {
 const Login = () => {
   const { push } = useRouter();
   const dispatch = useDispatch<AppDispatch>();
-  const [token, setToken] = useLocalStorage("token", "");
   const [inforUser, setInforUser] = useLocalStorage("user", "");
-  const isBrowser = () => typeof window !== "undefined";
-
-  useEffect(() => {
-    function scrollToTop() {
-      if (!isBrowser()) return;
-      window.scrollTo({ top: 0, behavior: "instant" });
-    }
-    scrollToTop();
-  }, []);
+  const [loginSuccess, setLoginSuccess] = useState(false);
 
   const handleSubmitForm = async (
     data: PropSubmit,
@@ -39,12 +28,15 @@ const Login = () => {
   ) => {
     try {
       const result = await verifyLogin(data);
-      setToken(result.accessToken);
-      setInforUser(result.userFilter);
-      setTimeout(() => {
-        dispatch(setTurnOffPopup("popup_login"));
-        push("/admin");
-      }, 1500);
+      if (result !== undefined) {
+        setLoginSuccess(true);
+        setInforUser(result.userFilter);
+        setTimeout(() => {
+          setLoginSuccess(false);
+          dispatch(setTurnOffPopup("popup_login"));
+          push("/admin");
+        }, 1500);
+      }
     } catch (error: any) {
       if (error?.response?.data) {
         setError("errorSubmit", {
@@ -140,14 +132,14 @@ const Login = () => {
             </div>
             <ButtonDefault
               className={`w-full xl:p-5 md:p-4 p-3 rounded-full text-white border-b-[5px] border-r-[4px] font-medium text-base hover:font-medium ease-in-out duration-300 ${
-                token != ""
+                loginSuccess === true
                   ? "bg-[#3ed684]"
                   : props?.error?.errorSubmit?.message
                   ? `bg-rose-600 border-rose-800`
                   : `bg-[#000000] border-[#6d5ff6]`
               }`}
               content={
-                token != ""
+                loginSuccess === true
                   ? "Successfully !"
                   : props?.error?.errorSubmit?.message
                   ? `${props?.error?.errorSubmit?.message}`
