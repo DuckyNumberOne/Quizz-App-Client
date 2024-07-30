@@ -7,13 +7,11 @@ import { setTurnOffPopup } from "@lib/state/popup/popupSlice";
 import { resetQuestions } from "@lib/state/questions/questionSlice";
 import useLocalStorage from "@lib/hook/useLocalStorage";
 import { addUser } from "@lib/state/user/userSlice";
-import { User } from "@/lib/interface/user.interface";
 import { userInit } from "@lib/config/initUser";
-// import Header from "../admin/header";
 import Header from "@/lib/components/admin/headers/index";
-
-// import Sidebar from "../admin/sidebar";
 import Sidebar from "@/lib/components/admin/sidebar/index";
+import Image from "next/image";
+import Link from "next/link";
 
 export default function AdminLayout({
   children,
@@ -25,6 +23,7 @@ export default function AdminLayout({
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const savedPathNameRef = useRef(currentPage);
   const [inforUser, setInforUser] = useLocalStorage("user", userInit);
+  const idUser = useSelector((state: RootState) => state.user._id);
 
   const handleClearState = () => {
     dispatch(setTurnOffPopup("popup_choose_category_question"));
@@ -70,6 +69,80 @@ export default function AdminLayout({
           </main>
           {/* <!-- ===== Main Content End ===== --> */}
         </div>
+        <nav className="fixed bottom-0 w-full h-16 bg-white z-10 shadow-t shadow-lg lg:hidden block">
+          <ul className="grid grid-cols-5">
+            <li>
+              <div className="p-2 flex justify-center items-center">
+                <Link href="/admin">
+                  <Image
+                    src="/incons/home.png"
+                    alt=""
+                    height={30}
+                    width={30}
+                    className="mx-auto"
+                  />
+                  <p className="text-sm font-semibold">Home</p>
+                </Link>
+              </div>
+            </li>
+            <li>
+              <div className="p-2 flex justify-center items-center">
+                <Link href={`/admin/my-quizz/${idUser}`}>
+                  <Image
+                    src="/incons/quizz.png"
+                    alt=""
+                    height={30}
+                    width={30}
+                    className="mx-auto"
+                  />
+                  <p className="text-sm font-semibold">My quiz</p>
+                </Link>
+              </div>
+            </li>
+            <li>
+              <div className="p-2 flex justify-center items-center bg-[#8854c0] rounded-md">
+                <Link href="/admin/quizz/create">
+                  <Image
+                    src="/images/plus.png"
+                    alt=""
+                    height={30}
+                    width={30}
+                    className="mx-auto"
+                  />
+                  <p className="text-sm font-semibold text-white">Create</p>
+                </Link>
+              </div>
+            </li>
+            <li>
+              <div className="p-2 flex justify-center items-center">
+                <Link href={`/admin/my-friend/${idUser}`}>
+                  <Image
+                    src="/incons/friends.png"
+                    alt=""
+                    height={30}
+                    width={30}
+                    className="mx-auto"
+                  />
+                  <p className="text-sm font-semibold">My friend</p>
+                </Link>
+              </div>
+            </li>
+            <li>
+              <div className="p-2 flex justify-center items-center">
+                <Link href={`/admin/history/${idUser}`}>
+                  <Image
+                    src="/incons/history.png"
+                    alt=""
+                    height={30}
+                    width={30}
+                    className="mx-auto"
+                  />
+                  <p className="text-sm font-semibold">History</p>
+                </Link>
+              </div>
+            </li>
+          </ul>
+        </nav>
         {/* <!-- ===== Content Area End ===== --> */}
       </div>
       {/* <!-- ===== Page Wrapper End ===== --> */}

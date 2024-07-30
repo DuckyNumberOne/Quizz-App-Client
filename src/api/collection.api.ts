@@ -1,9 +1,9 @@
-import axios from "@/utils/index";
+import { clientInstance } from "@/api/services/axiosClient";
 import { Collection } from "@/lib/interface/collection.interface";
 
 export const getListCollection = async () => {
   try {
-    const response = await axios.get("/collection/getAllCollection");
+    const response = await clientInstance.get("/collection/getAllCollection");
     const collection = response.data;
     return collection;
   } catch (error) {
@@ -13,7 +13,7 @@ export const getListCollection = async () => {
 
 export const getItemCollection = async (id: string | string[]) => {
   try {
-    const response = await axios.get(`/collection/getItemCollection/${id}`);
+    const response = await clientInstance.get(`/collection/getItemCollection/${id}`);
     const collection = response.data;
     return collection;
   } catch (error) {
@@ -23,7 +23,7 @@ export const getItemCollection = async (id: string | string[]) => {
 
 export const postCollection = async (data: Collection) => {
   try {
-    const response = await axios.post("/collection/createCollection", data);
+    const response = await clientInstance.post("/collection/createCollection", data);
     const collection = response.data;
     return collection;
   } catch (error) {
@@ -33,7 +33,7 @@ export const postCollection = async (data: Collection) => {
 
 export const updateItemCollection = async (data: Collection, id: string) => {
   try {
-    const response = await axios.put(
+    const response = await clientInstance.put(
       `/collection/updateCollection/${id}`,
       data
     );
@@ -46,7 +46,7 @@ export const updateItemCollection = async (data: Collection, id: string) => {
 
 export const deleteCollection = async (id: string) => {
   try {
-    const response = await axios.delete(`/collection/deleteCollection/${id}`);
+    const response = await clientInstance.delete(`/collection/deleteCollection/${id}`);
     const Collection = response.data;
     return Collection;
   } catch (error) {

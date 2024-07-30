@@ -79,9 +79,7 @@ const MyProfile = () => {
   }, [param]);
   return (
     <div
-      className={`bg-bts-hero-search-bg bg-no-repeat bg-right bg-cover  ${
-        popupEditProfile ? "h-screen" : "h-screen"
-      }`}
+      className={`bg-bts-hero-search-bg bg-no-repeat bg-right bg-cover h-screen`}
     >
       <div className="max-w-7xl">
         <div className="grid grid-cols-12">

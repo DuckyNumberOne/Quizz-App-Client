@@ -1,8 +1,7 @@
 "use client";
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import Login from "./login";
 import { useRouter } from "next/router";
-import useLocalStorage from "@lib/hook/useLocalStorage";
 import Image from "next/image";
 import ButtonDefault from "../common/buttons/buttonDefault";
 import { typeAccount } from "@lib/config/typeAccount";
@@ -30,10 +29,8 @@ interface Auth {
   password: string;
 }
 
-const HomePage = ({ data }: any) => {
+const HomePage = () => {
   const { push } = useRouter();
-  const [token, setToken] = useLocalStorage("token", "");
-  const [inforUser, setInforUser] = useLocalStorage("user", "");
   const [mode, setMode] = useState("Start");
   const [step, setStep] = useState(1);
   const [typeAccountId, setTypeAccountId] = useState("");
@@ -44,12 +41,6 @@ const HomePage = ({ data }: any) => {
     title: items.name,
     value: items.name,
   }));
-
-  useEffect(() => {
-    if (token != "") {
-      push("/admin");
-    }
-  }, [token]);
 
   const handleSubmitForm = async (data: UserInfo) => {
     const checkExisEmail = await checkEmail(data);

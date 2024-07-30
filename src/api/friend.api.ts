@@ -1,9 +1,9 @@
-import axios from "@/utils/index";
+import { clientInstance } from "@/api/services/axiosClient";
 import { Friend } from "@/lib/interface/friend.interface";
 
 export const getListFriends = async () => {
   try {
-    const response = await axios.get("/friend/getAllFriends");
+    const response = await clientInstance.get("/friend/getAllFriends");
     const friends = response.data;
     return friends;
   } catch (error) {
@@ -13,7 +13,7 @@ export const getListFriends = async () => {
 
 export const getItemFriend = async (id: string | string[]) => {
   try {
-    const response = await axios.get(`/friend/getFriendByIdUser/${id}`);
+    const response = await clientInstance.get(`/friend/getFriendByIdUser/${id}`);
     const friend = response.data;
     return friend;
   } catch (error) {
@@ -22,14 +22,14 @@ export const getItemFriend = async (id: string | string[]) => {
 };
 
 export const postFriend = async (data: Friend) => {
-    const response = await axios.post("/friend/addFriend", data);
+    const response = await clientInstance.post("/friend/addFriend", data);
     const friend = response.data;
     return friend;
 };
 
 export const updateItemFriend = async (data: Friend, id: string) => {
   try {
-    const response = await axios.put(`/friend/updateFriend/${id}`, data);
+    const response = await clientInstance.put(`/friend/updateFriend/${id}`, data);
     const friend = response.data;
     return friend;
   } catch (error) {
@@ -38,7 +38,7 @@ export const updateItemFriend = async (data: Friend, id: string) => {
 };
 
 export const deleteFriend = async (id: string) => {
-    const response = await axios.delete(`/friend/removeFriend/${id}`);
+    const response = await clientInstance.delete(`/friend/removeFriend/${id}`);
     const friend = response.data;
     return friend;
 };

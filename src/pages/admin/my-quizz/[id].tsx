@@ -97,6 +97,22 @@ const MyQuizz = () => {
     }
   };
 
+  const handleClickQuizzEdit = (mode: string) => {
+    switch (mode) {
+      case "details":
+        push(`/admin/quizz/${idQuizz}`);
+        break;
+      case "edit":
+        push(`/admin/quizz/${idQuizz}`);
+        break;
+      case "delete":
+        push(`/admin/quizz/${idQuizz}`);
+        break;
+      default:
+        break;
+    }
+  };
+
   const debouncedCallback = debounce({
     delay: 500,
     callback: (value: string) => {
@@ -271,7 +287,7 @@ const MyQuizz = () => {
                 <ButtonDefault
                   className="px-4 py-2 bg-[#00a3e2] font-medium text-white rounded-2xl shadow-4 shadow-graydark"
                   content="Edit quizz"
-                  onClick={() => handleClickQuizzDetails("edit")}
+                  onClick={() => handleClickQuizzEdit("edit")}
                 />
                 <ButtonDefault
                   className="px-4 py-2 bg-rose-600 font-medium text-white rounded-2xl shadow-4 shadow-graydark"

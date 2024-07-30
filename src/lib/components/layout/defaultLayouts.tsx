@@ -1,7 +1,7 @@
 "use client";
 import React, { ReactNode, useEffect } from "react";
-import Header from "./header/defaultHeaders";
-import Footer from "./footer/defaultFooters";
+import Header from "../../../app/components/header/defaultHeaders";
+import Footer from "../../../app/components/footer/defaultFooters";
 import { usePathname, useRouter } from "next/navigation";
 import AdminLayout from "./adminLayouts";
 import { useDispatch, useSelector } from "react-redux";
@@ -22,30 +22,13 @@ const Layout = ({ children }: Props) => {
   );
 
   useEffect(() => {
-    const token = localStorage.getItem("token");
-    if (isAdminPage && token && JSON.parse(token) === "") {
-      push("/");
-    }
-  }, [path]);
-
-  useEffect(() => {
     if (popup_quizz_creation_mode && path == "/admin") {
       dispatch(setTurnOffPopup("popup_quizz_creation_mode"));
     }
   }, [popup_quizz_creation_mode, path]);
 
   return (
-    <>
-      {isAdminPage ? (
-        <AdminLayout>{children}</AdminLayout>
-      ) : (
-        <>
-          <Header />
-          <div className="pt-[74px] py-10">{children}</div>
-          <Footer />
-        </>
-      )}
-    </>
+    <>{isAdminPage ? <AdminLayout>{children}</AdminLayout> : <>{children}</>}</>
   );
 };
 
