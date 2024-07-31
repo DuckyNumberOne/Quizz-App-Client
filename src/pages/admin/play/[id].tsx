@@ -90,7 +90,7 @@ const Play = () => {
   const handleSubmit = async () => {
     const id = query.id;
     if (dataResult.length === question.length) {
-      push(`/admin/result/${id}`);
+      push(`/admin/results/${id}`);
     } else {
       clearTimer();
       setStopTime(true);

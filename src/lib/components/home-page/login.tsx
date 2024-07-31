@@ -9,13 +9,17 @@ import { useDispatch } from "react-redux";
 import { AppDispatch } from "@lib/state/store";
 import { setTurnOffPopup } from "@lib/state/popup/popupSlice";
 import useLocalStorage from "@lib/hook/useLocalStorage";
-
+import Image from "next/image";
 interface PropSubmit {
   email: string;
   password: string;
 }
 
-const Login = () => {
+interface PropsLogin {
+  setMode: React.Dispatch<React.SetStateAction<string>>;
+}
+
+const Login: React.FC<PropsLogin> = ({ setMode }) => {
   const { push } = useRouter();
   const dispatch = useDispatch<AppDispatch>();
   const [inforUser, setInforUser] = useLocalStorage("user", "");
@@ -52,7 +56,18 @@ const Login = () => {
 
   return (
     <PopupDefault>
-      <h3 className="xl:text-[30px] text-2xl font-bold">Hello there 👋</h3>
+      <div className="flex justify-between">
+        <button onClick={() => setMode("Start")}>
+          <Image
+            src="/incons/back-arrow.png"
+            alt="Back Arrow"
+            width={30}
+            height={30}
+          />
+        </button>
+        <h3 className="xl:text-[30px] text-2xl font-bold">Hello there 👋</h3>
+        <div />
+      </div>
       <Form
         classForm="space-y-4 md:space-y-6 mt-6"
         onSubmitForm={handleSubmitForm}
