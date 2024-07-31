@@ -42,7 +42,6 @@ const DropdownUser = () => {
 
   const handleLogout = async () => {
     const res = await logout();
-    console.log("🚀 ~ handleLogout ~ res:", res);
     push("/");
   };
 

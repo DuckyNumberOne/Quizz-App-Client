@@ -1,7 +1,7 @@
 import ButtonDefault from "@/lib/components/common/buttons/buttonDefault";
 import React, { useEffect, useRef, useState } from "react";
 import Image from "next/image";
-import DefaulltSlider from "@lib/components/common/sliders/defaulltSlider";
+import DefaultSlider from "@lib/components/common/sliders/defaulltSlider";
 import { getListQuizz } from "@/api/quizz.api";
 import { useRouter } from "next/router";
 import { useDispatch, useSelector } from "react-redux";
@@ -153,11 +153,9 @@ const Admin = () => {
   }, [user, PopupFindFriend]);
 
   useEffect(() => {
-    if (pathname) {
-      fetchCollectionQuiz();
-      fetchDataQuiz();
-    }
-  }, [pathname]);
+    fetchCollectionQuiz();
+    fetchDataQuiz();
+  }, []);
 
   return (
     <div className="relative">
@@ -312,7 +310,7 @@ const Admin = () => {
                   </div>
                   {/* Box Slider Category 1*/}
                   <div className="flex max-w-full relative">
-                    <DefaulltSlider>
+                    <DefaultSlider>
                       {dataQuizz && dataQuizz.length > 0 ? (
                         dataQuizz
                           .filter((item) => item.idCollection._id === col._id)
@@ -352,7 +350,7 @@ const Admin = () => {
                       ) : (
                         <p>Loading...</p>
                       )}
-                    </DefaulltSlider>
+                    </DefaultSlider>
                   </div>
                 </div>
               ))

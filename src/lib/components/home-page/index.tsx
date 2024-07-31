@@ -24,11 +24,6 @@ interface UserInfo {
   country: string;
 }
 
-interface Auth {
-  email: string;
-  password: string;
-}
-
 const HomePage = () => {
   const { push } = useRouter();
   const [mode, setMode] = useState("Start");
@@ -94,10 +89,10 @@ const HomePage = () => {
       {/* Start  */}
       {mode === "Start" && (
         <PopupDefault>
-          <h3 className="xl:text-[30px] text-2xl font-bold">
+          <h3 className="xl:text-[30px] lg:text-2xl text-xl font-bold">
             Everything is here to enjoy quiz!
           </h3>
-          <p className="text-base font-semibold">
+          <p className="xl:text-base lg:text-[15px] text-sm font-semibold">
             Quiz as a group or individually! Expand your circle !
           </p>
           <div className="mt-10 w-full flex justify-center items-center">
@@ -109,17 +104,18 @@ const HomePage = () => {
             />
           </div>
           <ButtonDefault
-            className={`font-bold mb-5 w-full xl:p-5 p-2 rounded-full text-black border-b-[5px] border-r-[4px] md:text-base text-sm ease-in-out duration-300 bg-[#f6f5fa] border-[#b5b2c1]`}
+            className={`font-bold mb-5 w-full xl:p-5 p-4 rounded-full text-black border-b-[5px] border-r-[4px] md:text-base text-sm ease-in-out duration-300 bg-[#f6f5fa] border-[#b5b2c1]`}
             content={"I have a account"}
             onClick={() => setMode("Login")}
           />
           <ButtonDefault
-            className={`font-bold w-full xl:p-5 p-2 rounded-full text-white border-b-[5px] border-r-[4px] md:text-base text-sm ease-in-out duration-300 bg-[#000000] border-[#6d5ff6]`}
+            className={`font-bold w-full xl:p-5 p-4 rounded-full text-white border-b-[5px] border-r-[4px] md:text-base text-sm ease-in-out duration-300 bg-[#000000] border-[#6d5ff6]`}
             content={"Get started"}
             onClick={() => setMode("Register")}
           />
         </PopupDefault>
       )}
+      {/* Register  */}
       {mode === "Register" && (
         <PopupDefault>
           <div className="relative h-full">
@@ -144,10 +140,10 @@ const HomePage = () => {
                   </div>
                   <div></div>
                 </div>
-                <h3 className="xl:text-[30px] text-2xl font-bold">
+                <h3 className="xl:text-[30px] lg:text-2xl text-xl font-bold">
                   What type of account will you open?
                 </h3>
-                <p className="text-base font-semibold">
+                <p className="xl:text-base lg:text-[15px] text-sm font-semibold">
                   You can skip it if you're not sure.
                 </p>
                 <div className="space-y-3 my-10">
@@ -197,10 +193,10 @@ const HomePage = () => {
                   </div>
                   <div></div>
                 </div>
-                <h3 className="xl:text-[30px] text-2xl font-bold">
+                <h3 className="xl:text-[30px] lg:text-2xl text-xl font-bold">
                   Create an account
                 </h3>
-                <p className="text-base font-semibold">
+                <p className="xl:text-base lg:text-[15px] text-sm font-semibold">
                   Please complere your profile.
                 </p>
                 <div className="space-y-3 mt-2">
@@ -427,10 +423,10 @@ const HomePage = () => {
                   </div>
                   <div></div>
                 </div>
-                <h3 className="xl:text-[30px] text-2xl font-bold">
+                <h3 className="xl:text-[30px] lg:text-2xl text-xl font-bold">
                   Welcome to Quizer 😎
                 </h3>
-                <p className="text-base font-semibold">
+                <p className="xl:text-base lg:text-[15px] text-sm font-semibold">
                   You choose Personal plan.
                 </p>
                 <div className="mt-10 w-full h-full flex justify-center items-center">
@@ -454,7 +450,7 @@ const HomePage = () => {
         </PopupDefault>
       )}
       {/* Login  */}
-      {mode === "Login" && <Login />}
+      {mode === "Login" && <Login setMode={setMode} />}
     </>
   );
 };

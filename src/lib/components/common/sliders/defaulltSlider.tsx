@@ -6,7 +6,7 @@ interface PropsDefaulSlider {
   children: React.ReactNode;
 }
 
-const DefaulltSlider: React.FC<PropsDefaulSlider> = ({ children }) => {
+const DefaultSlider: React.FC<PropsDefaulSlider> = ({ children }) => {
   const containerRef = useRef<HTMLDivElement>(null);
   const [showLeftButton, setShowLeftButton] = useState(false);
   const [showRightButton, setShowRightButton] = useState(true);
@@ -84,4 +84,4 @@ const DefaulltSlider: React.FC<PropsDefaulSlider> = ({ children }) => {
     </div>
   );
 };
-export default DefaulltSlider;
+export default DefaultSlider;
