@@ -3,17 +3,12 @@ import { useRouter } from "next/router";
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import Image from "next/image";
-import {
-  getAnwsersIsTrue,
-  getItemQuizz,
-  getQuestionById,
-} from "@/api/quizz.api";
+import { getAnwsersIsTrue, getQuestionById } from "@/api/quizz.api";
 import { Anwsers, Question } from "@/lib/interface/question.interface";
 import { questionInit } from "@lib/config/initQuestion";
 import CountdownTimer from "@/lib/components/common/countdownTimer/defaultCountdownTimer";
 import { addResult, resetResult } from "@lib/state/result/resultSlice";
 import { RootState } from "@lib/state/store";
-import Link from "next/link";
 import { colorCardAnswer } from "@lib/config/colorCardAnswer";
 import { randomUtils } from "@/utils/randomUtils ";
 

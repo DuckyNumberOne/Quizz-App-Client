@@ -187,7 +187,7 @@ const DefaulCreateQuizer: React.FC<PropsDefaultCreateQuestion> = ({ mode }) => {
             </div>
             <div className="flex items-center justify-center w-full mt-6">
               <ButtonDefault
-                content={dataQuizer.title !== "" ? "Edit quizz" : "Creat quizz"}
+                content={dataQuizer.title !== "" ? "Save quizz" : "Creat quizz"}
                 className="font-bold text-white bg-black rounded-full py-3 px-8 text-lg  hover:text-black hover:bg-white hover:shadow-sm hover:shadow-black ease-in-out duration-300 w-full"
               />
             </div>

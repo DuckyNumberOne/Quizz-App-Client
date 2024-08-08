@@ -7,7 +7,7 @@ const Banner = () => {
   const handleOpenPopupWel = () => {};
 
   return (
-    <section className="container mx-auto">
+    <section className="2xl:max-w-screen-3xl xl:max-w-screen-xl mx-auto">
       <div className="grid grid-cols-12 items-center">
         <div className="col-span-5 my-10">
           <h1 className="text-[#1D4645] font-bold text-[72px] leading-tight">
@@ -30,7 +30,6 @@ const Banner = () => {
           <Image
             src="/images/banner-home-page.svg"
             layout="fill"
-            objectFit="cover"
             alt="Play Online Quiz & Win Cash Daily!"
             priority={true}
             loading="eager"
