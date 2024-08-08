@@ -1,12 +1,20 @@
 import React from "react";
 import { navbarMenu } from "@lib/config/navbar";
 import Link from "next/link";
+import Image from "next/image";
 
 const Header = () => {
   return (
-    <div className="fixed z-10 w-full bg-white">
-      <div className="flex justify-between max-w-screen-xl mx-auto items-center font-normal">
-        <p>Logo</p>
+    <div className="fixed z-10 w-full bg-white top-0">
+      <div className="flex justify-between 2xl:max-w-screen-3xl xl:max-w-screen-xl mx-auto items-center font-normal">
+        <div>
+          <Image
+            src="/images/logo-quizz.png"
+            width={140}
+            height={20}
+            alt="Logo"
+          />
+        </div>
         <div className="flex justify-between gap-5">
           {navbarMenu.map((item, index) => (
             <Link href={item.url} key={index}>

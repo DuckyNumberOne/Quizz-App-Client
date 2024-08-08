@@ -26,6 +26,8 @@ const config: Config = {
             "white-shadow-2":"rgba(255,255,255, 0.1)",
             'black-shadow': 'rgba(0, 0, 0, 0.9);',
             'black-shadow-2': 'rgba(0, 0, 0, 0.4);',
+            'tiber':'#102F2E',
+            'seashell':'#fff2e6',
             current: "currentColor",
             transparent: "transparent",
             white: "#FFFFFF",
