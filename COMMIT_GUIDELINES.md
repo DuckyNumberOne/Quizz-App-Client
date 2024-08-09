@@ -26,6 +26,7 @@ Nội dung commit phải tuân theo định dạng sau: `type(scope): descriptio
 - `test`: Thay đổi liên quan đến tests
 - `style`: Thay đổi liên quan đến CSS/styles
 - `route`: Thay đổi liên quan đến routes
+- `seo` : Thay đổi hoặc tạo mới liên quan đến SEO
 
 ### Ví dụ về commit:
 

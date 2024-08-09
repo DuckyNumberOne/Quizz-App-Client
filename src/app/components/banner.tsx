@@ -26,14 +26,12 @@ const Banner = () => {
           </p>
           <p className="text-[55px] text-[#1D4645] font-medium">20,000+</p>
         </div>
-        <div className="col-span-7 w-full h-full relative">
+        <div className="col-span-7 flex justify-end items-center relative">
           <Image
-            src="/images/banner-home-page.svg"
-            layout="fill"
+            src="/images/banner-home-page.png"
             alt="Play Online Quiz & Win Cash Daily!"
-            priority={true}
-            loading="eager"
-            className="w-full h-full"
+            width={782}
+            height={609}
           />
         </div>
       </div>
