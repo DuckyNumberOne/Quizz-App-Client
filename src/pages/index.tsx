@@ -15,6 +15,10 @@ export default function Home() {
           content="Join DuckQuizz to log in or sign up. Test your knowledge and challenge friends with fun and engaging quizzes!"
         />
         <meta
+          name="google-site-verification"
+          content="qY1qnlkWLjpxc4lP574qitxsY-JO9I8BNe8EWm7vbU0"
+        />
+        <meta
           name="keywords"
           content="DuckQuizz, login, sign up, quiz, challenge, knowledge test, online quiz"
         />
