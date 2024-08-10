@@ -26,6 +26,10 @@ const LandingPage = () => {
       <Head>
         <title>{metadata.title}</title>
         <meta name="description" content={metadata.description} />
+        <meta
+          name="google-site-verification"
+          content="qY1qnlkWLjpxc4lP574qitxsY-JO9I8BNe8EWm7vbU0"
+        />
         <meta name="keywords" content={metadata.keywords} />
         <meta name="robots" content="index, follow" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
