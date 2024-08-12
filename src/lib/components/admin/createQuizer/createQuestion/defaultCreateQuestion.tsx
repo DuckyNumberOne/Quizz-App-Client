@@ -457,7 +457,7 @@ const DefaultCreateQuestion: React.FC<PropsDefaultCreateQuestion> = ({
                           number={index}
                           register={props.registers}
                           errors={props.error}
-                          placeholder="Text question"
+                          placeholder="Text answer"
                           defaultValue={
                             dataQuestion &&
                             dataQuestion[indexs] &&

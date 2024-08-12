@@ -51,7 +51,7 @@ const DefaultCheckBoxAnswer: React.FC<CheckBoxAnswerProps> = ({
           checked={isCorrect}
           className="opacity-0 w-[40px] h-[40px] absolute inset-0 z-1 cursor-pointer"
           onChange={handleClick}
-          defaultChecked={defaultValue}
+          // defaultChecked={defaultValue}
         />
         {isCorrect && (
           <Image
