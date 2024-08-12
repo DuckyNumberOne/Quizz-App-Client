@@ -30,7 +30,7 @@ const QuizCategories = () => {
             </div>
             <div className="mt-[18px]">
               <p className="font-bold text-2xl">Math</p>
-              <p className="text-base text-[#999999] mt-5">
+              <p className="text-base text-black mt-5">
                 Sky was cloudless and of a deep dark blue spectacle before us
                 was indeed
               </p>
@@ -51,7 +51,7 @@ const QuizCategories = () => {
               </div>
               <div className="mt-[18px]">
                 <p className="font-bold text-2xl">Science</p>
-                <p className="text-base text-[#999999] mt-5">
+                <p className="text-base text-black mt-5">
                   Unorthographic life One day however a small line of blind
                   text.
                 </p>
@@ -75,7 +75,7 @@ const QuizCategories = () => {
               </div>
               <div className="mt-[18px]">
                 <p className="font-bold text-2xl">English</p>
-                <p className="text-base text-[#999999] mt-5">
+                <p className="text-base text-black mt-5">
                   Even the all-powerful Pointing has no control about the blind
                   texts.
                 </p>
@@ -95,7 +95,7 @@ const QuizCategories = () => {
                 </div>
                 <div className="mt-[18px]">
                   <p className="font-bold text-2xl">Bangla</p>
-                  <p className="text-base text-[#999999] mt-5">
+                  <p className="text-base text-black mt-5">
                     However a small line of blind text by the name.
                   </p>
                 </div>
@@ -113,7 +113,7 @@ const QuizCategories = () => {
                 </div>
                 <div className="mt-[18px]">
                   <p className="font-bold text-2xl">General Knowledge</p>
-                  <p className="text-base text-[#999999] mt-5 ">
+                  <p className="text-base text-black mt-5 ">
                     Text by the name of Lorem Ipsum decided to leave for the far
                     World of Grammar.
                   </p>

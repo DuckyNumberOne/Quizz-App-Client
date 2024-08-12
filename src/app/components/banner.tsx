@@ -14,7 +14,7 @@ const Banner = () => {
             Play Online Quiz & Win Cash Daily!
           </h1>
           <p className="mt-[33px] text-[#3F3F3F] text-2xl">
-            Win up to 1000৳ monthly from QuizBaj.
+            Win up to 1000৳ monthly from DukQuizz.
           </p>
           <ButtonDefault
             className="py-5 bg-[#E8C5B0] w-2/3 rounded-md my-12 text-center text-xl font-medium hover:scale-110 transition-all hover:font-bold"
@@ -30,6 +30,7 @@ const Banner = () => {
           <Image
             src="/images/banner-home-page.png"
             alt="Play Online Quiz & Win Cash Daily!"
+            priority={true}
             width={782}
             height={609}
           />
