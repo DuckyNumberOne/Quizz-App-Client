@@ -6,7 +6,7 @@ import { QuizzPost } from "@/lib/interface/quizz.interface";
 import { setTurnOnPopup } from "@lib/state/popup/popupSlice";
 import { addQuizz, updateQuizz } from "@lib/state/quizz/quizzSlice";
 import { RootState } from "@lib/state/store";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import Select from "@lib/components/common/selects/defaultSelect";
 import ButtonDefault from "@/lib/components/common/buttons/buttonDefault";
@@ -19,6 +19,7 @@ const DefaulCreateQuizer: React.FC<PropsDefaultCreateQuestion> = ({ mode }) => {
   const dispatch = useDispatch();
   const [collection, setCollection] = useState<Collection[]>([]);
   const dataQuizer = useSelector((state: RootState) => state.quizz);
+  const initialDataRef = useRef<QuizzPost | null>(null);
   const visibility = [
     { id: 1111, title: "Public", value: "public" },
     { id: 2222, title: "Private", value: "private" },
@@ -40,7 +41,8 @@ const DefaulCreateQuizer: React.FC<PropsDefaultCreateQuestion> = ({ mode }) => {
   }, []);
 
   const handleSubmitForm = async (data: QuizzPost) => {
-    if (dataQuizer.title !== " ") {
+    if (initialDataRef.current === null) {
+      initialDataRef.current = data;
       dispatch(addQuizz(data));
       if (mode === "Normal") {
         dispatch(setTurnOnPopup("popup_choose_category_question"));
@@ -55,7 +57,7 @@ const DefaulCreateQuizer: React.FC<PropsDefaultCreateQuestion> = ({ mode }) => {
 
   return (
     <div className="px-3 py-4 border md:p-4 bg-white border-[#e5e5e5] my-4 rounded-lg h-[935px]">
-      <p className="text-xl font-bold">Create quizer 🙋</p>
+      <p className="text-xl font-bold">Create quizz 🙋</p>
       <Form classForm="mt-6" onSubmitForm={handleSubmitForm}>
         {(props: any) => (
           <>
