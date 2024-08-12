@@ -14,9 +14,9 @@ const HowToPlay = () => {
       {/* Section 1 */}
       <section className="h-[688px] bg-[#1D4645]">
         <div className="2xl:max-w-screen-3xl xl:max-w-screen-xl mx-auto relative h-full">
-          <h3 className="text-[66px] text-white font-bold pt-[100px]">
+          <p className="text-[66px] text-white font-bold pt-[100px]">
             How To Play
-          </h3>
+          </p>
           <div className="absolute w-full h-full bottom-[-25px] left-0 ">
             <div className="relative w-full h-full grid gap-x-8 grid-cols-12">
               {/* Box Step 1  */}
@@ -31,9 +31,7 @@ const HowToPlay = () => {
                       alt="Step 1"
                     />
                     <div className="border-solid border-b-2 border-[#EFEFEF] mt-3 mb-7 mx-5" />
-                    <h3 className="font-bold text-black text-2xl mb-5">
-                      Step 1
-                    </h3>
+                    <p className="font-bold text-black text-2xl mb-5">Step 1</p>
                     <p className="text-[#333333] text-base">
                       Enter the Phone Number and Click Resigiter
                     </p>
@@ -53,9 +51,7 @@ const HowToPlay = () => {
                       alt="Step 2"
                     />
                     <div className="border-solid border-b-2 border-[#EFEFEF] mt-3 mb-7 mx-5" />
-                    <h3 className="font-bold text-black text-2xl mb-5">
-                      Step 2
-                    </h3>
+                    <p className="font-bold text-black text-2xl mb-5">Step 2</p>
                     <p className="text-[#333333] text-base">
                       Enter the Verification Code and click Verify.
                     </p>
@@ -75,9 +71,7 @@ const HowToPlay = () => {
                       alt="Step 3"
                     />
                     <div className="border-solid border-b-2 border-[#EFEFEF] mt-3 mb-7 mx-5" />
-                    <h3 className="font-bold text-black text-2xl mb-5">
-                      Step 3
-                    </h3>
+                    <p className="font-bold text-black text-2xl mb-5">Step 3</p>
                     <p className="text-[#333333] text-base">
                       Enter your Info and click Play Quiz .
                     </p>
@@ -106,9 +100,7 @@ const HowToPlay = () => {
                       alt="Step 4"
                     />
                     <div className="border-solid border-b-2 border-[#EFEFEF] mt-3 mb-7 mx-5" />
-                    <h3 className="font-bold text-black text-2xl mb-5">
-                      Step 4
-                    </h3>
+                    <p className="font-bold text-black text-2xl mb-5">Step 4</p>
                     <p className="text-[#333333] text-base">
                       Click on the subject
                     </p>
@@ -128,9 +120,7 @@ const HowToPlay = () => {
                       alt="Step 5"
                     />
                     <div className="border-solid border-b-2 border-[#EFEFEF] mt-3 mb-7 mx-5" />
-                    <h3 className="font-bold text-black text-2xl mb-5">
-                      Step 5
-                    </h3>
+                    <p className="font-bold text-black text-2xl mb-5">Step 5</p>
                     <p className="text-[#333333] text-base">
                       A question will have four options
                     </p>
@@ -150,9 +140,7 @@ const HowToPlay = () => {
                       alt="Step 6"
                     />
                     <div className="border-solid border-b-2 border-[#EFEFEF] mt-3 mb-7 mx-5" />
-                    <h3 className="font-bold text-black text-2xl mb-5">
-                      Step 6
-                    </h3>
+                    <p className="font-bold text-black text-2xl mb-5">Step 6</p>
                     <p className="text-[#333333] text-base">
                       Click right Option.
                     </p>
