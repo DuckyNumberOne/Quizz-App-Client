@@ -86,12 +86,10 @@ const ChartThree: React.FC<Props> = ({ data }) => {
   };
 
   return (
-    <div className="col-span-12 rounded-sm border border-stroke bg-white px-5 pb-5 pt-7.5 shadow-default dark:border-strokedark dark:bg-boxdark sm:px-7.5 xl:col-span-5">
+    <div className="col-span-12 rounded-sm border border-stroke bg-white px-5 pb-5 pt-7.5 shadow-default   sm:px-7.5 xl:col-span-5">
       <div className="mb-3 justify-between gap-4 sm:flex">
         <div>
-          <h5 className="text-xl font-semibold text-black dark:text-white">
-            {data.title}
-          </h5>
+          <h5 className="text-xl font-semibold text-black ">{data.title}</h5>
         </div>
         <div>
           {/* <div className="relative z-20 inline-block">
@@ -100,10 +98,10 @@ const ChartThree: React.FC<Props> = ({ data }) => {
               id=""
               className="relative z-20 inline-flex appearance-none bg-transparent py-1 pl-3 pr-8 text-sm font-medium outline-none"
             >
-              <option value="" className="dark:bg-boxdark">
+              <option value="" className="">
                 Monthly
               </option>
-              <option value="" className="dark:bg-boxdark">
+              <option value="" className="">
                 Yearly
               </option>
             </select>
@@ -149,7 +147,7 @@ const ChartThree: React.FC<Props> = ({ data }) => {
                 className="mr-2 block h-3 w-full max-w-3 rounded-full"
                 style={{ backgroundColor: ` ${data.color[index]}` }}
               ></span>
-              <p className="flex w-full justify-between text-sm font-medium text-black dark:text-white">
+              <p className="flex w-full justify-between text-sm font-medium text-black ">
                 <span> {data.text[index]} </span>
                 <span> {items} %</span>
               </p>
