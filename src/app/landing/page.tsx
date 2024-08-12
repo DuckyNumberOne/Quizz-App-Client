@@ -37,7 +37,6 @@ const LandingPage = () => {
         <meta property="og:description" content={metadata.ogDescription} />
         <meta property="og:image" content={metadata.ogImage} />
         <meta property="og:url" content={metadata.ogUrl} />
-        <link rel="icon" href={metadata.ogImage} />
       </Head>
       <Banner />
       <HowToPlay />

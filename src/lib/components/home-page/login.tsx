@@ -140,7 +140,7 @@ const Login: React.FC<PropsLogin> = ({ setMode }) => {
               </div>
               <a
                 href="#"
-                className="xl:text-sm text-xs font-medium text-[#66a6ef] hover:underline dark:text-primary-500"
+                className="xl:text-sm text-xs font-medium text-[#66a6ef] hover:underline "
               >
                 Forgot password?
               </a>

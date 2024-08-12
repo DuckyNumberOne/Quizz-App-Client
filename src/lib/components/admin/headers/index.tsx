@@ -24,7 +24,7 @@ const Header = (props: {
 
   return (
     <header
-      className={`sticky top-0 z-999 flex w-full bg-white drop-shadow-1 dark:bg-boxdark dark:drop-shadow-none ${
+      className={`sticky top-0 z-999 flex w-full bg-white drop-shadow-1  ${
         toggleHeaderVisibility() && "hidden"
       }`}
     >
@@ -46,7 +46,7 @@ const Header = (props: {
             <div className="relative">
               <button className="absolute left-0 top-1/2 -translate-y-1/2">
                 <svg
-                  className="fill-body hover:fill-primary dark:fill-bodydark dark:hover:fill-primary"
+                  className="fill-body hover:fill-primary "
                   width="20"
                   height="20"
                   viewBox="0 0 20 20"
