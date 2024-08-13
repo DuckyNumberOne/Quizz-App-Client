@@ -2,6 +2,7 @@
 import Image from "next/image";
 import React from "react";
 import ButtonDefault from "../../lib/components/common/buttons/buttonDefault";
+import Link from "next/link";
 
 const Banner = () => {
   const handleOpenPopupWel = () => {};
@@ -16,11 +17,11 @@ const Banner = () => {
           <p className="mt-[33px] text-[#3F3F3F] text-2xl">
             Win up to 1000৳ monthly from DukQuizz.
           </p>
-          <ButtonDefault
-            className="py-5 bg-[#E8C5B0] w-2/3 rounded-md my-12 text-center text-xl font-medium hover:scale-110 transition-all hover:font-bold"
-            content=" Play Quizz"
-            onClick={handleOpenPopupWel}
-          />
+          <Link className="" href="/">
+            <div className="py-5 bg-[#E8C5B0] w-2/3 rounded-md my-12 text-center text-xl font-medium hover:scale-110 transition-all hover:font-bold">
+              Play Quizz
+            </div>
+          </Link>
           <p className="font-medium text-[25px] mb-5">
             Number of Active Users Right Now
           </p>
