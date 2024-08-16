@@ -2,7 +2,7 @@ import io from "socket.io-client";
 import { useState } from "react";
 import Chat from "@/lib/components/common/chat/defaultChat";
 
-const socket = io("http://localhost:9000");
+const socket = io(`${process.env.NEXT_PUBLIC_API_CLIENT_URL}`);
 
 function App() {
   const [username, setUsername] = useState("");

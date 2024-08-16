@@ -16,7 +16,6 @@ interface PropsUser {
 const Chat: React.FC<PropsChat> = ({ socket, username, room }) => {
   const [currentMessage, setCurrentMessage] = useState("");
   const [messageList, setMessageList] = useState<PropsUser[]>([]);
-  console.log("🚀 ~ messageList:", messageList);
 
   const sendMessage = async () => {
     if (currentMessage !== "") {
